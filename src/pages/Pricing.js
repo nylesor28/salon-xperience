@@ -29,7 +29,7 @@ const Flashcards=[{
     id: 2,
     service:"Blow Dry & Styling",
     description:"Updo",
-    Price: "$65 plus"
+    price:"$65 plus",
 },
 {
     id: 3,

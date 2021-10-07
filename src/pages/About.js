@@ -9,7 +9,7 @@ function About(props) {
       <div>
          <Content>
              <p>
-Salon Xperience was established in 2021 with a mission ot provide exceptional service via an inspired team, cutting-edge techniques, and an indulging experience to each every one of our guests. Our goal is to have you looking fantastic and feeling incrdible inside and out after your visit with us.
+Salon Xperience was established in 2021 with a mission to provide exceptional service via an inspired team, cutting-edge techniques, and an indulging experience to each every one of our guests. Our goal is to have you looking fantastic and feeling incredible inside and out after your visit with us.
             </p> 
         </Content>
           is working
