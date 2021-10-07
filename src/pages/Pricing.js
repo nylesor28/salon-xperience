@@ -16,8 +16,7 @@ function Pricing(props) {
       <div className="container">
       <FlashcardList flashcards={flashcards} />
       </div>
- /* <Hero title={props.title} subTitle={props.subTitle} subscript={props.subscript}/>
- <BootstrapCarouselComponent></BootstrapCarouselComponent> */
+ 
   );
 }
 const Flashcards=[{

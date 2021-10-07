@@ -16,7 +16,6 @@ export default function Flashcard({flashcard}) {
               {flashcard.description}
             <div className="flashcard-price">{flashcard.price}</div> 
            </div>
-          {/* {flip ? flashcard.service : flashcard.description}  */}
         </div>
     )
 }

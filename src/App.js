@@ -74,9 +74,6 @@ class App extends React.Component {
                 <Link className="nav-link" to="/">
                   About
                 </Link>
-                {/* <Link className="nav-link" to="/resume">
-                  Resume 
-                </Link> */}
                 <Link className="nav-link" to="/services">
                   Services
                 </Link>
@@ -92,7 +89,6 @@ class App extends React.Component {
                 <Link className="nav-link" to="/Contact">
                   Contact
                 </Link>
-                {/* <ContactForm></ContactForm> */}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -107,11 +103,6 @@ class App extends React.Component {
               />
             )}
           />
-          {/* <Route
-            path="/resume"
-            exact
-            render={() => <resume title={this.state.resume.title} />} */}
-          {/* />  */}
           <Route
             path="/services"
             exact

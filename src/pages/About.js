@@ -1,8 +1,7 @@
 import react from "react";
 import Content from "../components/Content/index.js";
-// import { Carousel } from "react-bootstrap";
-// import Hero from "../components/Hero/index.js";
-// import BootstrapCarouselComponent from '../components/Carousel/index.js';
+
+
 
 
 function About(props) {
@@ -14,8 +13,8 @@ Salon Xperience was established in 2021 with a mission ot provide exceptional se
             </p> 
         </Content>
           is working
- {/* <Hero title={props.title} subTitle={props.subTitle} subscript={props.subscript}/>
- <BootstrapCarouselComponent></BootstrapCarouselComponent> */}
+ 
+ 
 </div>
   );
 }
