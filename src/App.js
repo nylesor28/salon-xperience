@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
-import About from "./pages/About";
+import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
@@ -24,7 +24,7 @@ class App extends React.Component {
     this.state = {
       title: "Salon Xperience",
       headerLinks: [
-        { title: "About", path: "/" },
+        { title: "Home", path: "/" },
         { title: "Services", path: "/services" },
         { title: "Clients", path: "/clients" },
         { title: "Stylist", path: "/stylist" },
@@ -100,7 +100,7 @@ class App extends React.Component {
             path="/"
             exact
             render={() => (
-              <About
+              <Home
                 title={this.state.about.title}
                 subTitle={this.state.about.subTitle}
                 subscript={this.state.about.subscript}
