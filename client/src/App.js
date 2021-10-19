@@ -6,7 +6,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
-import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
@@ -24,7 +23,6 @@ class App extends React.Component {
       title: "Salon Xperience",
       headerLinks: [
         { title: "Home", path: "/" },
-        { title: "Services", path: "/services" },
         { title: "Clients", path: "/clients" },
         { title: "Stylist", path: "/stylist" },
         { title: "Contact", paht: "/contact" },
@@ -34,9 +32,6 @@ class App extends React.Component {
         subTitle: "Ventures into Web development",
         subscript: "explorer my ventures below!",
       },
-      // services: {
-      //   title: "Projects",
-      // },
       clients: {
         title: "Resume",
       },
@@ -73,9 +68,6 @@ class App extends React.Component {
                 <Link className="nav-link" to="/">
                   Home
                 </Link>
-                <Link className="nav-link" to="/services">
-                  Services
-                </Link>
                 <Link className="nav-link" to="/clients">
                   Clients
                 </Link>
@@ -101,11 +93,6 @@ class App extends React.Component {
                 subscript={this.state.home.subscript}
               />
             )}
-          />
-          <Route
-            path="/services"
-            exact
-            render={() => <Services title={this.state.services.title} />}
           />
           <Route
             path="/clients"
