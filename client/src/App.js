@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
-import About from "./pages/About";
+import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
@@ -15,8 +15,7 @@ import Contact from "./pages/Contact.js";
 import "./App.css";
 import"bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-// import{ColorPicker, useColor} from "react-color-palette";
-// import"react-color-palette/lib/css/styles.css";
+<div style={{backgroundImage:"url(/assets/background.png)"}}></div>
 
 class App extends React.Component {
   constructor(props) {
@@ -24,20 +23,20 @@ class App extends React.Component {
     this.state = {
       title: "Salon Xperience",
       headerLinks: [
-        { title: "About", path: "/" },
+        { title: "Home", path: "/" },
         { title: "Services", path: "/services" },
         { title: "Clients", path: "/clients" },
         { title: "Stylist", path: "/stylist" },
         { title: "Contact", paht: "/contact" },
       ],
-      about: {
+      home: {
         title: "Jacqueline of all Trades",
         subTitle: "Ventures into Web development",
         subscript: "explorer my ventures below!",
       },
-      services: {
-        title: "Projects",
-      },
+      // services: {
+      //   title: "Projects",
+      // },
       clients: {
         title: "Resume",
       },
@@ -72,7 +71,7 @@ class App extends React.Component {
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
                 <Link className="nav-link" to="/">
-                  About
+                  Home
                 </Link>
                 <Link className="nav-link" to="/services">
                   Services
@@ -96,10 +95,10 @@ class App extends React.Component {
             path="/"
             exact
             render={() => (
-              <About
-                title={this.state.about.title}
-                subTitle={this.state.about.subTitle}
-                subscript={this.state.about.subscript}
+              <Home
+                title={this.state.home.title}
+                subTitle={this.state.home.subTitle}
+                subscript={this.state.home.subscript}
               />
             )}
           />

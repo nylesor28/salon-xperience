@@ -5,8 +5,8 @@ import {
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
-  UPDATE_CATEGORIES,
-  UPDATE_CURRENT_CATEGORY,
+  UPDATE_SERVICES,
+  UPDATE_CURRENT_SERVICE,
   CLEAR_CART,
   TOGGLE_CART
 } from "./actions";
@@ -68,16 +68,16 @@ export const reducer = (state, action) => {
         cartOpen: !state.cartOpen
       };
 
-    case UPDATE_CATEGORIES:
+    case UPDATE_SERVICES:
       return {
         ...state,
-        categories: [...action.categories],
+        services: [...action.services],
       };
 
-    case UPDATE_CURRENT_CATEGORY:
+    case UPDATE_CURRENT_SERVICE:
       return {
         ...state,
-        currentCategory: action.currentCategory
+        currentService: action.currentService
       }
 
     default:

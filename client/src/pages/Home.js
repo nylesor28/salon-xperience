@@ -4,7 +4,7 @@ import Content from "../components/Content/index.js";
 
 
 
-function About(props) {
+function Home(props) {
   return (
       <div>
          <Content>
@@ -18,4 +18,4 @@ Salon Xperience was established in 2021 with a mission to provide exceptional se
 </div>
   );
 }
-export default About;
+export default Home;
