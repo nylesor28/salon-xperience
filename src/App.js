@@ -9,7 +9,9 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
+import Profile from "./pages/Profile.js";
 import Pricing from "./pages/Pricing";
+import Admin from "./pages/Admin";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
 import "./App.css";
@@ -26,9 +28,10 @@ class App extends React.Component {
       headerLinks: [
         { title: "Home", path: "/" },
         { title: "Services", path: "/services" },
-        { title: "Clients", path: "/clients" },
+        { title: "Admin", path: "/admin" },
         { title: "Stylist", path: "/stylist" },
         { title: "Contact", paht: "/contact" },
+        { title: "Profile", paht: "/profile" },
       ],
       about: {
         title: "Jacqueline of all Trades",
@@ -38,8 +41,8 @@ class App extends React.Component {
       services: {
         title: "Projects",
       },
-      clients: {
-        title: "Resume",
+      admin: {
+        title: "Admin",
       },
       stylist: {
         title: "Resume",
@@ -49,6 +52,9 @@ class App extends React.Component {
       },
       contact: {
         title: "Build the Universe Together",
+      },
+      profile: {
+        title: "Profile",
       },
     };
   }
@@ -80,8 +86,8 @@ class App extends React.Component {
                 <Link className="nav-link" to="/services">
                   Services
                 </Link>
-                <Link className="nav-link" to="/clients">
-                  Clients
+                <Link className="nav-link" to="/admin">
+                  Admin
                 </Link>
                 <Link className="nav-link" to="/stylist">
                   Stylist
@@ -91,6 +97,9 @@ class App extends React.Component {
                 </Link>
                 <Link className="nav-link" to="/Contact">
                   Contact
+                </Link>
+                <Link className="nav-link" to="/profile">
+                  Profile
                 </Link>
                 {/* <ContactForm></ContactForm> */}
               </Nav>
@@ -118,9 +127,9 @@ class App extends React.Component {
             render={() => <Services title={this.state.services.title} />}
           />
           <Route
-            path="/clients"
+            path="/admin"
             exact
-            render={() => <Clients title={this.state.clients.title} />}
+            render={() => <Admin title={this.state.admin.title} />}
           />
           <Route
             path="/stylist"
@@ -136,6 +145,11 @@ class App extends React.Component {
             path="/contact"
             exact
             render={() => <Contact title={this.state.contact.title} />}
+          />
+          <Route
+            path="/profile"
+            exact
+            render={() => <Profile title={this.state.profile.title} />}
           />
 
           <Footer></Footer>
