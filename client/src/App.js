@@ -7,14 +7,16 @@ import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
 import Clients from "./pages/Clients";
+import Profile from "./pages/Profile";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
+import Admin from "./pages/Admin";
 import "./App.css";
-import"bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-<div style={{backgroundImage:"url(/assets/background.png)"}}></div>
+<div style={{ backgroundImage: "url(/assets/background.png)" }}></div>;
 
 class App extends React.Component {
   constructor(props) {
@@ -23,17 +25,18 @@ class App extends React.Component {
       title: "Salon Xperience",
       headerLinks: [
         { title: "Home", path: "/" },
-        { title: "Clients", path: "/clients" },
+        { title: "Profile", path: "/profile" },
         { title: "Stylist", path: "/stylist" },
         { title: "Contact", paht: "/contact" },
+        { title: "Admin", paht: "/admin" },
       ],
       home: {
         title: "Jacqueline of all Trades",
         subTitle: "Ventures into Web development",
         subscript: "explorer my ventures below!",
       },
-      clients: {
-        title: "Resume",
+      profile: {
+        title: "profile",
       },
       stylist: {
         title: "Resume",
@@ -42,6 +45,9 @@ class App extends React.Component {
         title: "Resume",
       },
       contact: {
+        title: "Admin",
+      },
+      admin: {
         title: "Build the Universe Together",
       },
     };
@@ -51,7 +57,7 @@ class App extends React.Component {
       <Router>
         <Container className="p=0" fluid={true}>
           {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
-          <Navbar className="border-bottom" expand="lg">
+          <Navbar className="border-bottom bg-blue-400" expand="lg">
             <Navbar.Brand href="#home">
               <img
                 src={logo}
@@ -60,25 +66,46 @@ class App extends React.Component {
                 className="d-inline-block align-top"
                 alt="logo"
               />
-            </Navbar.Brand> 
+            </Navbar.Brand>
             {/* <Navbar.Brand>Salon Xperience</Navbar.Brand> */}
             <Navbar.Toggle className="border=0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
-                <Link className="nav-link" to="/">
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/"
+                >
                   Home
                 </Link>
-                <Link className="nav-link" to="/clients">
-                  Clients
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/profile"
+                >
+                  Profile
                 </Link>
-                <Link className="nav-link" to="/stylist">
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/stylist"
+                >
                   Stylist
                 </Link>
-                <Link className="nav-link" to="/pricing">
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/pricing"
+                >
                   Pricing
                 </Link>
-                <Link className="nav-link" to="/Contact">
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/Contact"
+                >
                   Contact
+                </Link>
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/Admin"
+                >
+                  Admin
                 </Link>
               </Nav>
             </Navbar.Collapse>
@@ -95,16 +122,16 @@ class App extends React.Component {
             )}
           />
           <Route
-            path="/clients"
+            path="/profile"
             exact
-            render={() => <Clients title={this.state.clients.title} />}
+            render={() => <Profile title={this.state.profile.title} />}
           />
           <Route
             path="/stylist"
             exact
             render={() => <Stylist title={this.state.stylist.title} />}
           />
-           <Route
+          <Route
             path="/pricing"
             exact
             render={() => <Pricing title={this.state.pricing.title} />}
@@ -113,6 +140,11 @@ class App extends React.Component {
             path="/contact"
             exact
             render={() => <Contact title={this.state.contact.title} />}
+          />
+          <Route
+            path="/admin"
+            exact
+            render={() => <Admin title={this.state.admin.title} />}
           />
 
           <Footer></Footer>
