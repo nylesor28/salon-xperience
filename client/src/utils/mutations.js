@@ -37,14 +37,16 @@ export const ADD_USER_PROFILE = gql`
 mutation addUserProfile($profileInput: UserProfileInput!){
   addUserProfile (profileInput:$profileInput) {
     _id
-   firstName
-    lastName
-    phoneNumber
-    address
-    city
-    zipCode
-    imageURL
-    
+    userProfile {
+      _id
+      firstName
+      lastName
+      phoneNumber
+      address
+      city
+      zipCode
+      imageURL
+    }
   }
 }
 `;
