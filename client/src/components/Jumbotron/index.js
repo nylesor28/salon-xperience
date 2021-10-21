@@ -6,7 +6,7 @@ function Jumbotron() {
     <>
       <div className="border">
           <div>
-              <img sr={jomboimg} alt="Jombotron Picture"/>
+              <img src={jomboimg} alt="Jombotron Picture"/>
           </div>
       </div>
       

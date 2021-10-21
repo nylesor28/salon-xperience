@@ -1,4 +1,5 @@
 import React from "react";
+import placeholder from "../../assets/images/jomboimg2.jpg";
 
 function Styler(props) {
   return (
@@ -12,7 +13,7 @@ function Styler(props) {
             <div id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
-                src="../assets/images/pic2.jpg"
+                src={placeholder}
                 alt="Logo"
               />
             </div>
@@ -41,7 +42,7 @@ function Styler(props) {
             <div id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
-                src="../assets/images/pic2.jpg"
+                src={placeholder}
                 alt="Logo"
               />
             </div>
@@ -70,7 +71,7 @@ function Styler(props) {
             <div id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
-                src="../assets/images/pic2.jpg"
+                src={placeholder}
                 alt="Logo"
               />
             </div>
@@ -99,7 +100,7 @@ function Styler(props) {
             <div id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
-                src="../assets/images/pic2.jpg"
+                src={placeholder}
                 alt="Logo"
               />
             </div>

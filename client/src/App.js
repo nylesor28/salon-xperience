@@ -1,4 +1,6 @@
 import { render } from "@testing-library/react";
+import { ApolloProvider } from '@apollo/client';
+import ApolloClient from 'apollo-boost';
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -6,17 +8,31 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
-import Clients from "./pages/Clients";
 import Profile from "./pages/Profile";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
 import Admin from "./pages/Admin";
+import SignUp from "./pages/Signup"
+import Login from "./pages/Login"
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-<div style={{ backgroundImage: "url(/assets/background.png)" }}></div>;
+
+const client = new ApolloClient({ request: operation => {
+  const token = localStorage.getItem('id_token');
+
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  });
+},
+  uri: '/graphql'
+});
+
+{/* <div style={{ backgroundImage: "url(/assets/background.png)" }}></div>; */}
 
 class App extends React.Component {
   constructor(props) {
@@ -27,8 +43,10 @@ class App extends React.Component {
         { title: "Home", path: "/" },
         { title: "Profile", path: "/profile" },
         { title: "Stylist", path: "/stylist" },
-        { title: "Contact", paht: "/contact" },
-        { title: "Admin", paht: "/admin" },
+        { title: "Contact", path: "/contact" },
+        { title: "Admin", path: "/admin" },
+        { title: "Login", path: "/login" },
+        { title: "SignUp", path: "/signup" },
       ],
       home: {
         title: "Jacqueline of all Trades",
@@ -47,13 +65,21 @@ class App extends React.Component {
       contact: {
         title: "Admin",
       },
+      signup: {
+        title: "signup",
+      },
+      login: {
+        title: "login",
+      },
       admin: {
         title: "Build the Universe Together",
       },
     };
   }
+  
   render() {
     return (
+      <ApolloProvider client={client}>
       <Router>
         <Container className="p=0" fluid={true}>
           {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
@@ -107,6 +133,18 @@ class App extends React.Component {
                 >
                   Admin
                 </Link>
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/signup"
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  to="/login"
+                >
+                  Login
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -146,10 +184,21 @@ class App extends React.Component {
             exact
             render={() => <Admin title={this.state.admin.title} />}
           />
+          <Route
+            path="/signup"
+            exact
+            render={() => <SignUp title={this.state.signup.title} />}
+          />
+          <Route
+            path="/login"
+            exact
+            render={() => <Login title={this.state.login.title} />}
+          />
 
           <Footer></Footer>
         </Container>
       </Router>
+      </ApolloProvider>
     );
   }
 }
