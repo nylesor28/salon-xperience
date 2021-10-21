@@ -42,14 +42,32 @@ const userSchema = new Schema(
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function(next) {
+  console.log("========SAVE========")
+  console.log("this.is new : " , this.isNew)
+  console.log("this.is mod : " , this.isModified('password'))
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
+    console.log("========HASHED SAVE========")
+    console.log(this)
   }
 
   next();
 });
 
+userSchema.pre('findByIdAndUpdate', async function(next) {
+  console.log("========FIND AND UPDATE ========")
+  console.log("this.is new : " , this.isNew)
+  console.log("this.is mod : " , this.isModified('password'))
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+    console.log("========HASH FIND AND UPDATE========")
+    console.log(this)
+  }
+
+  next();
+});
 // compare the incoming password with the hashed password
 userSchema.methods.isCorrectPassword = async function(password) {
   return await bcrypt.compare(password, this.password);

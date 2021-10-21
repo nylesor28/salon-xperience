@@ -102,8 +102,8 @@ const resolvers = {
       console.log(args)
       const user = await User.create(args);
       const token = signToken(user);
-      console.log(user)
-      return   user ;
+   
+      return  {token, user} ;
     },
     addUserProfile: async (parent, {profileInput}) => {
       console.log(profileInput)
@@ -111,6 +111,33 @@ const resolvers = {
       return UserProfile.create(profileInput);
   
       //return {userProfile };
+    },
+
+    updatePassword: async (parent, {oldPassword, newPassword}, context) => {
+      if (context.user){
+
+          const id = context.user._id
+          const user = await User.findById(id);
+
+          const correctPw = await user.isCorrectPassword(oldPassword);
+          if (!correctPw) {
+            throw new AuthenticationError('Incorrect credentials');
+          }
+          return await User.findByIdAndUpdate(id, {password: newPassword}, { new: true });
+      }
+      throw new AuthenticationError('Not logged in');
+    },
+    
+
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        
+        
+
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
 
     addOrder: async (parent, { products }, context) => {
@@ -125,13 +152,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
 
-      throw new AuthenticationError('Not logged in');
-    },
     updateProduct: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
