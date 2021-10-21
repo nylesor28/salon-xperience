@@ -45,7 +45,7 @@ input UserProfileInput {
     password: String!
     email: String!
     role: String
-    profile: UserProfile
+    userProfile: UserProfile
 
   }
 

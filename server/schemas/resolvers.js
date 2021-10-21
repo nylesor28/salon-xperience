@@ -135,7 +135,7 @@ const resolvers = {
           { _id: context.user._id },
           { $set: {userProfile: newProfile._id}},
           { new: true }
-        );
+        ).populate('userProfile')
         console.log ("updated user ", updatedUser)
         return updatedUser;
       }
