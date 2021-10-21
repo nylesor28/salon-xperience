@@ -29,23 +29,63 @@ export const ADD_ORDER = gql`
   }
 `;
 
+
+
+
+export const ADD_USER_PROFILE = gql`
+
+mutation addUserProfile($profileInput: UserProfileInput!){
+  addUserProfile (profileInput:$profileInput) {
+    _id
+   firstName
+    lastName
+    phoneNumber
+    address
+    city
+    zipCode
+    imageURL
+    
+  }
+}
+`;
+
+
+
 export const ADD_USER = gql`
-  mutation addUser(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
+    mutation addUser(
+      $username: String!
+      $email: String!
+      $password: String!
+      $role: String
+      $profileId: ID
     ) {
-      token
-      user {
-        _id
+      addUser(
+        username: $username
+        email: $email
+        password: $password
+        role: $role
+        profileId: $profileId
+        
+      ) {
+        token
+        user{
+          _id
+        }
       }
     }
-  }
 `;
+
+export const UPDATE_PASSWORD = gql`
+  mutation updatePassword(  
+    $oldPassword: String!
+    $newPassword: String!
+  ) {
+    updatePassword (
+      oldPassword: $oldPassword
+      newPassword: $newPassword
+    ) 
+    {
+        _id
+    }
+  }
+  `;

@@ -68,3 +68,19 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const GET_USER_PROILE = gql`
+  query GetUserProfile($profileId: ID!){
+    getUserProfile (profileId : $profileId) {
+      _id
+    firstName
+      lastName
+      phoneNumber
+      address
+      city
+      zipCode
+      imageURL
+      
+    }
+  }
+`;

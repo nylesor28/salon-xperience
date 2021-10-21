@@ -1,12 +1,13 @@
 import react from "react";
 // import { Carousel } from "react-bootstrap";
 // import BootstrapCarouselComponent from '../components/Carousel/index.js';
+import Styler from "../components/Styler"
 
 
 function Stylist(props) {
   return (
       <div>
-          is working
+         <Styler/>
  {/* <BootstrapCarouselComponent></BootstrapCarouselComponent>  */}
 </div>
   );
