@@ -38,19 +38,23 @@ input UserProfileInput {
     service: Service
   }
 
+  type User {
+    _id: ID
+    userName: String!
+    password: String!
+    email: String!
+    role: String
+    profile: UserProfile
+
+  }
+
   type Order {
     _id: ID
     purchaseDate: String
     products: [Product]
   }
 
-  type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    orders: [Order]
-  }
+
 
   type Checkout {
     session: ID
@@ -73,7 +77,7 @@ input UserProfileInput {
 
   type Mutation {
     addUserProfile( profileInput: UserProfileInput!) : UserProfile
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): User
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateProduct(_id: ID!, quantity: Int!): Product
