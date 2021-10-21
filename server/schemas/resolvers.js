@@ -123,13 +123,27 @@ const resolvers = {
       return { token, user };
     },
 
-    addUserProfile: async (parent, {profileInput}) => {
+    addUserProfile: async (parent, {profileInput}, context) => {
       console.log(profileInput)
+      if(context.user) {
+        const userId = context.user_id
+     
+        const newProfile = await UserProfile.create(profileInput)
+        console.log("NEW PROFILE: " , newProfile, "NEW ID: ", newProfile._id)
+        
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $set: {userProfile: newProfile._id}},
+          { new: true }
+        );
+        console.log ("updated user ", updatedUser)
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
 
-      return UserProfile.create(profileInput);
-  
-      //return {userProfile };
     },
+
+    
 
     updatePassword: async (parent, {oldPassword, newPassword}, context) => {
       if (context.user){
@@ -141,7 +155,7 @@ const resolvers = {
           if (!correctPw) {
             throw new AuthenticationError('Incorrect credentials');
           }
-          return await User.findByIdAndUpdate(id, {password: newPassword}, { new: true });
+          return await User.findByIdAndUpdate(id, {$set: {password: newPassword}}, { new: true });
       }
       throw new AuthenticationError('Not logged in');
     },
