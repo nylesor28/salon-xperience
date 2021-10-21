@@ -155,7 +155,7 @@ const resolvers = {
           if (!correctPw) {
             throw new AuthenticationError('Incorrect credentials');
           }
-          return await User.findByIdAndUpdate(id, {$set: {password: newPassword}}, { new: true });
+          return await User.findByIdAndUpdate(id,  {password: newPassword}, { new: true });
       }
       throw new AuthenticationError('Not logged in');
     },
