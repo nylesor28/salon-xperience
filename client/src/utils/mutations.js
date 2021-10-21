@@ -49,3 +49,21 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+
+export const ADD_USER_PROFILE = gql`
+
+mutation addUserProfile($profileInput: UserProfileInput!){
+  addUserProfile (profileInput:$profileInput) {
+    _id
+   firstName
+    lastName
+    phoneNumber
+    address
+    city
+    zipCode
+    imageURL
+    
+  }
+}
+`;

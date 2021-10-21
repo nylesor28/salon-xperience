@@ -1,10 +1,18 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Service, Order } = require('../models');
+const { User, Product, Service, Order, UserProfile } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
+
+    userProfile: async (parent, {profileId} ) =>{
+      console.log({profileId})
+     
+      const userProfileData = await UserProfile.findOne({_id: profileId}).select('-__v')
+      return userProfileData;
+    },
+
     services: async () => {
       return await Service.find();
     },
@@ -96,6 +104,14 @@ const resolvers = {
 
       return { token, user };
     },
+    addUserProfile: async (parent, {profileInput}) => {
+      console.log(profileInput)
+
+      return UserProfile.create(profileInput);
+  
+      //return {userProfile };
+    },
+
     addOrder: async (parent, { products }, context) => {
       console.log(context);
       if (context.user) {

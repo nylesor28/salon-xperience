@@ -1,6 +1,28 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
+type UserProfile {
+  _id: ID
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  address: String
+  city: String
+  zipCode: String
+  imageURL : String
+}
+
+input UserProfileInput {
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  address: String
+  city: String
+  zipCode: String
+  imageURL : String
+}
+
   type Service {
     _id: ID
     name: String
@@ -40,6 +62,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    userProfile(profileId: ID!) : UserProfile
     services: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
@@ -49,6 +72,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addUserProfile( profileInput: UserProfileInput!) : UserProfile
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
