@@ -102,15 +102,22 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async (parent, args) => {
-      console.log(args);
+    addUser: async (parent, args, context) => {
+      const loggedInRole = (context.user?.role)?.toLowerCase();
+      const newRole = (args.role)?.toLowerCase()
+
+      if(!(loggedInRole === 'admin') && (newRole === 'admin'|| newRole=== 'stylist'))
+        {
+          throw new AuthenticationError("Not Authorized");
+        }
+
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email }).select("-__v -password");
+      const user = await User.findOne({ email }).select("-__v");
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
@@ -128,7 +135,6 @@ const resolvers = {
     },
 
     addUpdateUserProfile: async (parent, { profileInput }, context) => {
-      console.log(profileInput);
       if (context.user) {
         const userId = context.user._id;
         const user = await User.findById(userId).select("-__v -password");
@@ -150,7 +156,7 @@ const resolvers = {
           const updatedProfile = await UserProfile.findOneAndUpdate(
             { _id: userProfileId },
             profileInput
-          );
+          ).select("-__v -password");
           const currentuser = await User.findById(userId)
             .select("-__v -password")
             .populate({ path: "userProfile", select: "-__v" });
@@ -161,9 +167,10 @@ const resolvers = {
     },
 
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
+ 
       if (context.user) {
         const id = context.user._id;
-        const user = await User.findById(id).select("-__v -password");
+        const user = await User.findById(id);
 
         const correctPw = await user.isCorrectPassword(oldPassword);
         if (!correctPw) {
