@@ -123,12 +123,17 @@ const resolvers = {
       return { token, user };
     },
 
-    addUserProfile: async (parent, {profileInput}, context) => {
+    addUpdateUserProfile: async (parent, {profileInput}, context) => {
       console.log(profileInput)
       if(context.user) {
-        const userId = context.user_id
-     
-        const newProfile = await UserProfile.create(profileInput)
+        const userId = context.user._id
+        const user = await User.findById(userId)
+        const userProfileId = user.userProfile?._id
+        console.log("---> FOUND PROFILE_ID: ", userProfileId)
+
+        if(!userProfileId){      
+        
+          const newProfile = await UserProfile.create(profileInput)
         console.log("NEW PROFILE: " , newProfile, "NEW ID: ", newProfile._id)
         
         const updatedUser = await User.findByIdAndUpdate(
@@ -138,6 +143,18 @@ const resolvers = {
         ).populate('userProfile')
         console.log ("updated user ", updatedUser)
         return updatedUser;
+      }
+      else{
+        console.log(profileInput)
+        console.log("NEED to update existing PROFILE")
+        const updatedProfile = await UserProfile.findOneAndUpdate({_id: userProfileId},profileInput)
+        console.log("***USER PROFILE***")
+        console.log(updatedProfile)
+        console.log("***CURRENT USER***")
+         const currentuser = await User.findById(userId).populate('userProfile')
+         console.log(currentuser)
+         return(currentuser)
+      }
       }
       throw new AuthenticationError('You need to be logged in!');
 

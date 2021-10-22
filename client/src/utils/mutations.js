@@ -32,10 +32,10 @@ export const ADD_ORDER = gql`
 
 
 
-export const ADD_USER_PROFILE = gql`
+export const ADD_UPDATE_USER_PROFILE = gql`
 
-mutation addUserProfile($profileInput: UserProfileInput!){
-  addUserProfile (profileInput:$profileInput) {
+mutation addUpdateUserProfile($profileInput: UserProfileInput!){
+  addUpdateUserProfile (profileInput:$profileInput) {
     _id
     userProfile {
       _id

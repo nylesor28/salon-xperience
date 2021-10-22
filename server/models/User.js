@@ -54,13 +54,15 @@ userSchema.pre('save', async function(next) {
 
 userSchema.pre(['updateOne', 'findOneAndUpdate'], async function(next) {
   console.log("======USER UPDATE======")
-  console.log(this)
+  //console.log(this)
     if (this._update.password) {
+
+      console.log("======USER PW UPDATE======")
     const saltRounds = 10;
     this._update.password = await bcrypt.hash(this._update.password, saltRounds);
   }
   console.log("======USER UPDATE END ======")
-  console.log(this)
+  //console.log(this)
   console.log("************************************")
 
   next();
