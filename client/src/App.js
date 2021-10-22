@@ -85,62 +85,64 @@ class App extends React.Component {
           {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
           <Navbar className="border-bottom bg-blue-400" expand="lg">
             <Navbar.Brand href="#home">
+              <div className="w-60 h-24 pl-4">
               <img
                 src={logo}
-                width="100"
-                height="100"
+                width="w-full"
+                height="w-full"
                 className="d-inline-block align-top"
                 alt="logo"
               />
+              </div>
             </Navbar.Brand>
             {/* <Navbar.Brand>Salon Xperience</Navbar.Brand> */}
             <Navbar.Toggle className="border=0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/"
                 >
                   Home
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/profile"
                 >
                   Profile
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/stylist"
                 >
                   Stylist
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/pricing"
                 >
                   Pricing
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/Contact"
                 >
                   Contact
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/Admin"
                 >
                   Admin
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/signup"
                 >
                   Sign Up
                 </Link>
                 <Link
-                  className="nav-link text-white font-bold text-lg hover:bg-gray-600 rounded-lg"
+                  className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                   to="/login"
                 >
                   Login
