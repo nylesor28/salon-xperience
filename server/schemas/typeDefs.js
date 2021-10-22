@@ -67,7 +67,8 @@ input UserProfileInput {
   }
 
   type Query {
-    userProfile(profileId: ID!) : UserProfile
+    getUserProfile : User
+
     services: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
