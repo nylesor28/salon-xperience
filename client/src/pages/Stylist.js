@@ -8,6 +8,7 @@ import img3 from "../assets/stylist/Emilia.jpg";
 import img4 from "../assets/stylist/Eva.jpg";
 import img5 from "../assets/stylist/Jurnee.jpg";
 import img6 from "../assets/stylist/maya.jpg";
+import BootstrapCarouselComponent from '../components/Carousel/index.js';
 import axios from "axios";
 
 
@@ -15,6 +16,8 @@ function Stylist(props) {
     const[stylistflashcards, setStylistFlashcards]=useState(StylistFlashcards)
   return (
       <div className="stylist-container">
+      <BootstrapCarouselComponent></BootstrapCarouselComponent>
+      
       <StylistFlashcardList stylistflashcards={stylistflashcards} />
       </div>
  
