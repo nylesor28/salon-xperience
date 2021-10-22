@@ -100,6 +100,8 @@
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
   cursor: pointer;
+  padding-top: 5px;
+  margin-top: 50px;
 }
 
 .stylistcard.flip {
@@ -119,4 +121,9 @@
 }
 .stylistcard .back {
   transform: rotateY(180deg);
+}
+
+.container-fluid{
+  box-shadow: 0 8 px 16px rgba(0, 0, 0, 0.75);
+  position: relative;
 }
