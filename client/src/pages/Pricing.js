@@ -4,12 +4,16 @@ import Flashcard from "../components/Flashcard";
 import React, { useState, useEffect } from 'react';
 import "../App.css";
 import axios from "axios";
+import ProductList from "../components/ProductList";
+import Cart from "../components/Cart";
 
 function Pricing(props) {
     const[flashcards, setFlashcards]=useState(Flashcards)
   return (
       <div className="container">
       <FlashcardList flashcards={flashcards} />
+      <ProductList/>
+      {/* <Cart/>  */}
       </div>
  
   );
