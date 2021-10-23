@@ -5,7 +5,7 @@ import { UPDATE_SERVICES } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_SERVICES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
-import spinner from '../../assets/spinner.gif';
+// import spinner from '../../assets/spinner.gif';
 
 function ServiceList() {
   const [state, dispatch] = useStoreContext();
@@ -62,7 +62,7 @@ function ServiceList() {
       ) : (
         <h3>You haven't added any services yet!</h3>
       )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
+      {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
     </div>
   );
 }

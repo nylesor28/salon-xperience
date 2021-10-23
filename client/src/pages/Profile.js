@@ -49,7 +49,7 @@ function Profile() {
             </div>
           </div>
           <div id="hair-profile" className="border rounded w-1/6 p-2 shadow">
-            <h2 className="font-bold text-center">HAIR PROFILE</h2>
+            <h2 className="text-center">HAIR PROFILE</h2>
             <table className="mb-4">
               <tr>
                 <td className="font-bold text-lg">Hair Type:</td>
