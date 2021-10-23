@@ -15,11 +15,18 @@ import axios from "axios";
 function Stylist(props) {
     const[stylistflashcards, setStylistFlashcards]=useState(StylistFlashcards)
   return (
+    <>
+     <div className="row">
+            <div className="col-sm-6">
+              <h1 className="justify-content-center py-5">STYLIST GALLERY</h1>
+            </div>
+          </div>
       <div className="stylist-container">
       <BootstrapCarouselComponent></BootstrapCarouselComponent>
       
       <StylistFlashcardList stylistflashcards={stylistflashcards} />
       </div>
+      </>
  
   );
 }
