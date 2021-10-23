@@ -1,54 +1,170 @@
 import React from "react";
-import pic from "../../assets/images/jomboimg2.jpg";
-
-function Carousel() {
-  return (
-    <div class="w-full carousel">
-      <div id="slide1" class="relative w-full pt-20 carousel-item">
-        <img src={pic} class="w-full" />
-        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="/components/carousel#slide4" class="btn btn-circle">
-            ❮
-          </a>
-          <a href="/components/carousel#slide2" class="btn btn-circle">
-            ❯
-          </a>
+import angelopantazis from "./../../assets/carousel/angelopantazis.jpg";
+import brookecagle from "./../../assets/carousel/erikmclean.jpg";
+import erikmclean from "./../../assets/carousel/brookecagle.jpg";
+import joelvalve from "./../../assets/carousel/joelvalve.jpg";
+import tammieallen from "./../../assets/carousel/tammieallen.jpg";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Carousel } from "react-bootstrap";
+import tylernix from "./../../assets/carousel/tylernix.jpg";
+class BootstrapCarouselComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-6">
+              <h1 className="justify-content-center py-5">Stylist Gallery</h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <Carousel className="justify-content-center py5">
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={angelopantazis}
+                    width="417"
+                    height="600"
+                    text="Akeem"
+                    alt="Akeem"
+                  />
+                  <Carousel.Caption>
+                    <h3
+                      classname="title"
+                      style={{
+                        color: "silver",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Akeem
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={brookecagle}
+                    width="417"
+                    height="600"
+                    text="Emilia"
+                    alt="Emilia"
+                  />
+                  <Carousel.Caption>
+                    <h3
+                      classname="title"
+                      style={{
+                        color: "silver",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Emilia
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={erikmclean}
+                    width="417"
+                    height="600"
+                    text="Eva"
+                    alt="Eva"
+                  />
+                  <Carousel.Caption>
+                    <h3
+                      classname="title"
+                      style={{
+                        color: "silver",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Eva
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={joelvalve}
+                    width="417"
+                    height="600"
+                    text="Jurnee"
+                    alt="Jurnee"
+                  />
+                </Carousel.Item>
+                <Carousel.Caption>
+                  <h3
+                    classname="title"
+                    style={{
+                      color: "silver",
+                      display: "flex",
+                      textAlign: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Jurnee
+                  </h3>
+                </Carousel.Caption>
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={tammieallen}
+                    width="417"
+                    height="600"
+                    text="Maya"
+                    alt="Maya"
+                  />
+                  <Carousel.Caption>
+                    <h3
+                      classname="title"
+                      style={{
+                        color: "silver",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Maya
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item Interval={500}>
+                  <img
+                    className="d-block w-100"
+                    src={tylernix}
+                    width="417"
+                    height="600"
+                    text="Roz"
+                    alt="Roz"
+                  />
+                  <Carousel.Caption>
+                    <h3
+                      classname="title"
+                      style={{
+                        color: "silver",
+                        display: "flex",
+                        textAlign: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Roz
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              </Carousel>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="slide2" class="relative w-full pt-20 carousel-item">
-        <img src={pic} class="w-full" />
-        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="/components/carousel#slide1" class="btn btn-circle">
-            ❮
-          </a>
-          <a href="/components/carousel#slide3" class="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide3" class="relative w-full pt-20 carousel-item">
-        <img src={pic} class="w-full" />
-        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="/components/carousel#slide2" class="btn btn-circle">
-            ❮
-          </a>
-          <a href="/components/carousel#slide4" class="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide4" class="relative w-full pt-20 carousel-item">
-        <img src={pic} class="w-full" />
-        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="/components/carousel#slide3" class="btn btn-circle">
-            ❮
-          </a>
-          <a href="/components/carousel#slide1" class="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
-export default Carousel;
+
+export default BootstrapCarouselComponent;
