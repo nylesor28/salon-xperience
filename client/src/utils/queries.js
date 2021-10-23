@@ -70,17 +70,19 @@ export const QUERY_USER = gql`
 `;
 
 export const GET_USER_PROILE = gql`
-  query GetUserProfile($profileId: ID!){
-    getUserProfile (profileId : $profileId) {
+query GetUserProfile{
+  getUserProfile {
+    _id
+    userProfile {
       _id
-    firstName
+      firstName
       lastName
       phoneNumber
       address
       city
       zipCode
       imageURL
-      
     }
   }
+}
 `;
