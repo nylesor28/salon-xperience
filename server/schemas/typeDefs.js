@@ -105,7 +105,7 @@ input ScheduleInput {
   }
 
   type Mutation {
-    addUpdateStylistInfo(_id: ID, certifications: String, workingHours: [ScheduleInput]) : Stylist
+    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : Stylist
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
     login(email: String!, password: String!): Auth

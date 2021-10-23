@@ -144,22 +144,37 @@ const resolvers = {
 
 
     addUpdateStylistInfo:  async (parent, args, context) => {
-      console.log("=======INSIDE ADD/UPDATE STYLIST =======")
-      console.log(args.workingHours)
+     // console.log("=======INSIDE ADD/UPDATE STYLIST =======")
+     // console.log(args.workingHours)
 
       if(context.user){
 
-      const userId = context.user._id;
+      const role = (context.user?.role)?.toLowerCase();
+      let stylistId = '';
+      let updateUserId =''
+
+      if (role === 'stylist') {
+        updateUserId = context.user._id;
+      }
+      else if (role === 'admin') {
+        updateUserId = args.userId
+      }
+      else {
+        throw new AuthenticationError("Not Authorized");
+      }
+      //console.log("USERID: " , updateUserId)
+      //console.log(args)
       
       const { certifications, workingHours} = args;
-      console.log(workingHours)
-     
 
+      //const stylist = await Stylist.create({userId: stylistId, certifications, workingHours: workingHours});
+      const stylist = await Stylist.findOneAndUpdate(
+        {userId: updateUserId},
+        {$set: {userId: updateUserId, certifications, workingHours: workingHours}},
+        {upsert: true, new: true}
+        )
 
-
-      const stylist = await Stylist.create({userId: userId, certifications, workingHours: workingHours});
-
-     // console.log (stylist)
+      //console.log (stylist)
       return stylist
       } 
 

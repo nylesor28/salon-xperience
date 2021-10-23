@@ -9,7 +9,7 @@ const stylistSchema = new Schema(
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      require: true
+      required: true
     },
     certifications: {
       type: String,
@@ -21,7 +21,7 @@ const stylistSchema = new Schema(
           type: Schema.Types.Number,
           min: 0,
           max: 6,
-          require: true
+          required: true
         },        
         hourStart:{
           type: Schema.Types.Number,

@@ -91,3 +91,31 @@ export const UPDATE_PASSWORD = gql`
     }
   }
   `;
+
+  export const ADD_UPDATE_STYLIST_INFO = gql`
+        mutation addUpdateStylistInfo(
+          $_id: ID
+          $userId: ID
+          $certifications: String
+          $scheduleInput: [ScheduleInput]
+        ) {
+          addUpdateStylistInfo( 
+          _id :$_id
+            userId: $userId
+            certifications: $certifications
+            workingHours: $scheduleInput
+          ) {
+            _id
+            userId
+            certifications
+            workingHours {
+              weekday
+              hourStart
+              minuteStart
+              hourEnd
+              minuteEnd
+            
+            }
+          }
+        }
+  `
