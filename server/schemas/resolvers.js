@@ -151,13 +151,13 @@ const resolvers = {
 
       const userId = context.user._id;
       
-      const { certification, workingHours} = args;
+      const { certifications, workingHours} = args;
       console.log(workingHours)
      
 
 
 
-      const stylist = await Stylist.create({userId: userId, certification, workingHours: workingHours});
+      const stylist = await Stylist.create({userId: userId, certifications, workingHours: workingHours});
 
      // console.log (stylist)
       return stylist
