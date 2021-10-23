@@ -47,6 +47,7 @@ type Auth {
 }
 
 
+
 type UserProfile {
   _id: ID
   firstName: String!
@@ -92,10 +93,14 @@ input ScheduleInput {
   minuteEnd: Int
 }
 
+type StylistCompleteProfile {
+  stylist: Stylist
+  user: User
+}
 
   type Query {
     getUserProfile : User
-
+    getStylistInfo(userId: ID ) : StylistCompleteProfile
     services: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product

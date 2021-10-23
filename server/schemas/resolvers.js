@@ -16,6 +16,39 @@ const resolvers = {
       return user;
     }
   },
+  getStylistInfo:  async (parent, {userId}, context) => {
+
+
+    console.log(userId)
+
+    const stylist = await Stylist.findOne(
+      {userId: userId}
+        // {   
+        //   $or : [     
+        //            {userId: userId},
+        //            {_id : stylistId}
+        //         ]
+        // }
+    )
+    console.log(stylist)
+   const user = await User.findOne({
+      _id: stylist.userId,
+    }).select("-__v -password")
+    .populate({ path: "userProfile", select: "-__v" });
+
+    //console.log ("============= STYLIST =================")
+
+   // console.log ("============= STYLIST USER INFO =================")
+  //  console.log(stylistInfo)
+
+    
+    const obj = {user, stylist}
+    console.log(obj)
+     return { stylist,  user}
+     //return obj
+    
+   },
+
 
     services: async () => {
       return await Service.find();
@@ -124,6 +157,7 @@ const resolvers = {
       return {user}
      
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email }).select("-__v");
 
@@ -171,13 +205,13 @@ const resolvers = {
       const stylist = await Stylist.findOneAndUpdate(
         {userId: updateUserId},
         {$set: {userId: updateUserId, certifications, workingHours: workingHours}},
-        {upsert: true, new: true}
+        {upsert: true, new: true, runValidators:true}
         )
 
       //console.log (stylist)
       return stylist
       } 
-
+      throw new AuthenticationError("You need to be logged in!");
     },
     addUpdateUserProfile: async (parent, { profileInput }, context) => {
       if (context.user) {
