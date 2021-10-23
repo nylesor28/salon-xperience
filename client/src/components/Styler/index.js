@@ -7,10 +7,10 @@ function Styler(props) {
       <section className="flex justify-evenly">
         <div>
           <div id="card" className="border w-72 p-2 m-2 rounded-lg">
-            <div id="card-title">
+            <div id="card-title" className="text-center">
               <h3>Paterna Smith</h3>
             </div>
-            <div id="card-image">
+            <div className="flex justify-center" id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
                 src={placeholder}
@@ -36,10 +36,10 @@ function Styler(props) {
         </div>
         <div>
           <div id="card" className="border w-72 p-2 m-2 rounded-lg">
-            <div id="card-title">
+            <div id="card-title" className="text-center">
               <h3>Paterna Smith</h3>
             </div>
-            <div id="card-image">
+            <div className="flex justify-center" id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
                 src={placeholder}
@@ -65,10 +65,10 @@ function Styler(props) {
         </div>
         <div>
           <div id="card" className="border w-72 p-2 m-2 rounded-lg">
-            <div id="card-title">
+            <div id="card-title" className="text-center">
               <h3>Paterna Smith</h3>
             </div>
-            <div id="card-image">
+            <div className="flex justify-center" id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
                 src={placeholder}
@@ -94,10 +94,10 @@ function Styler(props) {
         </div>
         <div>
           <div id="card" className="border w-72 p-2 m-2 rounded-lg">
-            <div id="card-title">
+            <div id="card-title" className="text-center">
               <h3>Paterna Smith</h3>
             </div>
-            <div id="card-image">
+            <div className="flex justify-center" id="card-image">
               <img
                 className=" w-32 h-32 rounded-circle"
                 src={placeholder}
@@ -121,6 +121,7 @@ function Styler(props) {
             <div id="class-body"></div>
           </div>
         </div>
+        
       </section>
     </>
   );
