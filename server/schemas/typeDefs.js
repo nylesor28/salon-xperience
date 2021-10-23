@@ -45,7 +45,7 @@ input UserProfileInput {
     password: String!
     email: String!
     role: String
-    profile: UserProfile
+    userProfile: UserProfile
 
   }
 
@@ -67,7 +67,8 @@ input UserProfileInput {
   }
 
   type Query {
-    userProfile(profileId: ID!) : UserProfile
+    getUserProfile : User
+
     services: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
@@ -77,7 +78,7 @@ input UserProfileInput {
   }
 
   type Mutation {
-    addUserProfile( profileInput: UserProfileInput!) : User
+    addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
     login(email: String!, password: String!): Auth
 
