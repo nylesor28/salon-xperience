@@ -2,6 +2,50 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+type Service {
+  _id: ID
+  name: String
+}
+
+type Product {
+  _id: ID
+  name: String
+  description: String
+  image: String
+  quantity: Int
+  price: Float
+  service: Service
+}
+
+
+
+type Order {
+  _id: ID
+  purchaseDate: String
+  products: [Product]
+}
+
+
+
+type Checkout {
+  session: ID
+}
+
+type User {
+  _id: ID
+  userName: String!
+  password: String!
+  email: String!
+  role: String
+  userProfile: UserProfile
+
+}
+
+type Auth {
+  token: ID
+  user: User
+}
+
 
 type UserProfile {
   _id: ID
@@ -24,47 +68,30 @@ input UserProfileInput {
   imageURL : String
 }
 
-  type Service {
-    _id: ID
-    name: String
-  }
+type Stylist {
+  _id : ID
+  userId: ID!
+  certifications: String
+  workingHours: [Schedule]
 
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    service: Service
-  }
+}
 
-  type User {
-    _id: ID
-    userName: String!
-    password: String!
-    email: String!
-    role: String
-    userProfile: UserProfile
+type Schedule {
+  weekday: Int!
+  hourStart:  Int
+  minuteStart: Int
+  hourEnd: Int
+  minuteEnd: Int
+}
 
-  }
+input ScheduleInput {
+  weekday: Int!
+  hourStart:  Int
+  minuteStart: Int
+  hourEnd: Int
+  minuteEnd: Int
+}
 
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
-  }
-
-
-
-  type Checkout {
-    session: ID
-  }
-
-  type Auth {
-    token: ID!
-    user: User
-  }
 
   type Query {
     getUserProfile : User
@@ -78,6 +105,7 @@ input UserProfileInput {
   }
 
   type Mutation {
+    addUpdateStylistInfo(_id: ID, certifications: String, workingHours: [ScheduleInput]) : Stylist
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
     login(email: String!, password: String!): Auth

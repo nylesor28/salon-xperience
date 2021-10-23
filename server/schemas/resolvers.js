@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile } = require("../models");
+const { User, Product, Service, Order, UserProfile, Stylist } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -112,9 +112,17 @@ const resolvers = {
         }
 
       const user = await User.create(args);
-      const token = signToken(user);
 
-      return { token, user };
+      if (newRole === 'client'){
+        const token = signToken(user);
+        return { token, user };
+      }
+
+      // if (newRole === 'stylist') {
+      //   const stylist = await Stylist.create({userId: user._id })
+      // }
+      return {user}
+     
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email }).select("-__v");
@@ -134,6 +142,28 @@ const resolvers = {
       return { token, user };
     },
 
+
+    addUpdateStylistInfo:  async (parent, args, context) => {
+      console.log("=======INSIDE ADD/UPDATE STYLIST =======")
+      console.log(args.workingHours)
+
+      if(context.user){
+
+      const userId = context.user._id;
+      
+      const { certification, workingHours} = args;
+      console.log(workingHours)
+     
+
+
+
+      const stylist = await Stylist.create({userId: userId, certification, workingHours: workingHours});
+
+     // console.log (stylist)
+      return stylist
+      } 
+
+    },
     addUpdateUserProfile: async (parent, { profileInput }, context) => {
       if (context.user) {
         const userId = context.user._id;
