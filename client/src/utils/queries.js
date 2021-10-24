@@ -39,14 +39,47 @@ export const QUERY_ALL_PRODUCTS = gql`
   }
 `;
 
-export const QUERY_SERVICES = gql`
-  {
-    services {
-      _id
-      name
+export const QUERY_SERVICES_BY_ID = gql`
+  
+query getServiceById(
+  $_id:ID!
+) {
+  getServiceById(
+    _id: $_id
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
     }
+    expiredDate
   }
+}
 `;
+
+
+export const QUERY_ALL_SERVICES = gql`
+  
+query getServiceById(
+  $_id:ID!
+) {
+  getServiceById(
+    _id: $_id
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
+    }
+    expiredDate
+  }
+}
+`;
+
 
 export const QUERY_USER = gql`
   {

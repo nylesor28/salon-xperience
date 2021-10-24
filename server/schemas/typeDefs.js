@@ -115,7 +115,8 @@ input DurationInput {
     getUserProfile : User
 
     getClientInfo(clientUserId : ID) : ClientCompleteProfile
-    services: [Service]
+    getServiceById(_id: ID!) : Service
+    getAllServices: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User

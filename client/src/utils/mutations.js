@@ -164,3 +164,23 @@ mutation updateService(
   }
 }
 `;
+
+export const EXPIRE_SERVICE = gql`
+
+mutation deleteService(
+  $_id:ID!
+) {
+  deleteService(
+    _id: $_id
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
+    }
+    expiredDate
+  }
+}
+`;  

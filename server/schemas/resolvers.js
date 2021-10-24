@@ -43,8 +43,13 @@ const resolvers = {
     
    },
 
-    services: async () => {
-      return await Service.find();
+    getServiceById: async (parent, {_id}, context) => {
+    
+      return await Service.findById( {_id});
+    },
+
+    getAllServices: async () => {
+      return await (Service.find({expiredDate:null}))
     },
     products: async (parent, { service, name }) => {
       const params = {};
