@@ -16,6 +16,32 @@ const resolvers = {
       return user;
     }
   },
+  getClientInfo:  async (parent, {clientUserId}, context) => {
+    let cUserId = ""
+
+    if(context.user){
+        if (context.user.role?.toLowerCase() === 'client')
+          cUserId = context.user._id
+    }
+    else {
+        cUserId = clientUserId
+    }
+
+    const client = await Client.findOne(
+      {userId: cUserId}
+    )
+    console.log(client)
+   const user = await User.findOne({
+      _id: client.userId,
+    }).select("-__v -password")
+    .populate({ path: "userProfile", select: "-__v" });
+
+
+    
+    return  {user, client}
+
+    
+   },
 
     services: async () => {
       return await Service.find();

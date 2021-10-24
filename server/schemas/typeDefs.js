@@ -89,9 +89,15 @@ input UserProfileInput {
 
   }
 
+  type ClientCompleteProfile {
+    client: Client
+    user: User
+  }
+
   type Query {
     getUserProfile : User
 
+    getClientInfo(clientUserId : ID) : ClientCompleteProfile
     services: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
