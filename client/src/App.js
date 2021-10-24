@@ -1,20 +1,45 @@
 import { render } from "@testing-library/react";
 import React from "react";
+import{ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
+import Detail from './pages/Detail';
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
+import Profile from "./pages/Profile";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
 import "./App.css";
 import"bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
+// import axios from "axios";
+import { setContext } from '@apollo/client/link/context';
+import { StoreProvider } from './utils/GlobalState';
 <div style={{backgroundImage:"url(/assets/background.png)"}}></div>
+
+  
+const httpLink= createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +50,7 @@ class App extends React.Component {
         { title: "Home", path: "/" },
         { title: "Clients", path: "/clients" },
         { title: "Stylist", path: "/stylist" },
+        { title: "Profile", path: "/profile" },
         { title: "Contact", paht: "/contact" },
       ],
       home: {
@@ -41,14 +67,20 @@ class App extends React.Component {
       pricing: {
         title: "Resume",
       },
+      profile: {
+        title: "profile",
+      },
       contact: {
         title: "Build the Universe Together",
       },
     };
   }
+
   render() {
     return (
+      <ApolloProvider client={client}>
       <Router>
+        <StoreProvider>
         <Container className="p=0" fluid={true}>
           {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
           <Navbar className="border-bottom" expand="lg">
@@ -76,6 +108,9 @@ class App extends React.Component {
                 </Link>
                 <Link className="nav-link" to="/pricing">
                   Pricing
+                </Link>
+                <Link className="nav-link" to="/profile">
+                  Profile
                 </Link>
                 <Link className="nav-link" to="/Contact">
                   Contact
@@ -110,6 +145,11 @@ class App extends React.Component {
             render={() => <Pricing title={this.state.pricing.title} />}
           />
           <Route
+            path="/profile"
+            exact
+            render={() => <Pricing title={this.state.pricing.title} />}
+          />
+          <Route
             path="/contact"
             exact
             render={() => <Contact title={this.state.contact.title} />}
@@ -117,7 +157,9 @@ class App extends React.Component {
 
           <Footer></Footer>
         </Container>
+        </StoreProvider>
       </Router>
+      </ApolloProvider>
     );
   }
 }

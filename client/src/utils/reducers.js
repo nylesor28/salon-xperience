@@ -5,19 +5,19 @@ import {
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
-  // UPDATE_SERVICES,
+  UPDATE_SERVICES,
   UPDATE_CURRENT_SERVICE,
   CLEAR_CART,
   TOGGLE_CART
 } from "./actions";
 
-const initialState={
-  products: [],
-  cart: [],
-  cartOpen: false,
-  // categories: [],
-  // currentCategory:'',
-}
+// const initialState={
+//   products: [],
+//   cart: [],
+//   cartOpen: false,
+//   services: [],
+//   currentService:'',
+// }
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -76,17 +76,17 @@ export const reducer = (state, action) => {
         cartOpen: !state.cartOpen
       };
 
-    // case UPDATE_SERVICES:
-    //   return {
-    //     ...state,
-    //     services: [...action.services],
-    //   };
+    case UPDATE_SERVICES:
+      return {
+        ...state,
+        services: [...action.services],
+      };
 
-    // case UPDATE_CURRENT_SERVICE:
-    //   return {
-    //     ...state,
-    //     currentService: action.currentService
-    //   }
+    case UPDATE_CURRENT_SERVICE:
+      return {
+        ...state,
+        currentService: action.currentService
+      }
 
     default:
       return state;

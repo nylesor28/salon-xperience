@@ -39,14 +39,14 @@ export const QUERY_ALL_PRODUCTS = gql`
   }
 `;
 
-// export const QUERY_PRODUCTS = gql`
-//   {
-//     products {
-//       _id
-//       name
-//     }
-//   }
-// `;
+export const QUERY_SERVICES = gql`
+  {
+    services {
+      _id
+      name
+    }
+  }
+`;
 
 export const QUERY_USER = gql`
   {

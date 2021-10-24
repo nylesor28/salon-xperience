@@ -10,7 +10,7 @@ import spinner from '../../assets/spinner.gif';
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentproduct } = state;
+  const { currentService } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
@@ -34,12 +34,12 @@ function ProductList() {
   }, [data, loading, dispatch]);
 
   function filterproducts() {
-    if (!currentproduct) {
+    if (!currentService) {
       return state.products;
     }
 
     return state.products.filter(
-      (product) => product.product._id === currentproduct
+      (product) => product.product._id === currentService
     );
   }
 
