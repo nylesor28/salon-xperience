@@ -8,7 +8,7 @@ import {
   StatusBar
 } from 'react-native';
 import * as firebase from 'firebase'
-import Animbutton from '../animbutton'
+// import Animbutton from '../animbutton'
 import Commonstyle from '../BookingStyle'
 const jsonData = { "slots" : {
     "slot1": "9:00am to 9:30am",
