@@ -29,7 +29,7 @@ const resolvers = {
 
     const client = await Client.findOne(
       {userId: cUserId}
-    )
+    ).select("-__v")
     console.log(client)
    const user = await User.findOne({
       _id: client.userId,
