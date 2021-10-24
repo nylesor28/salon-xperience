@@ -107,7 +107,7 @@ input DurationInput {
     duration: Duration
     price: Float
     createdDate: String
-    expiredDae: String
+    expiredDate: String
 
   }
 
@@ -128,6 +128,7 @@ input DurationInput {
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
     addService (serviceName: String!, duration: DurationInput!, price: String!) : Service
     updateService (_id: ID!, serviceName: String!, duration: DurationInput!, price: Float!) : Service
+    deleteService (_id: ID!) : Service
     
     login(email: String!, password: String!): Auth
 

@@ -257,6 +257,29 @@ const resolvers = {
        } 
      throw new AuthenticationError("You need to be logged in!");
    },
+
+   deleteService:  async (parent, {_id}, context) => {
+  
+    if(context.user){
+
+      if (context.user.role !== 'admin') {
+        throw new AuthenticationError("Not Authorized");
+      }
+
+      const service = await Service.findByIdAndUpdate(
+             {_id}, 
+             {expiredDate: Date.now()},
+             { new: true }
+           ).select("-__v");
+      
+      let objService = new Service(service)
+      objService.expiredDate = new Date (service.expiredDate)
+      console.log(service)
+      console.log(objService)
+      return objService
+      } 
+    throw new AuthenticationError("You need to be logged in!");
+  },
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
  
       if (context.user) {
