@@ -43,8 +43,13 @@ const resolvers = {
     
    },
 
-    services: async () => {
-      return await Service.find();
+    getServiceById: async (parent, {_id}, context) => {
+    
+      return await Service.findById( {_id});
+    },
+
+    getAllServices: async () => {
+      return await (Service.find({expiredDate:null}))
     },
     products: async (parent, { service, name }) => {
       const params = {};
@@ -218,6 +223,68 @@ const resolvers = {
        throw new AuthenticationError("You need to be logged in!");
      },
 
+     addService:  async (parent, args, context) => {
+       console.log (args)
+      if(context.user){
+
+        if (context.user.role !== 'admin') {
+          throw new AuthenticationError("Not Authorized");
+        }
+  
+        const { serviceName, duration, price} = args;
+        let floatPrice = parseFloat(price);
+
+        const service = await Service.create ({serviceName, duration, price:floatPrice})
+        
+        return service
+        } 
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    updateService:  async (parent, args, context) => {
+  
+     if(context.user){
+
+       if (context.user.role !== 'admin') {
+         throw new AuthenticationError("Not Authorized");
+       }
+ 
+       const {_id,  serviceName, duration, price} = args;
+       let floatPrice = parseFloat(price);
+
+       const service = await Service.findOneAndUpdate(
+              {_id: _id}, 
+              {serviceName, duration, price:floatPrice},   
+              { new: true }
+            ).select("-__v");
+       
+       return service
+       } 
+     throw new AuthenticationError("You need to be logged in!");
+   },
+
+   deleteService:  async (parent, {_id}, context) => {
+  
+    if(context.user){
+
+      if (context.user.role !== 'admin') {
+        throw new AuthenticationError("Not Authorized");
+      }
+
+      const service = await Service.findByIdAndUpdate(
+             {_id}, 
+             {expiredDate: Date.now()},
+             { new: true }
+           ).select("-__v");
+      
+      let objService = new Service(service)
+      objService.expiredDate = new Date (service.expiredDate)
+      console.log(service)
+      console.log(objService)
+      return objService
+      } 
+    throw new AuthenticationError("You need to be logged in!");
+  },
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
  
       if (context.user) {
