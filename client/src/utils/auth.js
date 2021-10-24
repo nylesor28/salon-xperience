@@ -22,6 +22,11 @@ class AuthService {
     }
   }
 
+  isAdmin(){
+    const token = this.getToken();
+    const role = decode(token).role;
+    return role === 'admin';
+  }
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token');
