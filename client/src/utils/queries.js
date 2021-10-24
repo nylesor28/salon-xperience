@@ -62,20 +62,18 @@ query getServiceById(
 
 export const QUERY_ALL_SERVICES = gql`
   
-query getServiceById(
-  $_id:ID!
-) {
-  getServiceById(
-    _id: $_id
-  ) {
+query GetAllServices{
+  getAllServices {
     _id
     serviceName
-    price
-    duration {
+    duration{
       hour
       minute
     }
+    price
+    createdDate
     expiredDate
+    
   }
 }
 `;
