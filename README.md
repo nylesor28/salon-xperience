@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# salon-xperience
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+Background image Photo by <a href="https://unsplash.com/@benyamin_bohlouli?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Benyamin Bohlouli</a> on <a href="https://unsplash.com/s/photos/salon-interior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+stylist (jurnee) image Photo by <a href="https://unsplash.com/@maltephotos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">malte</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+stylist (maya) image Photo by <a href="https://unsplash.com/@juniorreisfoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Junior REIS</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+stylist (Eva) imag Photo by <a href="https://unsplash.com/@juniorreisfoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Junior REIS</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Stylist (Roz) image Photo by <a href="https://unsplash.com/@jsebastiao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jonathan Sebastiao</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Stylist (Akeem) image Photo by <a href="https://unsplash.com/@dammypayne?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dami Adebayo</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-### `npm run build`
+LadiesHaircut Photo by <a href="https://unsplash.com/@awcreativeut?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adam Winger</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ BlowDry Photo by <a href="https://unsplash.com/@sharisocial?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Shari Sirotnak</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  styling Photo by <a href="https://unsplash.com/@bayleejadegramling?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Baylee Gramling</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  custom color Photo by <a href="https://unsplash.com/@stuchy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">George Bohunicky</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-### `npm run eject`
+  youth Haircut Photo by <a href="https://unsplash.com/@vitaelondon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vitae London</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  gentshair Cut Photo by <a href="https://unsplash.com/@thenewmalcolm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Obi Onyeador</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  Gents Full Service Haircut Photo by <a href="https://unsplash.com/@seteph?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Allef Vinicius</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  The ultimate Identity Photo by <a href="https://unsplash.com/@chrisknight?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Chris Knight</a> on <a href="https://unsplash.com/s/photos/salon-hair?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  Hydrating Treatment Photo by <a href="https://unsplash.com/@tylernixcreative?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tyler Nix</a> on <a href="https://unsplash.com/s/photos/hair-products?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  scalptreatment Photo by <a href="https://unsplash.com/@glennclaire?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Glenn Claire</a> on <a href="https://unsplash.com/s/photos/hair-products?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  protein treatment Photo by <a href="https://unsplash.com/@charissek?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Charisse Kenion</a> on <a href="https://unsplash.com/s/photos/hair-products?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  Crochet Photo by <a href="https://unsplash.com/@themephotos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Theme Photos</a> on <a href="https://unsplash.com/s/photos/hair-products?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  carousel Photo by <a href="https://unsplash.com/@tammeallen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tammie Allen</a> on <a href="https://unsplash.com/s/photos/braids?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  Photo by <a href="https://unsplash.com/@joelvalve?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">JoelValve</a> on <a href="https://unsplash.com/s/photos/braids?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  Photo by <a href="https://unsplash.com/@introspectivedsgn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Erik Mclean</a> on <a href="https://unsplash.com/s/photos/braids?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  Photo by <a href="https://unsplash.com/@angelopantazis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Angelo Pantazis</a> on <a href="https://unsplash.com/s/photos/hairstyles?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+     
