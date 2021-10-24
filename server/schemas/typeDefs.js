@@ -24,10 +24,17 @@ input UserProfileInput {
   imageURL : String
 }
 
-  type Service {
-    _id: ID
-    name: String
-  }
+type Duration {
+  hour: Int
+  minute: Int
+}
+
+input DurationInput {
+  hour: Int
+  minute: Int
+}
+
+
 
   type Product {
     _id: ID
@@ -94,6 +101,16 @@ input UserProfileInput {
     user: User
   }
 
+  type Service {
+    _id: ID
+    serviceName: String
+    duration: Duration
+    price: Float
+    createdDate: String
+    expiredDae: String
+
+  }
+
   type Query {
     getUserProfile : User
 
@@ -109,6 +126,9 @@ input UserProfileInput {
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
+    addService (serviceName: String!, duration: DurationInput!, price: String!) : Service
+    updateService (_id: ID!, serviceName: String!, duration: DurationInput!, price: Float!) : Service
+    
     login(email: String!, password: String!): Auth
 
     addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
