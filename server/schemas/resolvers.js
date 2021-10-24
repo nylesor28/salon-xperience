@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile } = require("../models");
+const { User, Product, Service, Order, UserProfile, Client} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -16,6 +16,32 @@ const resolvers = {
       return user;
     }
   },
+  getClientInfo:  async (parent, {clientUserId}, context) => {
+    let cUserId = ""
+
+    if(context.user){
+        if (context.user.role?.toLowerCase() === 'client')
+          cUserId = context.user._id
+    }
+    else {
+        cUserId = clientUserId
+    }
+
+    const client = await Client.findOne(
+      {userId: cUserId}
+    ).select("-__v")
+    console.log(client)
+   const user = await User.findOne({
+      _id: client.userId,
+    }).select("-__v -password")
+    .populate({ path: "userProfile", select: "-__v" });
+
+
+    
+    return  {user, client}
+
+    
+   },
 
     services: async () => {
       return await Service.find();
@@ -165,6 +191,32 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    addUpdateClientInfo:  async (parent, args, context) => {
+ 
+       if(context.user){
+ 
+       const role = (context.user?.role)?.toLowerCase();
+       let updateUserId =''
+ 
+       if (role === 'client') {
+         updateUserId = context.user._id;
+       }
+       else {
+         throw new AuthenticationError("Not Authorized");
+       }
+ 
+       const { stylistId, hairProfileInput} = args;
+ 
+       const client = await Client.findOneAndUpdate(
+         {userId: updateUserId},
+         {$set: {userId: updateUserId, stylistId, hairProfile: hairProfileInput}},
+         {upsert: true, new: true, runValidators:true}
+         ).select("-__v")
+
+       return client
+       } 
+       throw new AuthenticationError("You need to be logged in!");
+     },
 
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
  
