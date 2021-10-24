@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile } = require("../models");
+const { User, Product, Service, Order, UserProfile, Client} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -165,6 +165,32 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    addUpdateClientInfo:  async (parent, args, context) => {
+ 
+       if(context.user){
+ 
+       const role = (context.user?.role)?.toLowerCase();
+       let updateUserId =''
+ 
+       if (role === 'client') {
+         updateUserId = context.user._id;
+       }
+       else {
+         throw new AuthenticationError("Not Authorized");
+       }
+ 
+       const { stylistId, hairProfileInput} = args;
+ 
+       const client = await Client.findOneAndUpdate(
+         {userId: updateUserId},
+         {$set: {userId: updateUserId, stylistId, hairProfile: hairProfileInput}},
+         {upsert: true, new: true, runValidators:true}
+         ).select("-__v")
+
+       return client
+       } 
+       throw new AuthenticationError("You need to be logged in!");
+     },
 
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
  

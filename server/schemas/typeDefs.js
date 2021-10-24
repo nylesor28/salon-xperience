@@ -66,6 +66,29 @@ input UserProfileInput {
     user: User
   }
 
+  type Client {
+    _id : ID
+    userId : ID
+    stylistId : ID
+    hairProfile: HairProfile
+  }
+
+  type HairProfile {
+    pictureUrl: String
+    hairType: String
+    hairState: String
+    hairGoal: String
+
+  }
+
+  input HairProfileInput {
+    pictureUrl: String
+    hairType: String
+    hairState: String
+    hairGoal: String
+
+  }
+
   type Query {
     getUserProfile : User
 
@@ -82,6 +105,7 @@ input UserProfileInput {
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
     login(email: String!, password: String!): Auth
 
+    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
     updateUser(firstName: String, lastName: String, email: String ): User
     updatePassword(oldPassword: String, newPassword: String): User
 
