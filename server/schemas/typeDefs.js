@@ -13,7 +13,6 @@ type UserProfile {
   zipCode: String
   imageURL : String
 }
-
 input UserProfileInput {
   firstName: String!
   lastName: String!
@@ -45,7 +44,6 @@ input DurationInput {
     price: Float
     service: Service
   }
-
   type User {
     _id: ID
     userName: String!
@@ -67,7 +65,6 @@ input DurationInput {
   type Checkout {
     session: ID
   }
-
   type Auth {
     token: ID!
     user: User
@@ -123,7 +120,6 @@ input DurationInput {
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
-
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
@@ -145,3 +141,4 @@ input DurationInput {
 `;
 
 module.exports = typeDefs;
+
