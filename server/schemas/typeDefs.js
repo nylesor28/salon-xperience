@@ -131,7 +131,22 @@ type StylistCompleteProfile {
     price: Float
     createdDate: String
     expiredDate: String
+  }
 
+  type Appointment {
+    _id: ID
+    clientId: ID
+    stylistId: ID
+    serviceId: ID
+    startTime: String
+    endTime: String
+  }
+
+  type AppointmentDetails{
+    appointment: Appointment
+    client: Client
+    stylist: Stylist
+    Service: Service
   }
 
   type Query {
@@ -141,6 +156,10 @@ type StylistCompleteProfile {
     getStylistInfo(userId: ID ) : StylistCompleteProfile
     getServiceById(_id: ID!) : Service
     getAllServices: [Service]
+    getAllAppointments: [Appointment]
+    getAppointmentById(_id: ID): Appointment
+    getAppointmentsByStylist(stylistId: ID): [Appointment]
+    getAppointmentsByClient(clientId: ID): [Appointment]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
@@ -153,7 +172,10 @@ type StylistCompleteProfile {
     addService (serviceName: String!, duration: DurationInput!, price: String!) : Service
     updateService (_id: ID!, serviceName: String!, duration: DurationInput!, price: Float!) : Service
     deleteService (_id: ID!) : Service
-    
+    addAppointment(clientId: ID!, stylistId: ID!, serviceId: ID!, startTime: String!, endTime: String) : Appointment
+    updateAppointment (_id: ID!, clientId: ID!, stylistId: ID!, serviceId: ID!, startTime: String!, endTime: String) : AppointmentDetails
+    deleteAppointment (_id: ID!): Appointment
+
     login(email: String!, password: String!): Auth
 
     addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client

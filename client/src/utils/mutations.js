@@ -92,7 +92,7 @@ export const UPDATE_PASSWORD = gql`
   }
   `;
 
-  
+
 export const ADD_UPDATE_CLIENT_INFO = gql`
 
 mutation addUpdateClientInfo(
@@ -183,7 +183,7 @@ mutation deleteService(
     expiredDate
   }
 }
-`;  
+`;
 
 export const ADD_UPDATE_STYLIST_INFO = gql`
 mutation addUpdateStylistInfo(
@@ -211,4 +211,94 @@ mutation addUpdateStylistInfo(
     }
   }
 }
+`;
+
+
+export const ADD_APPOINTMENT = gql`
+
+mutation addAppointment(
+  $clientId: ID!
+  $stylistId: ID!
+  $serviceId: ID!
+  $startTime: String!
+  $endTime:String
+) {
+  addAppointment(
+    clientId: $clientId
+    stylistId: $stylistId
+    serviceId: $serviceId
+    startTime: $startTime
+    endTime: $endTime
+    
+  ) {
+        _id
+    clientId
+    stylistId
+    serviceId
+    startTime
+    endTime
+  }
+}
+
+`;
+
+export const UPDATE_APPOINTMENT = gql`
+
+mutation updateAppointment(
+  $_id: ID!
+  $clientId: ID!
+  $stylistId: ID!
+  $serviceId: ID!
+  $startTime: String!
+  $endEndTime:String
+) {
+  updateAppointment(
+    _id:$_id
+    clientId: $clientId
+    stylistId: $stylistId
+    serviceId: $serviceId
+    startTime: $startTime
+    endTime: $endEndTime
+    
+  ) {
+     appointment{
+      _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+      
+    }
+    client {
+      _id
+      
+    }
+    
+  }
+}
+
+
+`;
+
+
+export const CANCEL_APPOINTMENT = gql`
+
+
+mutation deleteAppointment(
+  $_id: ID!
+) {
+  deleteAppointment(
+    _id: $_id
+  ) {
+        _id
+    clientId
+    stylistId
+    serviceId
+    startTime
+    endTime
+  }
+}
+
+
 `;
