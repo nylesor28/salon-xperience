@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ServiceItem from '../ServiceItem';
+//import ServiceItem from '../ServiceItem';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_SERVICES } from '../../utils/actions';
 import { useQuery } from '@apollo/client';

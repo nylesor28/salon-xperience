@@ -1,55 +1,54 @@
 import React from "react";
+import Service from "../components/Service";
+import UserList from "../components/UserList";
 
-function Service() {
+function Admin() {
   return (
     <>
-      <section className="">
-        <div id="wrapper">
+      <section className="flex justify-between p-4">
+        <div id="wrapper" className="">
           <div>
-            <h2>Create A Service</h2>
+            <h2>Create User</h2>
           </div>
 
           <form className="border w-96 p-1 rounded-md">
             <div className="m-1">
-              <label for="service">Service Name:</label>
+              <label for="name">Name:</label>
               <input
-                id="service"
+                id="name"
                 type="text"
                 className="border-1 border-black ml-2"
               ></input>
             </div>
             <div className="m-1">
-              <label for="duration">Dutation:</label>
+              <label for="email">Email:</label>
               <input
-                id="duration"
+                id="email"
                 type="text"
                 className="border-1 border-black ml-2"
               ></input>
             </div>
             <div className="m-1">
-              <label for="time">Appoinment Time:</label>
-              <input id="time" type="text" className="border-1 border-black ml-2"></input>
+              <label for="password">Create password:</label>
+              <input type="text" className="border-1 border-black ml-2"></input>
             </div>
             <div>
-              <label for="price">Price:</label>
-              <input id="price" className="border-1 border-black ml-2"></input>
-            </div>
-            <div>
-              <label for="users">Select Stylist:</label>
+              <label for="users">User Type:</label>
               <select name="users" className="rounded-md border mt-2 ml-2">
-                <option> Roz</option>
-                <option> Kelly </option>
-                <option> Paterna </option>
-                <option> Jody </option>
+                <option> Admin</option>
+                <option> Stylist </option>
               </select>
             </div>
             <button className="border p-1 rounded-lg bg-blue-800 text-white font-bold hover:bg-blue-400">
-              Add Service
+              Create User
             </button>
           </form>
         </div>
+        <Service />
+        <UserList />
       </section>
     </>
   );
 }
- export default Service;
+
+export default Admin;
