@@ -127,3 +127,39 @@
   box-shadow: 0 8 px 16px rgba(0, 0, 0, 0.75);
   position: relative;
 }
+Form{
+  border-radius: 10px;
+  border: solid silver;
+  color: rgb(190, 98, 144);
+  padding-top: 15px;
+padding-left: 15px;
+padding-bottom:15px;
+padding-right: 15px;
+}
+Button{
+  background: rgb(190, 98, 144);
+  color: black;
+  border-radius: 15px;
+  align-self: center;
+}
+Footer{
+  color: silver;
+  background: rgb(190, 98, 144);
+}
+.list-unstyled{
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.carousel {
+  margin-left: 75px;
+  margin-right: 100px;
+  position: relative;
+  object-position: center;
+  border: silver;
+  background: white;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.75); 
+}
+.carousel .container-fluid{
+  padding-left:  800px;
+  padding-right: 800px;
+}
