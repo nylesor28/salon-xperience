@@ -58,7 +58,6 @@ type UserProfile {
   zipCode: String
   imageURL : String
 }
-
 input UserProfileInput {
   firstName: String!
   lastName: String!
@@ -95,7 +94,6 @@ input DurationInput {
     price: Float
     service: Service
   }
-
   type User {
     _id: ID
     userName: String!
@@ -134,6 +132,13 @@ type StylistCompleteProfile {
   stylist: Stylist
   user: User
 }
+  type Checkout {
+    session: ID
+  }
+  type Auth {
+    token: ID!
+    user: User
+  }
 
   type Client {
     _id : ID
@@ -187,7 +192,6 @@ type StylistCompleteProfile {
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
-
   type Mutation {
     addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : Stylist
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
@@ -210,3 +214,4 @@ type StylistCompleteProfile {
 `;
 
 module.exports = typeDefs;
+

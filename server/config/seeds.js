@@ -5,10 +5,10 @@ db.once('open', async () => {
   await Service.deleteMany();
 
   const services = await Service.insertMany([
-    { name: 'Food' },
-    { name: 'Household Supplies' },
-    { name: 'Electronics' },
-    { name: 'Books' },
+    { name: 'Hair Treatment' },
+    { name: 'Hair Regiment' },
+    { name: 'Style' },
+    { name: 'Youth' },
     { name: 'Toys' }
   ]);
 
@@ -18,111 +18,138 @@ db.once('open', async () => {
 
   const products = await Product.insertMany([
     {
-      name: 'Tin of Cookies',
+      name: 'Custom Color',
       description:
-        'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-      image: 'cookie-tin.jpg',
+        'custom crafted hair color made especially for you to deliver your dream color, while keeping your hair healthy',
+      image: 'customcolor.jpg',
       service: services[0]._id,
-      price: 2.99,
-      quantity: 500
+      price: 65,
+      quantity: 1000
     },
     {
-      name: 'Canned Coffee',
+      name: 'Blow Dry Styling',
       description:
         'Praesent sed lacinia mauris. Nulla congue nibh magna, at feugiat nunc scelerisque quis. Donec iaculis rutrum vulputate. Suspendisse lectus sem, vulputate ac lectus sed, placerat consequat dui.',
-      image: 'canned-coffee.jpg',
+      image: 'BlowDry.jpg',
       service: services[0]._id,
-      price: 1.99,
-      quantity: 500
+      price: 65,
+      quantity: 1000
     },
     {
-      name: 'Toilet Paper',
+      name: 'Brazilian Blowout',
       service: services[1]._id,
       description:
-        'Donec volutpat erat erat, sit amet gravida justo sodales in. Phasellus tempus euismod urna. Proin ultrices nisi ut ipsum congue, vitae porttitor libero suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacinia a nisi non congue.',
-      image: 'toilet-paper.jpg',
-      price: 7.99,
-      quantity: 20
+        'Give your hair a fuller and glossier look with our Brazilian Blowout.',
+      image: 'BrazillianBlowout.jpg',
+      price: 235,
+      quantity: 1000
     },
     {
-      name: 'Handmade Soap',
+      name: 'Hydrating Treatment',
       service: services[1]._id,
       description:
-        'Praesent placerat, odio vel euismod venenatis, lectus arcu laoreet felis, et fringilla sapien turpis vestibulum nisl.',
-      image: 'soap.jpg',
-      price: 3.99,
-      quantity: 50
+        'A deep-hydrating masque that transforms even the driest, most over-it hair, leaving it supremely soft and irresistibly touchable.',
+      image: 'HydratingTreatment.jpg',
+      price: 20,
+      quantity: 1000
     },
     {
-      name: 'Set of Wooden Spoons',
+      name: 'Protein Treatment',
       service: services[1]._id,
       description:
-        'Vivamus ut turpis in purus pretium mollis. Donec turpis odio, semper vel interdum ut, vulputate at ex. Duis dignissim nisi vel tortor imperdiet finibus. Aenean aliquam sagittis rutrum.',
-      image: 'wooden-spoons.jpg',
-      price: 14.99,
-      quantity: 100
+        'Restorative Hair Mask for weakened and damaged hair',
+      image: 'ProteinTreatment.jpg',
+      price: 20,
+      quantity: 1000
     },
     {
-      name: 'Camera',
+      name: 'Scalp Treatment',
       service: services[2]._id,
       description:
-        'Vestibulum risus metus, luctus non tortor quis, tincidunt consectetur ex. Nullam vitae lobortis ligula, ut sagittis massa. Curabitur consectetur, tellus at pulvinar venenatis, erat augue cursus erat, eu ullamcorper eros lectus ultrices ipsum. Integer rutrum, augue vitae auctor venenatis, turpis turpis elementum orci, at sagittis risus mi a leo.',
-      image: 'camera.jpg',
-      price: 399.99,
-      quantity: 30
+        'Healthy hair starts at the scalp. Our professional-strength scalp care soothes skin and regulates oil production.',
+      image: 'ScalpTreatment.jpg',
+      price: 30,
+      quantity: 1000
     },
     {
-      name: 'Tablet',
+      name: 'Natural Styling',
       service: services[2]._id,
       description:
-        'In sodales, ipsum quis ultricies porttitor, tellus urna aliquam arcu, eget venenatis purus ligula ut nisi. Fusce ut felis dolor. Mauris justo ante, aliquet non tempus in, tempus ac lorem. Aliquam lacinia dolor eu sem eleifend ultrices. Etiam mattis metus metus. Sed ligula dui, placerat non turpis vitae, suscipit volutpat elit. Phasellus sagittis, diam elementum suscipit fringilla, libero mauris scelerisque ex, ac interdum diam erat non sapien.',
-      image: 'tablet.jpg',
-      price: 199.99,
-      quantity: 30
+        'Embrace your natural hair and enjoy freedom wash-and-go with confidence to rule the world.',
+      image: 'naturalstyling.jpg',
+      price: 100,
+      quantity: 1000
     },
     {
-      name: 'Tales at Bedtime',
+      name: 'Protective Styling',
       service: services[3]._id,
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare diam quis eleifend rutrum. Aliquam nulla est, volutpat non enim nec, pharetra gravida augue. Donec vitae dictum neque. Pellentesque arcu lorem, fringilla non ligula ac, tristique bibendum erat. Ut a semper nibh. Quisque a mi et mi tempor ultricies. Maecenas eu ipsum eu enim hendrerit accumsan at euismod urna.',
-      image: 'bedtime-book.jpg',
-      price: 9.99,
+        'Great style that allow your hair to be healthy, ready to go on a moments notice.',
+      image: 'BoxBraids.jpg',
+      price: 180,
       quantity: 100
     },
     {
-      name: 'Spinning Top',
+      name: 'Protective Styling with flair',
       service: services[4]._id,
-      description: 'Ut vulputate hendrerit nibh, a placerat elit cursus interdum.',
-      image: 'spinning-top.jpg',
-      price: 1.99,
+      description: 'Great style with a bite of flair that allow your hair to be healthy, ready to go on a moments notice.',
+      image: 'crochet.jpg',
+      price: 120,
       quantity: 1000
     },
     {
-      name: 'Set of Plastic Horses',
+      name: 'Gents Haircut',
       service: services[4]._id,
       description:
-        'Sed a mauris condimentum, elementum enim in, rhoncus dui. Phasellus lobortis leo odio, sit amet pharetra turpis porta quis.',
-      image: 'plastic-horses.jpg',
-      price: 2.99,
+        'a Standard cut by shears or clipers for a clean fresh look.',
+      image: 'gentsHaircuts.jpg',
+      price: 35,
       quantity: 1000
     },
     {
-      name: 'Teddy Bear',
+      name: 'Ladies Haircut',
       service: services[4]._id,
       description:
-        'Vestibulum et erat finibus erat suscipit vulputate sed vitae dui. Ut laoreet tellus sit amet justo bibendum ultrices. Donec vitae felis vestibulum, congue augue eu, finibus turpis.',
-      image: 'teddy-bear.jpg',
-      price: 7.99,
-      quantity: 100
+        'Reinvent yourself with a new look that sure to catch the eye, as well as increase your confidence.',
+      image: 'LadiesHaircuts.jpg',
+      price: 45,
+      quantity: 1000
     },
     {
-      name: 'Alphabet Blocks',
+      name: 'Gents Full Service Haircut',
       service: services[4]._id,
       description:
-        'Morbi consectetur viverra urna, eu fringilla turpis faucibus sit amet. Suspendisse potenti. Donec at dui ac sapien eleifend hendrerit vel sit amet lectus.',
-      image: 'alphabet-blocks.jpg',
-      price: 9.99,
-      quantity: 600
+        'Enjoy a facial wash with a mosturizer treatment ending with a warm tower, shave or shape up of beard, and haircut.',
+      image: 'GFSHC.jpg',
+      price: 60,
+      quantity: 1000
+    },
+    {
+      name: 'The Ulitmate Identity',
+      service: services[4]._id,
+      description:
+        'Enjoy a facial wash with a mosturizer treatment ending with a warm tower, shave or shape up of beard, and haircut. Inclusive of a custom color beard, hair, or both',
+      image: 'TheUltimateIdentity.jpg',
+      price: 120,
+      quantity: 1000
+    },
+    {
+      name: 'Youth Haircut',
+      service: services[4]._id,
+      description:
+        'a Standard cut by shears or clipers for a clean fresh look, with a small design.',
+      image: 'YouthHaircuts.jpg',
+      price: 25,
+      quantity: 1000
+    },
+    {
+      name: 'Styling',
+      service: services[4]._id,
+      description:
+        'Create an everyday look that can easily tranform into evening play',
+      image: 'styling.jpg',
+      price: 60,
+      quantity: 1000
     }
   ]);
 

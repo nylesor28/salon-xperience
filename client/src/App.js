@@ -15,16 +15,21 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Detail from './pages/Detail';
+import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
+import Profile from "./pages/Profile";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
 import Admin from "./pages/Admin";
 import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
+import"bootstrap/dist/css/bootstrap.css";
+// import axios from "axios";
+import { StoreProvider } from './utils/GlobalState';
+
 import Auth from "./utils/auth.js";
 // const client = new ApolloClient({ request: operation => {
 //   const token = localStorage.getItem('id_token');
@@ -42,26 +47,29 @@ const logout = (event) => {
   Auth.logout();
 };
 
-const httpLink = createHttpLink({
-  uri: "/graphql",
+{
+  /* <div style={{ backgroundImage: "url(/assets/background.png)" }}></div>; */
+}
+
+  
+const httpLink= createHttpLink({
+  uri: '/graphql',
 });
+
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem('id_token');
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-});
 
-{
-  /* <div style={{ backgroundImage: "url(/assets/background.png)" }}></div>; */
-}
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -91,6 +99,9 @@ class App extends React.Component {
       pricing: {
         title: "Resume",
       },
+      profile: {
+        title: "profile",
+      },
       contact: {
         title: "Admin",
       },
@@ -110,6 +121,7 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <Router>
+        <StoreProvider>
           <Container className="p=0" fluid={true}>
             {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
             <Navbar className="border-bottom bg-blue-400" expand="lg">
@@ -266,6 +278,7 @@ class App extends React.Component {
 
             <Footer></Footer>
           </Container>
+          </StoreProvider>
         </Router>
       </ApolloProvider>
     );
