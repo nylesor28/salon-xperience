@@ -5,11 +5,6 @@ import React, { useState, useEffect } from 'react';
 import "../App.css";
 import axios from "axios";
 
-// import { Carousel } from "react-bootstrap";
-// import Hero from "../components/Hero/index.js";
-// import BootstrapCarouselComponent from '../components/Carousel/index.js';
-
-
 function Pricing(props) {
     const[flashcards, setFlashcards]=useState(Flashcards)
   return (

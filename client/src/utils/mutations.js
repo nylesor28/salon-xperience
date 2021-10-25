@@ -119,3 +119,95 @@ export const UPDATE_PASSWORD = gql`
           }
         }
   `
+  
+export const ADD_UPDATE_CLIENT_INFO = gql`
+
+mutation addUpdateClientInfo(
+  $_id: ID
+  $stylistId : ID
+  $hairProfileInput: HairProfileInput
+) {
+   addUpdateClientInfo( 
+   _id :$_id
+    stylistId: $stylistId
+     hairProfileInput: $hairProfileInput
+  ) {
+    _id
+    userId
+    stylistId
+    hairProfile {
+      hairType
+      hairType
+      hairState
+      pictureUrl
+    }
+  }
+}
+`;
+
+export const ADD_SERVICE = gql`
+mutation addService(
+  $serviceName: String!
+  $durationInput: DurationInput!
+  $price: String!
+) {
+  addService(
+    serviceName: $serviceName
+    duration:	$durationInput 
+    price:$price
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
+    }
+  }
+}
+`;
+
+export const UPDATE_SERVICE = gql`
+
+mutation updateService(
+  $_id:ID!
+  $serviceName: String!
+  $durationInput: DurationInput!
+  $price: Float!
+) {
+  updateService(
+    _id: $_id
+    serviceName: $serviceName
+    duration:	$durationInput 
+    price:$price
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
+    }
+  }
+}
+`;
+
+export const EXPIRE_SERVICE = gql`
+
+mutation deleteService(
+  $_id:ID!
+) {
+  deleteService(
+    _id: $_id
+  ) {
+    _id
+    serviceName
+    price
+    duration {
+      hour
+      minute
+    }
+    expiredDate
+  }
+}
+`;  
