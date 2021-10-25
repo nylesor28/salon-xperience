@@ -163,3 +163,14 @@ Footer{
   padding-left:  800px;
   padding-right: 800px;
 }
+body,
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-image: url("../src/assets/background.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+}
