@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
+
 type UserProfile {
   _id: ID
   firstName: String!
@@ -20,10 +22,19 @@ input UserProfileInput {
   zipCode: String
   imageURL : String
 }
-  type Service {
-    _id: ID
-    name: String
-  }
+
+type Duration {
+  hour: Int
+  minute: Int
+}
+
+input DurationInput {
+  hour: Int
+  minute: Int
+}
+
+
+
   type Product {
     _id: ID
     name: String
@@ -40,12 +51,17 @@ input UserProfileInput {
     email: String!
     role: String
     userProfile: UserProfile
+
   }
+
   type Order {
     _id: ID
     purchaseDate: String
     products: [Product]
   }
+
+
+
   type Checkout {
     session: ID
   }
@@ -53,9 +69,51 @@ input UserProfileInput {
     token: ID!
     user: User
   }
+
+  type Client {
+    _id : ID
+    userId : ID
+    stylistId : ID
+    hairProfile: HairProfile
+  }
+
+  type HairProfile {
+    pictureUrl: String
+    hairType: String
+    hairState: String
+    hairGoal: String
+
+  }
+
+  input HairProfileInput {
+    pictureUrl: String
+    hairType: String
+    hairState: String
+    hairGoal: String
+
+  }
+
+  type ClientCompleteProfile {
+    client: Client
+    user: User
+  }
+
+  type Service {
+    _id: ID
+    serviceName: String
+    duration: Duration
+    price: Float
+    createdDate: String
+    expiredDate: String
+
+  }
+
   type Query {
     getUserProfile : User
-    services: [Service]
+
+    getClientInfo(clientUserId : ID) : ClientCompleteProfile
+    getServiceById(_id: ID!) : Service
+    getAllServices: [Service]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
@@ -65,12 +123,20 @@ input UserProfileInput {
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
+    addService (serviceName: String!, duration: DurationInput!, price: String!) : Service
+    updateService (_id: ID!, serviceName: String!, duration: DurationInput!, price: Float!) : Service
+    deleteService (_id: ID!) : Service
+    
     login(email: String!, password: String!): Auth
+
+    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
     updateUser(firstName: String, lastName: String, email: String ): User
     updatePassword(oldPassword: String, newPassword: String): User
+
     addOrder(products: [ID]!): Order
    
     updateProduct(_id: ID!, quantity: Int!): Product
+
   }
 `;
 
