@@ -1,6 +1,6 @@
 import React from "react";
 import ProductList from "../components/ProductList";
-import Service from "../components/Service";
+import Service from "../components/ServiceP";
 import Cart from "../components/Cart";
 
 const Pricing = () => {

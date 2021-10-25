@@ -1,6 +1,7 @@
 import react from "react";
 import Content from "../components/Content/index.js";
 import ClientForm from '../components/ClientForm/index.js';
+import Slot from "../components/BookingSlot/index.js";
 
 
 
@@ -14,8 +15,6 @@ Salon Xperience was established in 2021 with a mission to provide exceptional se
         </Content>
           is working
           <ClientForm />
- 
- 
 </div>
   );
 }
