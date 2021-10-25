@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile, Client} = require("../models");
+const { User, Product, Service, Order, UserProfile, Client, Stylist} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -36,10 +36,38 @@ const resolvers = {
     }).select("-__v -password")
     .populate({ path: "userProfile", select: "-__v" });
 
+    return  {user, client}
+   },
+   getStylistInfo:  async (parent, {userId}, context) => {
+
+
+    console.log(userId)
+
+    const stylist = await Stylist.findOne(
+      {userId: userId}
+        // {   
+        //   $or : [     
+        //            {userId: userId},
+        //            {_id : stylistId}
+        //         ]
+        // }
+    )
+    console.log(stylist)
+   const user = await User.findOne({
+      _id: stylist.userId,
+    }).select("-__v -password")
+    .populate({ path: "userProfile", select: "-__v" });
+
+    //console.log ("============= STYLIST =================")
+
+   // console.log ("============= STYLIST USER INFO =================")
+  //  console.log(stylistInfo)
 
     
-    return  {user, client}
-
+    const obj = {user, stylist}
+    console.log(obj)
+     return { stylist,  user}
+     //return obj
     
    },
 
@@ -51,6 +79,8 @@ const resolvers = {
     getAllServices: async () => {
       return await (Service.find({expiredDate:null}))
     },
+
+
     products: async (parent, { service, name }) => {
       const params = {};
 
@@ -222,7 +252,42 @@ const resolvers = {
        } 
        throw new AuthenticationError("You need to be logged in!");
      },
-
+     addUpdateStylistInfo:  async (parent, args, context) => {
+      // console.log("=======INSIDE ADD/UPDATE STYLIST =======")
+      // console.log(args.workingHours)
+ 
+       if(context.user){
+ 
+       const role = (context.user?.role)?.toLowerCase();
+       let stylistId = '';
+       let updateUserId =''
+ 
+       if (role === 'stylist') {
+         updateUserId = context.user._id;
+       }
+       else if (role === 'admin') {
+         updateUserId = args.userId
+       }
+       else {
+         throw new AuthenticationError("Not Authorized");
+       }
+       //console.log("USERID: " , updateUserId)
+       //console.log(args)
+       
+       const { certifications, workingHours} = args;
+ 
+       //const stylist = await Stylist.create({userId: stylistId, certifications, workingHours: workingHours});
+       const stylist = await Stylist.findOneAndUpdate(
+         {userId: updateUserId},
+         {$set: {userId: updateUserId, certifications, workingHours: workingHours}},
+         {upsert: true, new: true, runValidators:true}
+         )
+ 
+       //console.log (stylist)
+       return stylist
+       } 
+       throw new AuthenticationError("You need to be logged in!");
+     },
      addService:  async (parent, args, context) => {
        console.log (args)
       if(context.user){

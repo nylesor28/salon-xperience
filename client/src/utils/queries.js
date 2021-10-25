@@ -127,7 +127,7 @@ query GetUserProfile{
 }
 `;
 
-export const GET_CLIENT_HAIR_PROFILE_INFO=gql`
+export const GET_CLIENT_FULL_PROFILE_INFO=gql`
 query getClientInfo( $userId:ID!) {
   getClientInfo( clientUserId: $userId){
     client {
@@ -156,4 +156,34 @@ query getClientInfo( $userId:ID!) {
     
   }
 }
-`
+`;
+
+export const GET_STYLIST_FULL_PROFILE_INFO=gql`
+
+mutation addUpdateStylistInfo(
+  $_id: ID
+  $userId: ID
+  $certifications: String
+  $scheduleInput: [ScheduleInput]
+) {
+   addUpdateStylistInfo( 
+   _id :$_id
+    userId: $userId
+    certifications: $certifications
+     workingHours: $scheduleInput
+  ) {
+    _id
+    userId
+    certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    
+    }
+  }
+}
+
+`;
