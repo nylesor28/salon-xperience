@@ -1,8 +1,8 @@
 import react from "react";
 import Content from "../components/Content";
-import Styler from "../components/Styler";
+// import Styler from "../components/Styler";
 import Carousel from "../components/Carousel";
-import ServiceList from "../components/ServiceList";
+// import ServiceList from "../components/ServiceList";
 
 
 function Home(props) {
@@ -15,8 +15,8 @@ Salon Xperience was established in 2021 with a mission to provide exceptional se
             </Content>
            
           <Carousel/>
-        <Styler/>
-          <ClientForm />
+        {/* <Styler/> */}
+          {/* <ClientForm /> */}
   </div>
   );
 }
