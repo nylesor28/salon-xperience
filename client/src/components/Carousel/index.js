@@ -19,12 +19,12 @@ class BootstrapCarouselComponent extends React.Component {
                   <img
                     className="d-block w-100"
                     src={brookecagle}
-                    alt="First slide"
+                    alt="Roz"
                   />
                   <Carousel.Caption>
-                    <h3>First slide label</h3>
+                    <h3>Roz</h3>
                     <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                     Summer Evening Wedding
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
@@ -32,77 +32,73 @@ class BootstrapCarouselComponent extends React.Component {
                   <img
                     className="d-block w-100"
                     src={erikmclean}
-                    alt="Second slide"
+                    alt="Akeem"
                   />
 
                   <Carousel.Caption>
-                    <h3>Second slide label</h3>
+                    <h3>Akeem</h3>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Casual Stroll through the city
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src={erikmclean}
-                    alt="Third slide"
+                    src={angelopantazis}
+                    alt="Emilia"
                   />
 
                   <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Emilia</h3>
                     <p>
-                      Praesent commodo cursus magna, vel scelerisque nisl
-                      consectetur.
+                      Evening Beach Outdoor Wedding
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src={erikmclean}
-                    alt="Third slide"
+                    src={joelvalve}
+                    alt="Eva"
                   />
 
                   <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Eva</h3>
                     <p>
-                      Praesent commodo cursus magna, vel scelerisque nisl
-                      consectetur.
+                     Natural Queen
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src={erikmclean}
-                    alt="Third slide"
+                    src={tammieallen}
+                    alt="Jurnee"
                   />
 
                   <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Jurnee</h3>
                     <p>
-                      Praesent commodo cursus magna, vel scelerisque nisl
-                      consectetur.
+                      Quiet Feiry
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
-                 <Carousel.Item>
+              <Carousel.Item>
                   <img
                     className="d-block w-100"
-                    src={erikmclean}
-                    alt="Third slide"
+                    src={tylernix}
+                    alt="Maya"
                   />
 
                   <Carousel.Caption>
-                    <h3>Third slide label</h3>
+                    <h3>Maya</h3>
                     <p>
-                      Praesent commodo cursus magna, vel scelerisque nisl
-                      consectetur.
+                      The natural leader
                     </p>
                   </Carousel.Caption>
                 </Carousel.Item>
-              </Carousel>
+                </Carousel>
             </div>
           </div>
         </div>
