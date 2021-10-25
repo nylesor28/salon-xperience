@@ -9,7 +9,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -248,11 +248,12 @@ class App extends React.Component {
               exact
               render={() => <Contact title={this.state.contact.title} />}
             />
+            {Auth.loggedIn() && Auth.isAdmin() ? (
             <Route
               path="/admin"
               exact
               render={() => <Admin title={this.state.admin.title} />}
-            />
+            />) : <Redirect to="/" />}
             <Route
               path="/signup"
               exact
