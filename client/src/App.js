@@ -31,26 +31,11 @@ import"bootstrap/dist/css/bootstrap.css";
 import { StoreProvider } from './utils/GlobalState';
 
 import Auth from "./utils/auth.js";
-// const client = new ApolloClient({ request: operation => {
-//   const token = localStorage.getItem('id_token');
 
-//   operation.setContext({
-//     headers: {
-//       authorization: token ? `Bearer ${token}` : ''
-//     }
-//   });
-// },
-//   uri: '/graphql'
-// });
 const logout = (event) => {
   event.preventDefault();
   Auth.logout();
 };
-
-{
-  /* <div style={{ backgroundImage: "url(/assets/background.png)" }}></div>; */
-}
-
   
 const httpLink= createHttpLink({
   uri: '/graphql',
