@@ -9,7 +9,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import React from "react";
-import{ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -18,7 +17,6 @@ import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
 import Detail from './pages/Detail';
 import Clients from "./pages/Clients";
-import Profile from "./pages/Profile";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
@@ -30,9 +28,7 @@ import Login from "./pages/Login";
 import "./App.css";
 import"bootstrap/dist/css/bootstrap.css";
 // import axios from "axios";
-import { setContext } from '@apollo/client/link/context';
 import { StoreProvider } from './utils/GlobalState';
-<div style={{backgroundImage:"url(/assets/background.png)"}}></div>
 
 import Auth from "./utils/auth.js";
 // const client = new ApolloClient({ request: operation => {
