@@ -1,7 +1,35 @@
-import React from "react";
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { UPDATE_PASSWORD } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 export default function Modal() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [passwordState, setPassword] = useState({
+    oldpassword: "",
+    newPassword: "",
+  });
+
+  const [updatePassword] = useMutation(UPDATE_PASSWORD);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefautl();
+    const mutationResponse = await updatePassword({
+      variables: {
+        oldPassword: passwordState.oldPassword,
+        newPassword: passwordState.newPassword,
+      },
+    });
+    const token = mutationResponse.data.updatePassword.token;
+    Auth.passwordState(token);
+    console.log(token);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPassword({ ...passwordState, [name]: value });
+  };
+
   return (
     <>
       <button
@@ -19,9 +47,7 @@ export default function Modal() {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    Update Password
-                  </h3>
+                  <h3 className="text-3xl font-semibold">Update Password</h3>
                   <button
                     className="p-1 ml-auto bg-transparent text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -33,93 +59,41 @@ export default function Modal() {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <form className="p-3 rounded shadow">
+                  <form
+                    onSubmit={handleFormSubmit}
+                    className="p-3 rounded shadow"
+                  >
                     <div>
-                      <label className=" font-bold" htmlFor="password">
+                      <label className=" font-bold" htmlFor="oldPassword">
                         Old Password
                       </label>
                       <input
-                        name="password"
+                        name="oldPassword"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Old Password"
-                        type="password"
-                        id="password"
+                        type="oldPassword"
+                        id="oldPassword"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="NewPassword">
+                      <label className=" font-bold" htmlFor="newPassword">
                         New Password
                       </label>
                       <input
-                        name="lastName"
+                        name="newPassword"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="New Password"
-                        type="NewPassword"
-                        id="NewPassword"
+                        type="newPassword"
+                        id="newPassword"
+                        onChange={handleChange}
                       />
                     </div>
-                    {/* <div className="mt-2">
-                      <label className=" font-bold" htmlFor="contact">
-                        Contact Number:
-                      </label>
-                      <input
-                        name="contact"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="Contact"
-                        type="contact"
-                        id="contact"
-                      />
-                    </div>
+
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
-                        Address:
-                      </label>
-                      <input
-                        name="address"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="Address"
-                        type="address"
-                        id="address"
-                      />
-                    </div>
-                    <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
-                        City:
-                      </label>
-                      <input
-                        name="city"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="City"
-                        type="city"
-                        id="city"
-                      />
-                    </div>
-                    <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
-                        State:
-                      </label>
-                      <input
-                        name="state"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="State"
-                        type="state"
-                        id="state"
-                      />
-                    </div>
-                    <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
-                        Zip Code:
-                      </label>
-                      <input
-                        name="zipcode"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="Zip Code"
-                        type="zipcode"
-                        id="zipcode"
-                      />
-                    </div> */}
-                    <div className="mt-2">
-                        <button className="bg-blue-600 px-4 py-1 rounded text-white font-bold hover:bg-blue-800 mt-2">Submit</button>
+                      <button className="bg-blue-600 px-4 py-1 rounded text-white font-bold hover:bg-blue-800 mt-2">
+                        Submit
+                      </button>
                     </div>
                   </form>
                 </div>
