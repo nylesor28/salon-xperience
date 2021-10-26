@@ -94,25 +94,49 @@ export const UPDATE_PASSWORD = gql`
 
 
 export const ADD_UPDATE_CLIENT_INFO = gql`
-
 mutation addUpdateClientInfo(
-  $_id: ID
   $stylistId : ID
   $hairProfileInput: HairProfileInput
 ) {
    addUpdateClientInfo( 
-   _id :$_id
     stylistId: $stylistId
      hairProfileInput: $hairProfileInput
-  ) {
-    _id
-    userId
-    stylistId
+  ) {      _id
+
+    userId {
+      _id
+      email
+      userProfile{
+        firstName
+        lastName
+        phoneNumber
+      }
+    }
     hairProfile {
       hairType
-      hairType
+      hairGoal
       hairState
       pictureUrl
+    }
+    stylist {
+      _id
+      userId {
+        _id
+        email
+        userProfile{
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+       certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    }
     }
   }
 }

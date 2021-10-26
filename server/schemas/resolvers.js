@@ -34,42 +34,65 @@ const resolvers = {
       } else {
         cUserId = clientUserId;
       }
+      const client = await Client.findOne({ userId: cUserId })
+        .select("-__v")
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
 
-      const client = await Client.findOne({ userId: cUserId }).select("-__v");
-      console.log(client);
-      const user = await User.findOne({
-        _id: client.userId,
-      })
-        .select("-__v -password")
-        .populate({ path: "userProfile", select: "-__v" });
 
-      return { user, client };
+      const clientInfo = {
+        _id: client._id,
+        userId: client.userId,
+        hairProfile: client.hairProfile,
+        stylist: client.stylistId,
+      };
+
+      return clientInfo;
     },
     getStylistInfo: async (parent, { userId }, context) => {
-
       const stylist = await Stylist.findOne({ userId: userId })
-      .select("-__v")
-      .populate({
-        path: "userId",
-        model: "User",
-        select: "-__v, -username, -password",
-        populate: {
-          path: "userProfile",
-          model: "UserProfile",
-          select: "-__v"
-        },
-      });
+        .select("-__v")
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
 
-    const stylistInfo = {
+      const stylistInfo = {
         _id: stylist._id,
         userId: stylist.userId,
         certifications: stylist.certifications,
-        workingHours: stylist.workingHours
-    }
-
-   return stylistInfo;
-      
-
+        workingHours: stylist.workingHours,
+      };
+      return stylistInfo;
     },
 
     getServiceById: async (parent, { _id }, context) => {
@@ -506,63 +529,94 @@ const resolvers = {
             },
           },
           { upsert: true, new: true, runValidators: true }
-        ).select("-__v");
-
-        return client;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    addUpdateStylistInfo: async (parent, args, context) => {
-
-      if (!context.user) {
-        throw new AuthenticationError("You need to be logged in!");
-      }
-        const role = context.user?.role?.toLowerCase();
-        let updateUserId = "";
-
-        if (role === "stylist") {
-          updateUserId = context.user._id;
-        } else if (role === "admin") {
-          updateUserId = args.userId;
-        } else {
-          throw new AuthenticationError("Not Authorized");
-        }
-
-        const { certifications, workingHours } = args;
-
-        const stylist = await Stylist.findOneAndUpdate(
-          { userId: updateUserId },
-          {
-            $set: {
-              userId: updateUserId,
-              certifications,
-              workingHours: workingHours,
-            },
-          },
-          { upsert: true, new: true, runValidators: true }
-        )
-          .select("-__v")
-          .populate({
+        )        .select("-__v")
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
             path: "userId",
             model: "User",
             select: "-__v, -username, -password",
             populate: {
               path: "userProfile",
               model: "UserProfile",
-              select: "-__v"
+              select: "-__v",
             },
-          });
+          },
+        })
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
 
-        const stylistInfo = {
-            _id: stylist._id,
-            userId: stylist.userId,
-            certifications: stylist.certifications,
-            workingHours: stylist.workingHours
-        }
 
-       return stylistInfo;
+      const clientInfo = {
+        _id: client._id,
+        userId: client.userId,
+        hairProfile: client.hairProfile,
+        stylist: client.stylistId,
+      };
+
+      return clientInfo;
       }
-,
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addUpdateStylistInfo: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      const role = context.user?.role?.toLowerCase();
+      let updateUserId = "";
+
+      if (role === "stylist") {
+        updateUserId = context.user._id;
+      } else if (role === "admin") {
+        updateUserId = args.userId;
+      } else {
+        throw new AuthenticationError("Not Authorized");
+      }
+
+      const { certifications, workingHours } = args;
+
+      const stylist = await Stylist.findOneAndUpdate(
+        { userId: updateUserId },
+        {
+          $set: {
+            userId: updateUserId,
+            certifications,
+            workingHours: workingHours,
+          },
+        },
+        { upsert: true, new: true, runValidators: true }
+      )
+        .select("-__v")
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
+
+      const stylistInfo = {
+        _id: stylist._id,
+        userId: stylist.userId,
+        certifications: stylist.certifications,
+        workingHours: stylist.workingHours,
+      };
+
+      return stylistInfo;
+    },
     addService: async (parent, args, context) => {
       if (context.user) {
         if (context.user.role !== "admin") {

@@ -131,8 +131,10 @@ input ScheduleInput {
   }
 
   type ClientCompleteProfile {
-    client: Client
-    user: User
+    _id : ID
+    userId : User
+    stylist: BookedStylist
+    hairProfile: HairProfile
   }
 
   type Service {
@@ -163,7 +165,7 @@ input ScheduleInput {
   type Query {
     getUserProfile : User
 
-    getClientInfo(clientUserId : ID) : ClientCompleteProfile
+    getClientInfo(clientUserId : ID) : ClientCompleteProfile 
     getStylistInfo(userId: ID ) : BookedStylist
     getServiceById(_id: ID!) : Service
     getAllServices: [Service]
@@ -189,7 +191,7 @@ input ScheduleInput {
 
     login(email: String!, password: String!): Auth
 
-    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
+    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : ClientCompleteProfile
     addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : BookedStylist
     updateUser(firstName: String, lastName: String, email: String ): User
     updatePassword(oldPassword: String, newPassword: String): User

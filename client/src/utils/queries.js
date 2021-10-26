@@ -128,34 +128,58 @@ query GetUserProfile{
 `;
 
 export const GET_CLIENT_FULL_PROFILE_INFO=gql`
-query getClientInfo( $userId:ID!) {
-  getClientInfo( clientUserId: $userId){
-    client {
+
+
+query getClientInfo(
+  $clientUserId: ID
+) {
+   getClientInfo( 
+   clientUserId :$clientUserId
+    
+  ) {
+    _id
+
+    userId {
       _id
-      userId
-      hairProfile {
-				hairType
-        hairGoal
-        hairState
-      }
-    }
-    user {
-      _id
-      userName
       email
-      userProfile {
+      userProfile{
         firstName
         lastName
         phoneNumber
-        address
-        city
-        zipCode
-        imageURL
       }
-  	}
+    }
+    hairProfile {
+      hairType
+      hairGoal
+      hairState
+      pictureUrl
+    }
+    stylist {
+      _id
+      userId {
+        _id
+        email
+        userProfile{
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+       certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
     
+    }
+      
+    }
   }
 }
+
+
 `;
 
 export const GET_STYLIST_FULL_PROFILE_INFO=gql`
