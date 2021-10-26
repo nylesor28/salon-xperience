@@ -554,7 +554,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addService: async (parent, args, context) => {
-      console.log(args);
+
       if (context.user) {
         if (context.user.role !== "admin") {
           throw new AuthenticationError("Not Authorized");
@@ -606,11 +606,7 @@ const resolvers = {
           { new: true }
         ).select("-__v");
 
-        let objService = new Service(service);
-        objService.expiredDate = new Date(service.expiredDate);
-        console.log(service);
-        console.log(objService);
-        return objService;
+        return service;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

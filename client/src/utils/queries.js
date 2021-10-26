@@ -233,9 +233,7 @@ query getAllAppointments {
       
     }
 }
-
 `;
-
 
 export const GET_APPOINTMENT_BY_ID=gql`
 query getAppointmentById($_id:ID!) {
