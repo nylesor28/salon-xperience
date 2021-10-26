@@ -1,65 +1,65 @@
 import React, { useEffect } from 'react';
 import ProductItem from '../ProductItem';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_MERCHANDISES } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import { QUERY_PRODUCTS } from '../../utils/queries';
+import { QUERY_MERCHANDISES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentService } = state;
+  const { currentAmenity } = state;
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { loading, data } = useQuery(QUERY_MERCHANDISES);
 
   useEffect(() => {
     if (data) {
       dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products,
+        type: UPDATE_MERCHANDISES,
+        merchandises: data.merchandises,
       });
-      data.products.forEach((product) => {
-        idbPromise('products', 'put', product);
+      data.merchandises.forEach((merchandise) => {
+        idbPromise('merchandises', 'put', merchandise);
       });
     } else if (!loading) {
-      idbPromise('products', 'get').then((products) => {
+      idbPromise('merchandises', 'get').then((merchandises) => {
         dispatch({
-          type: UPDATE_PRODUCTS,
-          products: products,
+          type: UPDATE_MERCHANDISES,
+          merchandises: merchandises,
         });
       });
     }
   }, [data, loading, dispatch]);
 
-  function filterproducts() {
-    if (!currentService) {
-      return state.products;
+  function filtermerchandises() {
+    if (!currentAmenity) {
+      return state.merchandises;
     }
 
-    return state.products.filter(
-      (product) => product.product._id === currentService
+    return state.merchandises.filter(
+      (merchandise) => merchandise.merchandise._id === currentAmenity
     );
   }
 
   return (
     <div className="my-2">
-      {state.products.length ? (
+      {state.merchandises.length ? (
         <div className="flex-row">
-          {filterproducts().map((product) => (
+          {filtermerchandises().map((merchandise) => (
             <ProductItem
-              key={product._id}
-              _id={product._id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              quantity={product.quantity}
+              key={merchandise._id}
+              _id={merchandise._id}
+              image={merchandise.image}
+              name={merchandise.name}
+              price={merchandise.price}
+              quantity={merchandise.quantity}
             />
           ))}
         </div>
       ) : (
-        <h3>You haven't added any products yet!</h3>
+        <h3>You haven't added any merchandises yet!</h3>
       )}
       {loading ? <img src={spinner} alt="loading" /> : null}
     </div>

@@ -34,49 +34,55 @@ const StylistFlashcards=[{
     id: 0,
     stylist:"Roz",
     speciality: "natural Hair",
-    education:"Paul Mitchell",
+    education:"Empire Beauty School",
     image: img1,
-    description: "long term"
+    description: "long term",
+    ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {
   id: 1,
   stylist:"Akem",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Paul Mitchell School",
   image: img2,
-  description: "long term"
+  description: "long term",
+  ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {
   id: 2,
   stylist:"Emilia",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Empire Beauty School",
   image: img3,
-  description: "long term"
+  description: "long term",
+  ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {
   id: 3,
   stylist:"Eva",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Empire Beauty School",
   image: img4,
-  description: "long term"
+  description: "long term",
+  ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {
   id: 4,
   stylist:"Jurnee",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Paul Mitchell School",
   image: img5,
-  description: "long term"
+  description: "long term",
+  ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {
   id: 5,
   stylist:"Maya",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Paul Mitchell School",
   image: img6,
-  description: "long term"
+  description: "long term",
+  ratings:"Ratings:⭐⭐⭐⭐⭐"
 }
 ]
 

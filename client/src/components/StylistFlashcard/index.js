@@ -27,6 +27,7 @@ export default function StylistFlashcard({stylistflashcard}) {
           height="150"
           alt="Stylist"
         />
+        <p>{stylistflashcard.ratings}</p>
            </div>
            <div className="back" style ={{
                backgroundColor: "white",

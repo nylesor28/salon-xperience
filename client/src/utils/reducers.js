@@ -1,60 +1,52 @@
 import { useReducer } from "react";
 import {
-  UPDATE_PRODUCTS,
+  UPDATE_MERCHANDISES,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
-  UPDATE_SERVICES,
-  UPDATE_CURRENT_SERVICE,
+  UPDATE_AMENITIES,
+  UPDATE_CURRENT_AMENITY,
   CLEAR_CART,
   TOGGLE_CART
 } from "./actions";
 
-// const initialState={
-//   products: [],
-//   cart: [],
-//   cartOpen: false,
-//   services: [],
-//   currentService:'',
-// }
-
 export const reducer = (state, action) => {
   switch (action.type) {
-    case UPDATE_PRODUCTS:
+    case UPDATE_MERCHANDISES:
       return {
         ...state,
-        products: [...action.products],
+        merchandises: [...action.merchandises],
       };
 
     case ADD_TO_CART:
       return {
         ...state,
         cartOpen: true,
-        cart: [...state.cart, action.product],
+        cart: [...state.cart, action.merchandise],
       };
 
     case ADD_MULTIPLE_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, ...action.products],
+        cart: [...state.cart, ...action.merchandises],
       };
 
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
         cartOpen: true,
-        cart: state.cart.map(product => {
-          if (action._id === product._id) {
-            product.purchaseQuantity = action.purchaseQuantity
+        cart: state.cart.map(merchandise => {
+          if (action._id === merchandise._id) {
+            merchandise.purchaseQuantity = action.purchaseQuantity
           }
-          return product
+          return merchandise
         })
       };
 
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter(product => {
-        return product._id !== action._id;
+      let newState = state.cart.filter(merchandise => {
+        return merchandise._id !== action._id;
       });
 
       return {
@@ -76,16 +68,16 @@ export const reducer = (state, action) => {
         cartOpen: !state.cartOpen
       };
 
-    case UPDATE_SERVICES:
+    case UPDATE_AMENITIES:
       return {
         ...state,
-        services: [...action.services],
+        amenities: [...action.amenities],
       };
 
-    case UPDATE_CURRENT_SERVICE:
+    case UPDATE_CURRENT_AMENITY:
       return {
         ...state,
-        currentService: action.currentService
+        currentAmenity: action.currentAmenity
       }
 
     default:

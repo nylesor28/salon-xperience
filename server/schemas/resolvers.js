@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile, Client} = require("../models");
+const { User, Product, Service, Order, UserProfile, Client, Merchandise} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -94,6 +94,41 @@ const resolvers = {
       }
 
       throw new AuthenticationError("Not logged in");
+    },
+    amenities: async () => {
+      return await Amenity.find();
+    },
+    merchandises: async (parent, { amenity, name }) => {
+      const params = {};
+
+      if (amenity) {
+        params.amenity = amenity;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await Merchandise.find(params).populate('amenity');
+    },
+    Merchandise: async (parent, { _id }) => {
+      return await Merchandise.findById(_id).populate('amenity');
+    },
+    operator: async (parent, args, context) => {
+      if (context.operator) {
+        const operator = await Operator.findById(context.operator._id).populate({
+          path: 'orders.products',
+          populate: 'amenity'
+        });
+
+        operator.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return operator;
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
@@ -338,6 +373,41 @@ const resolvers = {
         { new: true }
       );
     },
+    addOperator: async (parent, args) => {
+      const operator = await Operator.create(args);
+      const token = signToken(operator);
+
+      return { token, operator };
+    },
+    updateOperator: async (parent, args, context) => {
+      if (context.operator) {
+        return await Operator.findByIdAndUpdate(context.operator._id, args, { new: true });
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    updateMerchandise: async (parent, { _id, quantity }) => {
+      const decrement = Math.abs(quantity) * -1;
+
+      return await Merchandise.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+    },
+    login: async (parent, { email, password }) => {
+      const operator = await Operator.findOne({ email });
+
+      if (!operator) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const correctPw = await operator.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(operator);
+
+      return { token, operator };
+    }
   },
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Service from "../components/Service";
+import Service from "../components/Merchandise";
 import UserList from "../components/UserList";
 
 function Admin() {

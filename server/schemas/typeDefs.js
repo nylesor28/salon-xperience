@@ -53,6 +53,13 @@ input DurationInput {
     userProfile: UserProfile
 
   }
+  type Operator {
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    orders: [Order]
+  }
 
   type Order {
     _id: ID
@@ -120,6 +127,29 @@ input DurationInput {
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
+  type Amenity {
+    _id: ID
+    name: String
+  }
+
+  type Merchandise {
+    _id: ID
+    name: String
+    description: String
+    image: String
+    quantity: Int
+    price: Float
+    amenity: Amenity
+  }
+  type Query {
+    amenities: [Amenity]
+    products(amenity: ID, name: String): [Merchandise]
+    merchandise(_id: ID!): Merchandise
+    operator: Operator
+    order(_id: ID!): Order
+    checkout(merchandise: [ID]!): Checkout
+  }
+
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
@@ -137,6 +167,11 @@ input DurationInput {
    
     updateProduct(_id: ID!, quantity: Int!): Product
 
+    addOperator(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addOrder(merchandises: [ID]!): Order
+    updateOperator(firstName: String, lastName: String, email: String, password: String): User
+    updateMerchandise(_id: ID!, quantity: Int!): Merchandise
+    login(email: String!, password: String!): Auth
   }
 `;
 

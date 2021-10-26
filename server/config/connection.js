@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 // require ('dotenv').config();
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/salon-xperience"', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/salon_xperience', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
