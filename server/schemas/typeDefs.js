@@ -164,9 +164,11 @@ input ScheduleInput {
 
   type Query {
     getUserProfile : User
-
+    getAllClients(clientUserId : ID) : [ClientCompleteProfile]
     getClientInfo(clientUserId : ID) : ClientCompleteProfile 
+    getAllStylists: [BookedStylist]    
     getStylistInfo(userId: ID ) : BookedStylist
+
     getServiceById(_id: ID!) : Service
     getAllServices: [Service]
     getAllAppointments: [AppointmentDetails]
