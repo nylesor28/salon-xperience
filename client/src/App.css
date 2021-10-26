@@ -177,3 +177,7 @@ html {
   background-position: center;
   background-attachment: fixed;
 }
+
+.stylistheading{
+  font-family: cursive;
+}

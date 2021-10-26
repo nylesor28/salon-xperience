@@ -13,7 +13,7 @@ class BootstrapCarouselComponent extends React.Component {
       <div className="p-2">
         <div className="container-fluid">
           <div className="row flex justify-center w-full">
-            <div className="col-6 border-2 p-2 shadow-md">
+            <div className="col-6 p-2 shadow-md">
               <Carousel>
                 <Carousel.Item>
                   <img

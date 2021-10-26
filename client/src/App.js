@@ -109,7 +109,7 @@ class App extends React.Component {
         <StoreProvider>
           <Container className="p=0" fluid={true}>
             {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
-            <Navbar className="border-bottom bg-blue-400" expand="lg">
+            <Navbar className="border-bottom bg-pink-600" expand="lg">
               <Navbar.Brand href="#home">
                 <div className="w-60 h-24 pl-4">
                   <img

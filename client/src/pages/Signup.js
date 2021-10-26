@@ -30,13 +30,13 @@ function Signup(props) {
   };
 
   return (
-    <section className="flex justify-center">
-    <div className="border-2 rounded-md w-3/12 m-4 p-2 shadow-lg">
-      <Link to="/login">← Go to Login</Link>
+    <section className="flex justify-center py-60">
+    <div className="rounded-lg w-3/12 m-4 p-4 shadow-lg bg-white">
+      <Link className="font-bold text-lg" to="/login">← Go to Login</Link>
 
       <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="">
+      <form onSubmit={handleFormSubmit} className="border">
+        <div className="text-black">
           <label className="font-bold" htmlFor="username">
             Username:
           </label>
@@ -49,20 +49,7 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        {/* <div className="my-1">
-          <label className="font-bold" htmlFor="lastName">
-            Last Name:
-          </label>
-          <input
-            className="ml-2 border-1 border-black rounded"
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
-            onChange={handleChange}
-          />
-        </div> */}
-        <div className="my-1">
+        <div className="my-1 text-black">
           <label className="font-bold" htmlFor="email">
             User Email:
           </label>
@@ -75,7 +62,7 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="my-1">
+        <div className="my-1 text-black">
           <label className="font-bold" htmlFor="pwd">
             Password:
           </label>
