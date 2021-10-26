@@ -1,5 +1,5 @@
 import React from "react";
-import Service from "../components/Service";
+import CreateService from "../components/CreateService";
 import { useState } from "react";
 import UserList from "../components/UserList";
 import { useMutation } from "@apollo/client";
@@ -10,7 +10,7 @@ function Admin() {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
   const [addUser] = useMutation(ADD_USER);
 
@@ -20,7 +20,7 @@ function Admin() {
       variables: {
         email: formState.email,
         password: formState.password,
-        username: formState.username
+        username: formState.username,
       },
     });
     const token = mutationResponse.data.addUser.token;
@@ -37,14 +37,14 @@ function Admin() {
   return (
     <>
       <section className="flex justify-between p-4">
-        <div id="wrapper" className="">
+        <div id="wrapper">
           <div>
-            <h2>Create User</h2>
+            <h2 className="text-center font-bold text-white">Create User</h2>
           </div>
 
           <form
             onSubmit={handleFormSubmit}
-            className="border w-96 p-1 rounded-md"
+            className="border w-96 p-1 rounded-md bg-white opacity-90 p-2 shadow-lg"
           >
             <div className="m-1">
               <label htmlFor="username">User Name:</label>
@@ -95,7 +95,7 @@ function Admin() {
             </button>
           </form>
         </div>
-        <Service />
+        <CreateService />
         <UserList />
       </section>
     </>
