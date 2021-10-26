@@ -12,7 +12,6 @@ const {
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
-
 const resolvers = {
   Query: {
     getUserProfile: async (parent, args, context) => {
@@ -413,9 +412,6 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     updateAppointment: async (parent, args, context) => {
-      console.log("========= UPDATE APPOINTMENT======");
-      console.log(args);
-      console.log(context.user);
 
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
@@ -425,32 +421,13 @@ const resolvers = {
           args;
         let appointmentDetails = {};
 
-        // const appointment = await Appointment.findOneAndUpdate(
-        //   { _id },
-        //   { clientId, stylistId, serviceId, startTime, endTime },
-        //   { new: true }
-        // ).select("-__v")
-
-        // console.log("APPT FIND:  ", appointment)
-
-        // const client = await Client.findOne({_id: clientId}).select("-__v")
-
-        // console.log("CLIENT FIND:  ", client)
-
-        // const stylist = await Stylist.findOne({_id: stylistId}).select("-__v")
-
-        // console.log("CLIENT FIND:  ", client)
-        
-
-
-
         const appointmentResults = await Appointment.findOneAndUpdate(
-          //  return await Appointment.findOneAndUpdate(
+    
           { _id: _id },
           { clientId, stylistId, serviceId, startTime, endTime },
           { new: true }
         )
-         .select("-__v")
+          .select("-__v")
           .populate({
             path: "clientId",
             model: "Client",
@@ -485,85 +462,29 @@ const resolvers = {
             path: "serviceId",
             model: "Service",
             select: "-__v -createdDate",
-          })
-          console.log ("***LEVEL Three (3) ****")
-          console.log (appointmentResults)
+          });
 
-          const appointmentData = {
-                _id: appointmentResults._id,
-                clientId: appointmentResults.clientId._id,
-                stylistId: appointmentResults.stylistId._id,
-                serviceId: appointmentResults.serviceId._id,
-                startTime: appointmentResults.startTime,
-                endTime: "appointmentResults.endTime",
-              };
-              
-              //console.log(appointmentData);
-              appointmentDetails = {
-                appointment: appointmentData,
-                client: appointmentResults.clientId,
-                stylist: appointmentResults.stylistId,
-                service: appointmentResults.serviceId,
-              };
-         console.log ("***LEVEL Four (4) ****")
-         console.log("**********APPOINTMENT DATA***************");
-         console.log(appointmentDetails);
-          return appointmentDetails
 
-          // .exec(function (err, appointmentResults) {
-          //   if (err) return handleError(err);
-          //   console.log(
-          //     "=============GETTING APPOINTMENT DETAILS =============="
-          //   );
-          //   console.log(
-          //     "Here is the populated appointment: ",
-          //     appointmentResults
-          //   );
-          //   console.log(
-          //     "===> UserProfile Data ",
-          //     appointmentResults.clientId.userId.userProfile
-          //   );
+        const appointmentData = {
+          _id: appointmentResults._id,
+          clientId: appointmentResults.clientId._id,
+          stylistId: appointmentResults.stylistId._id,
+          serviceId: appointmentResults.serviceId._id,
+          startTime: appointmentResults.startTime,
+          endTime: appointmentResults.endTime
+        };
 
-          //   const appointmentData = {
-          //     _id: appointmentResults._id,
-          //     clientId: appointmentResults.clientId._id,
-          //     stylistId: appointmentResults.stylistId._id,
-          //     serviceId: appointmentResults.serviceId._id,
-          //     startTime: appointmentResults.startTime,
-          //     endTime: "appointmentResults.endTime",
-          //   };
-          //   console.log("**********APPOINTMENT DATA***************");
-          //   console.log(appointmentData);
-          //   appointmentDetails = {
-          //     appointment: appointmentData,
-          //     client: appointmentResults.clientId,
-          //     stylist: appointmentResults.stylistId,
-          //     service: appointmentResults.serviceId,
-          //   };
+        appointmentDetails = {
+          appointment: appointmentData,
+          client: appointmentResults.clientId,
+          stylist: appointmentResults.stylistId,
+          service: appointmentResults.serviceId,
+        };
 
-          //   console.log("--------appointmentDetails -----");
-          //   console.log(appointmentDetails.service);
+        return appointmentDetails;
 
-          //   return appointmentDetails;
-          // })
-
-        console.log("*******LINE 508*******");
-        //  console.log("--------RESULTS -----", appointmentResults)
-
-        // return appointmentDetails
-        //  return {
-        //   appointment: {_id: "1234", clientId: "5678" , stylistId: "0123", serviceId: "554", startTime: "2012-01-01"},
-        //   client: {_id: "Some Client ID", userId: ""},
-        //   stylist: Stylist,
-        //   service: Service,
-
-        //  }
-        // appointment: new Appointment (appointmentData),
-        // client: new Client(appointmentDetails.client),
-        // stylist: new Stylist (appointmentDetails.stylist),
-        // service: new Service (appointmentDetails.service)
       } catch (e) {
-        console.log("*******************", e);
+        throw new Error ("There was a problem updating appointment")
       }
     },
     deleteAppointment: async (parent, { _id }, context) => {

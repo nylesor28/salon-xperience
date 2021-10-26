@@ -250,34 +250,59 @@ mutation updateAppointment(
   $stylistId: ID!
   $serviceId: ID!
   $startTime: String!
-  $endEndTime:String
-) {
+  $endTime:String
+  ) {
   updateAppointment(
     _id:$_id
     clientId: $clientId
     stylistId: $stylistId
     serviceId: $serviceId
     startTime: $startTime
-    endTime: $endEndTime
-    
-  ) {
-     appointment{
+    endTime: $endTime
+    ) {
+    appointment {
       _id
       clientId
       stylistId
       serviceId
       startTime
       endTime
-      
     }
+
     client {
       _id
-      
+      userId {
+        userProfile {
+          _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    stylist {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    service {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
     }
     
   }
 }
-
 
 `;
 
