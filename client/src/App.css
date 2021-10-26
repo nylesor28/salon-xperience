@@ -145,6 +145,8 @@ Button{
 Footer{
   color: silver;
   background: rgb(190, 98, 144);
+  /* width:1680px; */
+  /* padding-left: -2px; */
 }
 .list-unstyled{
   margin-top: 0px;
@@ -163,10 +165,15 @@ Footer{
   padding-left:  800px;
   padding-right: 800px;
 }
-/* .login-page{
-  background-image: url("./assets/images/pexels-cottonbro-3993454.jpg");
+body,
+html {
+  width: 100%;
+  height: 100%;
+  /* padding: 0px;
+  margin: 0px; */
+  background-image: url("../src/assets/background.png");
+  background-repeat:no-repeat;
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
-  height: 600px;
-} */
+  background-attachment: fixed;
+}
