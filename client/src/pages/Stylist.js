@@ -34,15 +34,15 @@ const StylistFlashcards=[{
     id: 0,
     stylist:"Roz",
     speciality: "natural Hair",
-    education:"Paul Mitchell",
+    education:"Kelly  Mitchell",
     image: img1,
     description: "long term"
 },
 {
   id: 1,
-  stylist:"Akem",
+  stylist:"Akeem",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Jody Mitchell",
   image: img2,
   description: "long term"
 },
@@ -50,7 +50,7 @@ const StylistFlashcards=[{
   id: 2,
   stylist:"Emilia",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Anna Mitchell",
   image: img3,
   description: "long term"
 },

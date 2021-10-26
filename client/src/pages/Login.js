@@ -30,9 +30,9 @@ function Login(props) {
   };
 
   return (
-    <section className="flex justify-center">
+    <section className="login-page flex justify-center">
       <div className="border-2 rounded-md w-3/12 m-4 p-2 shadow-lg">
-        <Link to="/signup">← Go to Signup</Link>
+        <Link className="font-bold" to="/signup">← Signup Here</Link>
 
         <h2>Login</h2>
         <form onSubmit={handleFormSubmit}>

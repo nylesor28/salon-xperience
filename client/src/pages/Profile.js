@@ -2,14 +2,14 @@ import React from "react";
 import profilepic from "../assets/images/jomboimg.jpg";
 import Modal from "../components/ModalUserData/Index";
 import StylistAppointment from "../components/StylistAppointment";
-
+import Passwod_Update from "../components/UpdatePassword";
 function Profile() {
   return (
     <>
       <h1>ALLEN'S PROFILE</h1>
       <section>
         <div className="flex justify-between"> 
-          <div className="flex border rounded m-1 w-2/6 shadow">
+          <div className="flex border rounded m-1 w-3/6 shadow">
             <div id="profile-img" className="w-80 h-80 pt-2">
               <img
                 className="w-full rounded-lg"
@@ -45,6 +45,7 @@ function Profile() {
                 </tr>
               </table>
               <Modal />
+              <Passwod_Update/>
               {/* <button className="bg-blue-400 p-1 rounded-lg text-white font-bold hover:bg-blue-800 mt-2">Update Info</button> */}
             </div>
           </div>
