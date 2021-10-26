@@ -26,15 +26,6 @@ Salon Xperience was established in 2021 with a mission to provide exceptional se
             </p>
             </Content>
            <HomeForm />
-           <h3 className="subtext"
-              style={{
-                display: "flex",
-                // color: "silver",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize:'48px',
-              }}>
-            POLICY AND PROCEDURES</h3>
            <PolicyForm/>
           {/* <Carousel/> */}
         {/* <Styler/> */}

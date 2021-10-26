@@ -42,10 +42,10 @@ const StylistFlashcards=[{
 {
   id: 1,
   stylist:"Akem",
-  speciality: "natural Hair",
-  education:"Paul Mitchell School",
+  speciality: "Speciality: natural Hair",
+  education:"Education: Paul Mitchell School",
   image: img2,
-  description: "long term",
+  description: "BIO: Akeem has been a barber for six years. Originally born and raised in Lancaster, I moved to Boston in 2010 looking for a new adventure. Working at Barbershop has been my favorite adventure so far – I love building strong connections with my clients and helping them express their personalities through their appearance!",
   ratings:"Ratings:⭐⭐⭐⭐⭐"
 },
 {

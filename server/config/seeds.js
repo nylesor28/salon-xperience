@@ -9,7 +9,7 @@ db.once('open', async () => {
     { name: 'Hair Regiment' },
     { name: 'Style' },
     { name: 'Youth' },
-    { name: 'Toys' }
+    { name: 'Adult' }
   ]);
 
   console.log('Amenities seeded');

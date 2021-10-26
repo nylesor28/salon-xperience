@@ -47,4 +47,27 @@ LadiesHaircut Photo by <a href="https://unsplash.com/@awcreativeut?utm_source=un
   
   Photo by <a href="https://unsplash.com/@angelopantazis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Angelo Pantazis</a> on <a href="https://unsplash.com/s/photos/hairstyles?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
-     
+Hair Type 4c Photo by <a href="https://unsplash.com/@princearkman?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Prince Akachi</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Hair Type 4b Photo by <a href="https://unsplash.com/@hustwilson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">HUST WILSON</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Hair Type 4b female Photo by <a href="https://unsplash.com/@emilianovittoriosi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Emiliano Vittoriosi</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+
+Hair Type 1 Straight Photo by <a href="https://unsplash.com/@alexkixa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alexandre Debiève</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
+Hair Type 3b Photo by <a href="https://unsplash.com/@houcinencibphotography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Houcine Ncib</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Hair Type 3a Photo by <a href="https://unsplash.com/@caiqueportraits?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Caique Silva</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Hair Type 2a Photo by <a href="https://unsplash.com/@sharonmccutcheon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sharon McCutcheon</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+Hair Type 4a Photo by <a href="https://unsplash.com/@major001?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Terricks Noah</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+
+Hair Type 4a male Photo by <a href="https://unsplash.com/@jacksondavid?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jackson David</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+
+Hair Type 2c Photo by <a href="https://unsplash.com/@glm_murshed?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Md. Golam Murshed</a> on <a href="https://unsplash.com/s/photos/hair-types?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
