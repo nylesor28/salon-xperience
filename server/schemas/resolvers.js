@@ -62,7 +62,6 @@ const resolvers = {
           },
         });
 
-
       const clientInfo = {
         _id: client._id,
         userId: client.userId,
@@ -93,6 +92,83 @@ const resolvers = {
         workingHours: stylist.workingHours,
       };
       return stylistInfo;
+    },
+    getAllStylists: async (parent, args, context) => {
+      const stylist = await Stylist.find()
+        .select("-__v")
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
+
+      const stylistArr = stylist.map((stylist) => {
+        const stylistInfo = {
+          _id: stylist._id,
+          userId: stylist.userId,
+          certifications: stylist.certifications,
+          workingHours: stylist.workingHours,
+        };
+        return stylistInfo;
+      });
+      return stylistArr;
+    },
+
+    getAllClients: async (parent, args, context) => {
+
+
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+
+      const role = context.user.role?.toLowerCase();
+
+      if (role !== "admin" && role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+      const client = await Client.find()
+        .select("-__v")
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "userId",
+          model: "User",
+          select: "-__v, -username, -password",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+            select: "-__v",
+          },
+        });
+
+      const clientsArr = client.map((client) => {
+        const clientInfo = {
+          _id: client._id,
+          userId: client.userId,
+          hairProfile: client.hairProfile,
+          stylist: client.stylistId,
+        };
+        return clientInfo;
+      });
+      return clientsArr;
     },
 
     getServiceById: async (parent, { _id }, context) => {
@@ -529,12 +605,24 @@ const resolvers = {
             },
           },
           { upsert: true, new: true, runValidators: true }
-        )        .select("-__v")
-        .populate({
-          path: "stylistId",
-          model: "Stylist",
-          select: "-__v",
-          populate: {
+        )
+          .select("-__v")
+          .populate({
+            path: "stylistId",
+            model: "Stylist",
+            select: "-__v",
+            populate: {
+              path: "userId",
+              model: "User",
+              select: "-__v, -username, -password",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+                select: "-__v",
+              },
+            },
+          })
+          .populate({
             path: "userId",
             model: "User",
             select: "-__v, -username, -password",
@@ -543,28 +631,16 @@ const resolvers = {
               model: "UserProfile",
               select: "-__v",
             },
-          },
-        })
-        .populate({
-          path: "userId",
-          model: "User",
-          select: "-__v, -username, -password",
-          populate: {
-            path: "userProfile",
-            model: "UserProfile",
-            select: "-__v",
-          },
-        });
+          });
 
+        const clientInfo = {
+          _id: client._id,
+          userId: client.userId,
+          hairProfile: client.hairProfile,
+          stylist: client.stylistId,
+        };
 
-      const clientInfo = {
-        _id: client._id,
-        userId: client.userId,
-        hairProfile: client.hairProfile,
-        stylist: client.stylistId,
-      };
-
-      return clientInfo;
+        return clientInfo;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

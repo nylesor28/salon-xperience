@@ -178,8 +178,51 @@ query getClientInfo(
     }
   }
 }
+`;
 
+export const GET_ALL_CLIENTS = gql`
+query getAllClients {
+  getAllClients {
+   _id
 
+   userId {
+     _id
+     email
+     userProfile{
+       firstName
+       lastName
+       phoneNumber
+     }
+   }
+   hairProfile {
+     hairType
+     hairGoal
+     hairState
+     pictureUrl
+   }
+   stylist {
+     _id
+     userId {
+       _id
+       email
+       userProfile{
+         firstName
+         lastName
+         phoneNumber
+       }
+     }
+      certifications
+   workingHours {
+     weekday
+     hourStart
+     minuteStart
+     hourEnd
+     minuteEnd
+   
+   }
+   }
+ }
+}
 `;
 
 export const GET_STYLIST_FULL_PROFILE_INFO=gql`
@@ -206,6 +249,33 @@ query getStylistInfo( $userId:ID!) {
       }
     }
   }
+`;
+
+
+export const GET_ALL_STYLISTS = gql`
+query getAllStylists {
+  getAllStylists {
+         _id
+     userId{
+       _id
+       email
+       userProfile{
+         _id
+         firstName
+         lastName
+         phoneNumber
+       }
+     }
+     certifications
+     workingHours {
+       weekday
+       hourStart
+       minuteStart
+       hourEnd
+       minuteEnd
+     }
+ }
+}
 `;
 
 export const GET_ALL_APPOINTMENTS=gql`
