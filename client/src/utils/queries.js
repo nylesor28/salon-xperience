@@ -270,18 +270,50 @@ query getAppointmentByClient($clientId:ID!) {
 
 
 export const GET_APPOINTMENT_BY_STYLIST_ID=gql`
-
 query getAppointmentByStylist($stylistId:ID!) {
   getAppointmentsByStylist( stylistId: $stylistId) {
-    _id
-      clientId
-      stylistId
-      serviceId
-      startTime
-      endTime
-  }
+      appointment {
+        _id
+        clientId
+        stylistId
+        serviceId
+        startTime
+        endTime
+      }
+      client {
+        _id
+				userId {
+          userProfile {
+            _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        } 
+      }
+      stylist {
+        _id
+        userId {
+          userProfile{
+                _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        }
+      }
+      service {
+        _id
+        serviceName
+        price
+        duration{
+          hour
+          minute
+        }
+      }
+      
+    }
 }
-
 `;
 
 

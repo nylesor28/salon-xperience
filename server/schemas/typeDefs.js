@@ -172,7 +172,7 @@ type StylistCompleteProfile {
     getAllServices: [Service]
     getAllAppointments: [AppointmentDetails]
     getAppointmentById(_id: ID): Appointment
-    getAppointmentsByStylist(stylistId: ID): [Appointment]
+    getAppointmentsByStylist(stylistId: ID): [AppointmentDetails]
     getAppointmentsByClient(clientId: ID): [Appointment]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product

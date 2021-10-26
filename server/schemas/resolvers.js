@@ -88,7 +88,8 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
-        const appointmentResults = await Appointment.find().select("-__v")
+      const appointmentResults = await Appointment.find()
+        .select("-__v")
         .populate({
           path: "clientId",
           model: "Client",
@@ -125,25 +126,25 @@ const resolvers = {
           select: "-__v -createdDate",
         });
 
-        const apptDetailsArr = appointmentResults.map(item => {   
-          const appointmentData = {
-            _id: item._id,
-            clientId: item.clientId?._id,
-            stylistId: item.stylistId?._id,
-            serviceId: item.serviceId?._id,
-            startTime: item.startTime,
-            endTime: item.endTime
-          };
-          const appointmentDetails = {
-            appointment: appointmentData,
-            client: item.clientId,
-            stylist: item.stylistId,
-            service: item.serviceId,
-          };
-         
-          return appointmentDetails
-       })
-       return apptDetailsArr;
+      const apptDetailsArr = appointmentResults.map((item) => {
+        const appointmentData = {
+          _id: item._id,
+          clientId: item.clientId?._id,
+          stylistId: item.stylistId?._id,
+          serviceId: item.serviceId?._id,
+          startTime: item.startTime,
+          endTime: item.endTime,
+        };
+        const appointmentDetails = {
+          appointment: appointmentData,
+          client: item.clientId,
+          stylist: item.stylistId,
+          service: item.serviceId,
+        };
+
+        return appointmentDetails;
+      });
+      return apptDetailsArr;
     },
 
     getAppointmentById: async (parent, { _id }, context) => {
@@ -157,15 +158,68 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     getAppointmentsByStylist: async (parent, { stylistId }, context) => {
-      if (context.user) {
-        const allStylistAppointments = await Appointment.find({
-          stylistId: stylistId,
-        }).select("-__v");
-
-        console.log(allStylistAppointments);
-        return allStylistAppointments;
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
       }
-      throw new AuthenticationError("Not logged in");
+      const allStylistAppointments = await Appointment.find({
+        stylistId: stylistId,
+      })
+        .select("-__v")
+        .populate({
+          path: "clientId",
+          model: "Client",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
+
+      const apptDetailsArr = allStylistAppointments.map((item) => {
+        const appointmentData = {
+          _id: item._id,
+          clientId: item.clientId?._id,
+          stylistId: item.stylistId?._id,
+          serviceId: item.serviceId?._id,
+          startTime: item.startTime,
+          endTime: item.endTime,
+        };
+        const appointmentDetails = {
+          appointment: appointmentData,
+          client: item.clientId,
+          stylist: item.stylistId,
+          service: item.serviceId,
+        };
+
+        return appointmentDetails;
+      });
+      return apptDetailsArr;
     },
     getAppointmentsByClient: async (parent, { clientId }, context) => {
       if (context.user) {
@@ -455,19 +509,16 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addAppointment: async (parent, args, context) => {
-
       if (context.user) {
-        try{
-          return appointment =  await Appointment.create(args)
-        }
-        catch (e) {
-          throw "There was a problem saving your appointment"
+        try {
+          return (appointment = await Appointment.create(args));
+        } catch (e) {
+          throw "There was a problem saving your appointment";
         }
       }
       throw new AuthenticationError("You need to be logged in!");
     },
     updateAppointment: async (parent, args, context) => {
-
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -477,7 +528,6 @@ const resolvers = {
         let appointmentDetails = {};
 
         const appointmentResults = await Appointment.findOneAndUpdate(
-    
           { _id: _id },
           { clientId, stylistId, serviceId, startTime, endTime },
           { new: true }
@@ -519,14 +569,13 @@ const resolvers = {
             select: "-__v -createdDate",
           });
 
-
         const appointmentData = {
           _id: appointmentResults._id,
           clientId: appointmentResults.clientId._id,
           stylistId: appointmentResults.stylistId._id,
           serviceId: appointmentResults.serviceId._id,
           startTime: appointmentResults.startTime,
-          endTime: appointmentResults.endTime
+          endTime: appointmentResults.endTime,
         };
 
         appointmentDetails = {
@@ -537,19 +586,17 @@ const resolvers = {
         };
 
         return appointmentDetails;
-
       } catch (e) {
-        throw new Exception ("There was a problem updating appointment")
+        throw new Exception("There was a problem updating appointment");
       }
     },
     deleteAppointment: async (parent, { _id }, context) => {
       if (context.user) {
-        try{
+        try {
           return await Appointment.findOneAndDelete({ _id }).select("-__v");
         } catch (e) {
-          throw "There was a problem deleting the appointment"
+          throw "There was a problem deleting the appointment";
         }
-
       }
       throw new AuthenticationError("You need to be logged in!");
     },
