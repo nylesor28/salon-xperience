@@ -484,18 +484,17 @@ const resolvers = {
         return appointmentDetails;
 
       } catch (e) {
-        throw new Error ("There was a problem updating appointment")
+        throw new Exception ("There was a problem updating appointment")
       }
     },
     deleteAppointment: async (parent, { _id }, context) => {
-      console.log(_id);
       if (context.user) {
-        const appointment = await Appointment.findOneAndDelete({ _id }).select(
-          "-__v"
-        );
+        try{
+          return await Appointment.findOneAndDelete({ _id }).select("-__v");
+        } catch (e) {
+          throw "There was a problem deleting the appointment"
+        }
 
-        console.log(appointment);
-        return appointment;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

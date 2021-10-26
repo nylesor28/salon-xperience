@@ -308,22 +308,10 @@ mutation updateAppointment(
 
 
 export const CANCEL_APPOINTMENT = gql`
-
-
-mutation deleteAppointment(
-  $_id: ID!
-) {
-  deleteAppointment(
-    _id: $_id
-  ) {
+mutation deleteAppointment($_id: ID!) {
+  deleteAppointment(_id: $_id) {
         _id
-    clientId
-    stylistId
-    serviceId
-    startTime
-    endTime
   }
 }
-
 
 `;
