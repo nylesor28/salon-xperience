@@ -403,11 +403,14 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addAppointment: async (parent, args, context) => {
-      console.log(args);
+
       if (context.user) {
-        const appointment = await Appointment.create(args);
-        console.log(appointment);
-        return appointment;
+        try{
+          return appointment =  await Appointment.create(args)
+        }
+        catch (e) {
+          throw "There was a problem saving your appointment"
+        }
       }
       throw new AuthenticationError("You need to be logged in!");
     },

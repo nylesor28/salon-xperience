@@ -229,7 +229,6 @@ mutation addAppointment(
     serviceId: $serviceId
     startTime: $startTime
     endTime: $endTime
-    
   ) {
         _id
     clientId
@@ -239,7 +238,6 @@ mutation addAppointment(
     endTime
   }
 }
-
 `;
 
 export const UPDATE_APPOINTMENT = gql`
