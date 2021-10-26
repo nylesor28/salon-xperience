@@ -37,7 +37,7 @@ export default function Modal() {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        UPDATE USER PROFILE
+        UPDATE PASSWORD
       </button>
       {showModal ? (
         <>

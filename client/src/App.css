@@ -127,7 +127,7 @@
   box-shadow: 0 8 px 16px rgba(0, 0, 0, 0.75);
   position: relative;
 }
-Form{
+/* Form{
   border-radius: 10px;
   border: solid silver;
   color: rgb(190, 98, 144);
@@ -135,7 +135,7 @@ Form{
 padding-left: 15px;
 padding-bottom:15px;
 padding-right: 15px;
-}
+} */
 Button{
   /* background: rgb(190, 98, 144); */
   color: black;
@@ -143,8 +143,8 @@ Button{
   align-self: center;
 }
 Footer{
-  color: silver;
-  background: rgb(190, 98, 144);
+  color: white;
+  /* background: rgb(190, 98, 144); */
   /* width:1680px; */
   /* padding-left: -2px; */
 }
