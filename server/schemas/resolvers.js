@@ -46,33 +46,30 @@ const resolvers = {
       return { user, client };
     },
     getStylistInfo: async (parent, { userId }, context) => {
-      console.log(userId);
 
-      const stylist = await Stylist.findOne(
-        { userId: userId }
-        // {
-        //   $or : [
-        //            {userId: userId},
-        //            {_id : stylistId}
-        //         ]
-        // }
-      );
-      console.log(stylist);
-      const user = await User.findOne({
-        _id: stylist.userId,
-      })
-        .select("-__v -password")
-        .populate({ path: "userProfile", select: "-__v" });
+      const stylist = await Stylist.findOne({ userId: userId })
+      .select("-__v")
+      .populate({
+        path: "userId",
+        model: "User",
+        select: "-__v, -username, -password",
+        populate: {
+          path: "userProfile",
+          model: "UserProfile",
+          select: "-__v"
+        },
+      });
 
-      //console.log ("============= STYLIST =================")
+    const stylistInfo = {
+        _id: stylist._id,
+        userId: stylist.userId,
+        certifications: stylist.certifications,
+        workingHours: stylist.workingHours
+    }
 
-      // console.log ("============= STYLIST USER INFO =================")
-      //  console.log(stylistInfo)
+   return stylistInfo;
+      
 
-      const obj = { user, stylist };
-      console.log(obj);
-      return { stylist, user };
-      //return obj
     },
 
     getServiceById: async (parent, { _id }, context) => {
@@ -151,67 +148,66 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
-      try{
-        const appointmentResults = await Appointment.findById(_id).select("-__v")
-        .populate({
-          path: "clientId",
-          model: "Client",
-          select: "-__v",
-          populate: {
-            path: "userId",
-            model: "User",
-            select: "-__v, -username, -password",
+      try {
+        const appointmentResults = await Appointment.findById(_id)
+          .select("-__v")
+          .populate({
+            path: "clientId",
+            model: "Client",
+            select: "-__v",
             populate: {
-              path: "userProfile",
-              model: "UserProfile",
-              select: "-__v",
+              path: "userId",
+              model: "User",
+              select: "-__v, -username, -password",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+                select: "-__v",
+              },
             },
-          },
-        })
-        .populate({
-          path: "stylistId",
-          model: "Stylist",
-          select: "-__v",
-          populate: {
-            path: "userId",
-            model: "User",
-            select: "-__v, -username, -password",
+          })
+          .populate({
+            path: "stylistId",
+            model: "Stylist",
+            select: "-__v",
             populate: {
-              path: "userProfile",
-              model: "UserProfile",
-              select: "-__v",
+              path: "userId",
+              model: "User",
+              select: "-__v, -username, -password",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+                select: "-__v",
+              },
             },
-          },
-        })
-        .populate({
-          path: "serviceId",
-          model: "Service",
-          select: "-__v -createdDate",
-        });
+          })
+          .populate({
+            path: "serviceId",
+            model: "Service",
+            select: "-__v -createdDate",
+          });
 
+        const appointmentData = {
+          _id: appointmentResults._id,
+          clientId: appointmentResults.clientId._id,
+          stylistId: appointmentResults.stylistId._id,
+          serviceId: appointmentResults.serviceId._id,
+          startTime: appointmentResults.startTime,
+          endTime: appointmentResults.endTime,
+        };
 
-      const appointmentData = {
-        _id: appointmentResults._id,
-        clientId: appointmentResults.clientId._id,
-        stylistId: appointmentResults.stylistId._id,
-        serviceId: appointmentResults.serviceId._id,
-        startTime: appointmentResults.startTime,
-        endTime: appointmentResults.endTime
-      };
+        appointmentDetails = {
+          appointment: appointmentData,
+          client: appointmentResults.clientId,
+          stylist: appointmentResults.stylistId,
+          service: appointmentResults.serviceId,
+        };
 
-      appointmentDetails = {
-        appointment: appointmentData,
-        client: appointmentResults.clientId,
-        stylist: appointmentResults.stylistId,
-        service: appointmentResults.serviceId,
-      };
-
-      return appointmentDetails;
-
-    } catch (e) {
-      throw  "There was a problem getting appointment"
-    }
-  },
+        return appointmentDetails;
+      } catch (e) {
+        throw "There was a problem getting appointment";
+      }
+    },
     getAppointmentsByStylist: async (parent, { stylistId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
@@ -280,9 +276,11 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
-        const allClientAppointments = await Appointment.find({
-          clientId: clientId,
-        }).select("-__v")        .populate({
+      const allClientAppointments = await Appointment.find({
+        clientId: clientId,
+      })
+        .select("-__v")
+        .populate({
           path: "clientId",
           model: "Client",
           select: "-__v",
@@ -318,25 +316,25 @@ const resolvers = {
           select: "-__v -createdDate",
         });
 
-        const apptDetailsArr = allClientAppointments.map(item => {   
-          const appointmentData = {
-            _id: item._id,
-            clientId: item.clientId?._id,
-            stylistId: item.stylistId?._id,
-            serviceId: item.serviceId?._id,
-            startTime: item.startTime,
-            endTime: item.endTime
-          };
-          const appointmentDetails = {
-            appointment: appointmentData,
-            client: item.clientId,
-            stylist: item.stylistId,
-            service: item.serviceId,
-          };
-         
-          return appointmentDetails
-       })
-       return apptDetailsArr;
+      const apptDetailsArr = allClientAppointments.map((item) => {
+        const appointmentData = {
+          _id: item._id,
+          clientId: item.clientId?._id,
+          stylistId: item.stylistId?._id,
+          serviceId: item.serviceId?._id,
+          startTime: item.startTime,
+          endTime: item.endTime,
+        };
+        const appointmentDetails = {
+          appointment: appointmentData,
+          client: item.clientId,
+          stylist: item.stylistId,
+          service: item.serviceId,
+        };
+
+        return appointmentDetails;
+      });
+      return apptDetailsArr;
     },
     products: async (parent, { service, name }) => {
       const params = {};
@@ -515,12 +513,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addUpdateStylistInfo: async (parent, args, context) => {
-      // console.log("=======INSIDE ADD/UPDATE STYLIST =======")
-      // console.log(args.workingHours)
 
-      if (context.user) {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
         const role = context.user?.role?.toLowerCase();
-        let stylistId = "";
         let updateUserId = "";
 
         if (role === "stylist") {
@@ -530,12 +527,9 @@ const resolvers = {
         } else {
           throw new AuthenticationError("Not Authorized");
         }
-        //console.log("USERID: " , updateUserId)
-        //console.log(args)
 
         const { certifications, workingHours } = args;
 
-        //const stylist = await Stylist.create({userId: stylistId, certifications, workingHours: workingHours});
         const stylist = await Stylist.findOneAndUpdate(
           { userId: updateUserId },
           {
@@ -546,15 +540,30 @@ const resolvers = {
             },
           },
           { upsert: true, new: true, runValidators: true }
-        );
+        )
+          .select("-__v")
+          .populate({
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v"
+            },
+          });
 
-        //console.log (stylist)
-        return stylist;
+        const stylistInfo = {
+            _id: stylist._id,
+            userId: stylist.userId,
+            certifications: stylist.certifications,
+            workingHours: stylist.workingHours
+        }
+
+       return stylistInfo;
       }
-      throw new AuthenticationError("You need to be logged in!");
-    },
+,
     addService: async (parent, args, context) => {
-
       if (context.user) {
         if (context.user.role !== "admin") {
           throw new AuthenticationError("Not Authorized");

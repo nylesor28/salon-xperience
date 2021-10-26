@@ -160,32 +160,28 @@ query getClientInfo( $userId:ID!) {
 
 export const GET_STYLIST_FULL_PROFILE_INFO=gql`
 
-mutation addUpdateStylistInfo(
-  $_id: ID
-  $userId: ID
-  $certifications: String
-  $scheduleInput: [ScheduleInput]
-) {
-   addUpdateStylistInfo( 
-   _id :$_id
-    userId: $userId
-    certifications: $certifications
-     workingHours: $scheduleInput
-  ) {
-    _id
-    userId
-    certifications
-    workingHours {
-      weekday
-      hourStart
-      minuteStart
-      hourEnd
-      minuteEnd
-    
+query getStylistInfo( $userId:ID!) {
+  getStylistInfo( userId: $userId){
+      _id
+      userId{
+        _id
+        userProfile{
+          _id
+          firstName
+          lastName
+        }
+      }
+      certifications
+      workingHours {
+        weekday
+        hourStart
+        minuteStart
+        hourEnd
+        minuteEnd
+      
+      }
     }
   }
-}
-
 `;
 
 export const GET_ALL_APPOINTMENTS=gql`

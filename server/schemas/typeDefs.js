@@ -91,10 +91,7 @@ input ScheduleInput {
   hourEnd: Int
   minuteEnd: Int
 }
-type StylistCompleteProfile {
-  stylist: Stylist
-  user: User
-}
+
 
   type Client {
     _id : ID
@@ -167,7 +164,7 @@ type StylistCompleteProfile {
     getUserProfile : User
 
     getClientInfo(clientUserId : ID) : ClientCompleteProfile
-    getStylistInfo(userId: ID ) : StylistCompleteProfile
+    getStylistInfo(userId: ID ) : BookedStylist
     getServiceById(_id: ID!) : Service
     getAllServices: [Service]
     getAllAppointments: [AppointmentDetails]
@@ -193,7 +190,7 @@ type StylistCompleteProfile {
     login(email: String!, password: String!): Auth
 
     addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
-    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : Stylist
+    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : BookedStylist
     updateUser(firstName: String, lastName: String, email: String ): User
     updatePassword(oldPassword: String, newPassword: String): User
 
