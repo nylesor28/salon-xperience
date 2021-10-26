@@ -148,15 +148,70 @@ const resolvers = {
     },
 
     getAppointmentById: async (parent, { _id }, context) => {
-      console.log("INSIDE GET APPOINTMENTS");
-      if (context.user) {
-        const appointment = await Appointment.findById(_id).select("-__v");
-
-        console.log(appointment);
-        return appointment;
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
       }
-      throw new AuthenticationError("Not logged in");
-    },
+      try{
+        const appointmentResults = await Appointment.findById(_id).select("-__v")
+        .populate({
+          path: "clientId",
+          model: "Client",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
+
+
+      const appointmentData = {
+        _id: appointmentResults._id,
+        clientId: appointmentResults.clientId._id,
+        stylistId: appointmentResults.stylistId._id,
+        serviceId: appointmentResults.serviceId._id,
+        startTime: appointmentResults.startTime,
+        endTime: appointmentResults.endTime
+      };
+
+      appointmentDetails = {
+        appointment: appointmentData,
+        client: appointmentResults.clientId,
+        stylist: appointmentResults.stylistId,
+        service: appointmentResults.serviceId,
+      };
+
+      return appointmentDetails;
+
+    } catch (e) {
+      throw  "There was a problem getting appointment"
+    }
+  },
     getAppointmentsByStylist: async (parent, { stylistId }, context) => {
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
