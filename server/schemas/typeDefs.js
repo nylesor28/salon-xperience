@@ -101,6 +101,7 @@ type StylistCompleteProfile {
     userId : ID
     stylistId : ID
     hairProfile: HairProfile
+    userProfile : UserProfile
   }
 
   type HairProfile {
@@ -143,10 +144,10 @@ type StylistCompleteProfile {
   }
 
   type AppointmentDetails{
-    appointment: Appointment
+  appointment: Appointment
     client: Client
     stylist: Stylist
-    Service: Service
+    service: Service
   }
 
   type Query {
