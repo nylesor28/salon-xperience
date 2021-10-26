@@ -85,13 +85,65 @@ const resolvers = {
 
     getAllAppointments: async (parent, args, context) => {
       console.log("INSIDE GET APPOINTMENTS");
-      if (context.user) {
-        const allAppointments = await Appointment.find().select("-__v");
-
-        console.log(allAppointments);
-        return allAppointments;
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
       }
-      throw new AuthenticationError("Not logged in");
+        const appointmentResults = await Appointment.find().select("-__v")
+        .populate({
+          path: "clientId",
+          model: "Client",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
+
+        const apptDetailsArr = appointmentResults.map(item => {   
+          const appointmentData = {
+            _id: item._id,
+            clientId: item.clientId?._id,
+            stylistId: item.stylistId?._id,
+            serviceId: item.serviceId?._id,
+            startTime: item.startTime,
+            endTime: item.endTime
+          };
+          const appointmentDetails = {
+            appointment: appointmentData,
+            client: item.clientId,
+            stylist: item.stylistId,
+            service: item.serviceId,
+          };
+         
+          return appointmentDetails
+       })
+       return apptDetailsArr;
     },
 
     getAppointmentById: async (parent, { _id }, context) => {

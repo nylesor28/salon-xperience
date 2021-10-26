@@ -189,18 +189,50 @@ mutation addUpdateStylistInfo(
 `;
 
 export const GET_ALL_APPOINTMENTS=gql`
-
 query getAllAppointments {
   getAllAppointments{
-    _id
-      clientId
-      stylistId
-      serviceId
-      startTime
-      endTime
-  }
+      appointment {
+        _id
+        clientId
+        stylistId
+        serviceId
+        startTime
+        endTime
+      }
+      client {
+        _id
+				userId {
+          userProfile {
+            _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        } 
+      }
+      stylist {
+        _id
+        userId {
+          userProfile{
+                _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        }
+      }
+      service {
+        _id
+        serviceName
+        price
+        duration{
+          hour
+          minute
+        }
+      }
+      
+    }
 }
-
 
 `;
 
