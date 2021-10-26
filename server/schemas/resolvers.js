@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Service, Order, UserProfile, Client} = require("../models");
+const { User, Product, Service, Order, UserProfile, Client, Stylist, Appointment} = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
@@ -36,10 +36,38 @@ const resolvers = {
     }).select("-__v -password")
     .populate({ path: "userProfile", select: "-__v" });
 
+    return  {user, client}
+   },
+   getStylistInfo:  async (parent, {userId}, context) => {
+
+
+    console.log(userId)
+
+    const stylist = await Stylist.findOne(
+      {userId: userId}
+        // {   
+        //   $or : [     
+        //            {userId: userId},
+        //            {_id : stylistId}
+        //         ]
+        // }
+    )
+    console.log(stylist)
+   const user = await User.findOne({
+      _id: stylist.userId,
+    }).select("-__v -password")
+    .populate({ path: "userProfile", select: "-__v" });
+
+    //console.log ("============= STYLIST =================")
+
+   // console.log ("============= STYLIST USER INFO =================")
+  //  console.log(stylistInfo)
 
     
-    return  {user, client}
-
+    const obj = {user, stylist}
+    console.log(obj)
+     return { stylist,  user}
+     //return obj
     
    },
 
@@ -51,6 +79,57 @@ const resolvers = {
     getAllServices: async () => {
       return await (Service.find({expiredDate:null}))
     },
+    
+    getAllAppointments: async(parent, args, context) => {
+      console.log("INSIDE GET APPOINTMENTS")
+      if (context.user) {
+        
+        const allAppointments = await Appointment.find().select("-__v")
+      
+
+        console.log(allAppointments)
+      return allAppointments;
+    }
+    throw new AuthenticationError("Not logged in");
+  },
+
+  getAppointmentById: async(parent, {_id}, context) => {
+    console.log("INSIDE GET APPOINTMENTS")
+    if (context.user) {
+      
+      const appointment = await Appointment.findById(_id).select("-__v")
+
+      console.log(appointment)
+    return appointment;
+  }
+  throw new AuthenticationError("Not logged in");
+},
+getAppointmentsByStylist: async(parent, {stylistId}, context) => {
+
+  if (context.user) { 
+    
+    const allStylistAppointments = await Appointment.find({stylistId: stylistId}).select("-__v")
+
+
+    console.log(allStylistAppointments)
+  return allStylistAppointments;
+}
+throw new AuthenticationError("Not logged in");
+},
+getAppointmentsByClient: async(parent, {clientId}, context) => {
+
+  if (context.user) {
+    
+    const allClientAppointments = await Appointment.find({clientId: clientId}).select("-__v")
+
+
+
+    console.log(allClientAppointments)
+  return allClientAppointments;
+}
+throw new AuthenticationError("Not logged in");
+
+},
     products: async (parent, { service, name }) => {
       const params = {};
 
@@ -222,7 +301,42 @@ const resolvers = {
        } 
        throw new AuthenticationError("You need to be logged in!");
      },
-
+     addUpdateStylistInfo:  async (parent, args, context) => {
+      // console.log("=======INSIDE ADD/UPDATE STYLIST =======")
+      // console.log(args.workingHours)
+ 
+       if(context.user){
+ 
+       const role = (context.user?.role)?.toLowerCase();
+       let stylistId = '';
+       let updateUserId =''
+ 
+       if (role === 'stylist') {
+         updateUserId = context.user._id;
+       }
+       else if (role === 'admin') {
+         updateUserId = args.userId
+       }
+       else {
+         throw new AuthenticationError("Not Authorized");
+       }
+       //console.log("USERID: " , updateUserId)
+       //console.log(args)
+       
+       const { certifications, workingHours} = args;
+ 
+       //const stylist = await Stylist.create({userId: stylistId, certifications, workingHours: workingHours});
+       const stylist = await Stylist.findOneAndUpdate(
+         {userId: updateUserId},
+         {$set: {userId: updateUserId, certifications, workingHours: workingHours}},
+         {upsert: true, new: true, runValidators:true}
+         )
+ 
+       //console.log (stylist)
+       return stylist
+       } 
+       throw new AuthenticationError("You need to be logged in!");
+     },
      addService:  async (parent, args, context) => {
        console.log (args)
       if(context.user){
@@ -285,6 +399,92 @@ const resolvers = {
       } 
     throw new AuthenticationError("You need to be logged in!");
   },
+  addAppointment:  async (parent, args, context) => {
+    console.log (args)
+   if(context.user){
+
+
+     const appointment = await Appointment.create(args)
+     console.log(appointment)
+     return appointment
+     } 
+   throw new AuthenticationError("You need to be logged in!");
+ },
+ updateAppointment:  async (parent, args, context) => {
+  console.log("========= UPDATE APPOINTMENT======")
+  console.log(args)
+  
+  if(context.user){
+
+   const {_id, clientId, stylistId, serviceId, startTime, endTime } = args
+   let appointmentDetails ={}
+   let appointmentData = {}
+
+    const appointmentResults = await (Appointment.findOneAndUpdate(
+           {_id:_id}, 
+           {clientId, stylistId, serviceId, startTime, endTime}, 
+           { new: true }
+         ).select("-__v")
+         .populate({path: "clientId", model: "Client",select: "-__v",
+                    populate: {path: 'userId',model: 'User', select: "-__v, -username, -password",
+                                populate: {path: "userProfile", model: "UserProfile", select: "-__v"}
+                              }
+                  }
+          )
+         .populate({path: "stylistId", model: "Stylist", select: "-__v",
+                    populate: {path: 'userId',model: 'User', select: "-__v, -username, -password",
+                                populate: {path: "userProfile", model: "UserProfile", select: "-__v"}
+                              }
+                  }
+            )
+         .populate({path: "serviceId", model: "Service", select: "-__v -createdDate"})
+         .exec(function (err, appointmentResults) {
+          if (err) return handleError(err);
+          console.log('Here is the populated appointment: ', appointmentResults);
+          console.log("=============GETTING APPOINTMENT DETAILS ==============")
+          const appointmentData = new Object({
+            _id: appointmentResults._id,
+            clientId: appointmentResults.clientId._id,
+            stylistId: appointmentResults.stylistId._id,
+            serviceId: appointmentResults.serviceId._id,
+            startTime: appointmentResults.startTime,
+            endTime: appointmentResults.endTime
+          }) 
+          appointmentDetails = new Object({
+            appointment: appointmentData,
+             client: appointmentResults.clientId,
+             stylist: appointmentResults.stylistId,
+             service: appointmentResults.serviceId
+           })
+           console.log(appointmentResults)
+
+      })) 
+   
+      return {
+        appointment:appointmentData,
+        client: appointmentDetails.client,
+        stylist: appointmentDetails.stylist,
+        service: appointmentDetails.service
+      }
+
+    } 
+  throw new AuthenticationError("You need to be logged in!");
+},
+deleteAppointment:  async (parent, {_id}, context) => {
+  console.log(_id)
+  if(context.user){
+
+
+    const appointment = await Appointment.findOneAndDelete(
+           {_id}, 
+         ).select("-__v");
+    
+        console.log(appointment)
+      return appointment
+
+    } 
+  throw new AuthenticationError("You need to be logged in!");
+},
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
  
       if (context.user) {
