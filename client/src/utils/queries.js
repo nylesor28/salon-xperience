@@ -187,3 +187,69 @@ mutation addUpdateStylistInfo(
 }
 
 `;
+
+export const GET_ALL_APPOINTMENTS=gql`
+
+query getAllAppointments {
+  getAllAppointments{
+    _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+  }
+}
+
+
+`;
+
+
+export const GET_APPOINTMENT_BY_ID=gql`
+
+query getAppointmentById($_id:ID!) {
+  getAppointmentById(_id: $_id) {
+    _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+  }
+}
+
+
+`;
+
+
+export const GET_APPOINTMENT_BY_CLIENT_ID=gql`
+
+query getAppointmentByClient($clientId:ID!) {
+  getAppointmentsByClient( clientId: $clientId) {
+    _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+  }
+}
+`;
+
+
+export const GET_APPOINTMENT_BY_STYLIST_ID=gql`
+
+query getAppointmentByStylist($stylistId:ID!) {
+  getAppointmentsByStylist( stylistId: $stylistId) {
+    _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+  }
+}
+
+`;
+
+
