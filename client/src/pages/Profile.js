@@ -31,7 +31,7 @@ function Profile() {
   //   return <div>Loading...</div>;
   // }
 console.log(fullData)
-console.log(fullData.getUserProfile.userProfile.firstName)
+// console.log(fullData.getUserProfile.userProfile.firstName)
 // {fullData.firstName}
   return (
     <>

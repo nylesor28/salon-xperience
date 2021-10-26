@@ -170,10 +170,8 @@ class App extends React.Component {
                       >
                         Profile
                       </Link>
-                      <Link to="/" className="text-white mr-2 bg-red-400 border-2 text-xl hover:bg-red-800 rounded-full">
-                      <button className="font-bold p-1" onClick={logout}>
+                      <Link onClick={logout} to="/" className="mr-2 text-white font-bold text-2xl pt-2 hover:bg-gray-600 p-1 rounded-md no-underline">
                         Logout
-                      </button>
                       </Link>
                     </>
                   ) : (
