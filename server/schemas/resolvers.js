@@ -222,15 +222,66 @@ const resolvers = {
       return apptDetailsArr;
     },
     getAppointmentsByClient: async (parent, { clientId }, context) => {
-      if (context.user) {
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
         const allClientAppointments = await Appointment.find({
           clientId: clientId,
-        }).select("-__v");
+        }).select("-__v")        .populate({
+          path: "clientId",
+          model: "Client",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
 
-        console.log(allClientAppointments);
-        return allClientAppointments;
-      }
-      throw new AuthenticationError("Not logged in");
+        const apptDetailsArr = allClientAppointments.map(item => {   
+          const appointmentData = {
+            _id: item._id,
+            clientId: item.clientId?._id,
+            stylistId: item.stylistId?._id,
+            serviceId: item.serviceId?._id,
+            startTime: item.startTime,
+            endTime: item.endTime
+          };
+          const appointmentDetails = {
+            appointment: appointmentData,
+            client: item.clientId,
+            stylist: item.stylistId,
+            service: item.serviceId,
+          };
+         
+          return appointmentDetails
+       })
+       return apptDetailsArr;
     },
     products: async (parent, { service, name }) => {
       const params = {};

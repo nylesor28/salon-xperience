@@ -258,14 +258,49 @@ export const GET_APPOINTMENT_BY_CLIENT_ID=gql`
 
 query getAppointmentByClient($clientId:ID!) {
   getAppointmentsByClient( clientId: $clientId) {
-    _id
+   appointment {
+      _id
       clientId
       stylistId
       serviceId
       startTime
       endTime
+    }
+    client {
+      _id
+      userId {
+        userProfile {
+          _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      } 
+    }
+    stylist {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    service {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
+    }
+    
   }
 }
+
 `;
 
 
