@@ -15,6 +15,7 @@ function Admin() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    event.target.reset()
     await addUser({
       variables: {
         email: formState.email,
@@ -22,6 +23,7 @@ function Admin() {
         username: formState.username,
       },
     });
+
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
