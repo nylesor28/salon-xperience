@@ -1,6 +1,8 @@
 import React from "react";
 
 function CreateService() {
+
+    
   return (
     <div>
       <h2 className="text-center font-bold text-white">Create A Service</h2>
@@ -12,26 +14,36 @@ function CreateService() {
           <label htmlFor="serviceName">Service Name:</label>
           <input
             id="serviceName"
-            type="serviceName"
+            type="text"
             name="serviceName"
             className="border-1 border-black ml-2"
           ></input>
         </div>
-        <div className="m-1">
-          <label htmlFor="duration">Duration:</label>
+        <div className="m-1 flex">
+          <label  htmlFor="duration">Duration:</label>
+          <div className="flex">
           <input
-            id="duration"
-            type="duration"
-            name="duration"
-            className="border-1 border-black ml-2"
+            id="hours"
+            placeholder="hh"
+            type="text"
+            name="hours"
+            className="border-1 border-black ml-2 w-28"
           ></input>
+          <input
+            id="minutes"
+            placeholder="mm"  
+            type="text"
+            name="minutes"
+            className="border-1 border-black ml-2 w-28"
+          ></input>
+          </div>
         </div>
         <div className="m-1">
           <label htmlFor="price">Price:</label>
           <input
             id="price"
             name="price"
-            type="price"
+            type="text"
             className="border-1 border-black ml-2"
           ></input>
         </div>

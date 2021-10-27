@@ -85,9 +85,9 @@ function Admin() {
                 name="userType"
                 className="rounded-md border mt-2 ml-2"
               >
-                <option> admin</option>
-                <option> stylist </option>
-                <option> client </option>
+                <option value="admin"> admin</option>
+                <option value="stylist"> stylist </option>
+                <option value="client"> client </option>
               </select>
             </div>
             <button className="border p-1 rounded-lg bg-blue-800 text-white font-bold hover:bg-blue-400">
