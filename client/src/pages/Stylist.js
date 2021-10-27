@@ -10,10 +10,13 @@ import img5 from "../assets/stylist/Jurnee.jpg";
 import img6 from "../assets/stylist/maya.jpg";
 import BootstrapCarouselComponent from '../components/Carousel/index.js';
 import axios from "axios";
+import ServiceCardList from "../components/ServiceCardList";
 
 
 function Stylist(props) {
     const[stylistflashcards, setStylistFlashcards]=useState(StylistFlashcards)
+
+    const[servicecards, setServiceCards] =useState(ServiceCards)
   return (
     <>
      <div className="row">
@@ -23,7 +26,7 @@ function Stylist(props) {
           </div>
       <div className="stylist-container">
       <BootstrapCarouselComponent></BootstrapCarouselComponent>
-      
+      <ServiceCardList servicecards= {servicecards}/>
       <StylistFlashcardList stylistflashcards={stylistflashcards} />
       </div>
       </>
@@ -77,6 +80,56 @@ const StylistFlashcards=[{
   education:"Paul Mitchell",
   image: img6,
   description: "long term"
+}
+];
+
+const ServiceCards=[{
+  id: 0,
+  stylist:"Roz",
+  speciality: "natural Hair",
+  education:"Paul Mitchell",
+  image: img1,
+  description: "long term"
+},
+{
+id: 1,
+stylist:"Akem",
+speciality: "natural Hair",
+education:"Paul Mitchell",
+image: img2,
+description: "long term"
+},
+{
+id: 2,
+stylist:"Emilia",
+speciality: "natural Hair",
+education:"Paul Mitchell",
+image: img3,
+description: "long term"
+},
+{
+id: 3,
+stylist:"Eva",
+speciality: "natural Hair",
+education:"Paul Mitchell",
+image: img4,
+description: "long term"
+},
+{
+id: 4,
+stylist:"Jurnee",
+speciality: "natural Hair",
+education:"Paul Mitchell",
+image: img5,
+description: "long term"
+},
+{
+id: 5,
+stylist:"Maya",
+speciality: "natural Hair",
+education:"Paul Mitchell",
+image: img6,
+description: "long term"
 }
 ]
 
