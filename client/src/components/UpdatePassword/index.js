@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PASSWORD } from "../../utils/mutations";
-import Auth from "../../utils/auth";
 
 export default function Modal() {
   const [showModal, setShowModal] = useState(false);
-  const [passwordState, setPassword] = useState({
-    oldpassword: "",
+  const [passwordState, setPasswordState] = useState({
+    oldPassword: "",
     newPassword: "",
   });
 
@@ -14,20 +13,22 @@ export default function Modal() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefautl();
-    const mutationResponse = await updatePassword({
+
+ 
+    await updatePassword({
       variables: {
         oldPassword: passwordState.oldPassword,
         newPassword: passwordState.newPassword,
       },
     });
-    const token = mutationResponse.data.updatePassword.token;
-    Auth.passwordState(token);
-    console.log(token);
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setPassword({ ...passwordState, [name]: value });
+    setPasswordState({
+      ...passwordState,
+      [name]: value,
+    });
   };
 
   return (

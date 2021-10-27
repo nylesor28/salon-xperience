@@ -3,16 +3,18 @@ import profilepic from "../assets/images/jomboimg.jpg";
 import Modal from "../components/ModalUserData/Index";
 import StylistAppointment from "../components/StylistAppointment";
 import Passwod_Update from "../components/UpdatePassword";
-import { Redirect, useParams } from "react-router-dom";
+// import { Redirect, useParams } from "react-router-dom";
 import { GET_USER_PROILE } from "../utils/queries";
 import { useQuery, useMutation } from '@apollo/client';
-import Auth from "../utils/auth"
+import {GET_CLIENT_FULL_PROFILE_INFO} from "../utils/queries";
 
 
 function Profile() {
-  const { data: userParam } = useParams();
+  // const { data: userParam } = useParams();
   const {data: userData} = useQuery(GET_USER_PROILE);
-  const fullData = userData;;
+  const fullData = userData?.getUserProfile?.userProfile;
+  const {data: hairData} = useQuery(GET_CLIENT_FULL_PROFILE_INFO);
+  const fullHairData = hairData?.getClientInfo?.hairProfile;
   // const { loading, data } = useQuery(
   //   userParam ? GET_USER_PROILE : GET_USER_PROFILE,
   //   {
@@ -31,11 +33,12 @@ function Profile() {
   //   return <div>Loading...</div>;
   // }
 console.log(fullData)
+console.log(fullHairData)
 // console.log(fullData.getUserProfile.userProfile.firstName)
 // {fullData.firstName}
   return (
     <>
-      <h1 className="text-pink-600"> PROFILE</h1>
+      <h1 className="text-pink-600">{fullData?.firstName} PROFILE</h1>
       <section>
         <div className="flex justify-between">
           <div className="flex border rounded m-1 w-7/12 shadow">
@@ -50,27 +53,23 @@ console.log(fullData)
               <table className="mb-2 bg-white m-1 rounded opacity-70">
                 <tr>
                   <td className="font-bold text-lg pl-2">Name:</td>
-                  <td>Allen Brown</td>
+                  <td>{fullData?.firstName} {fullData?.lastName}</td>
                 </tr>
                 <tr>
                   <td className="font-bold text-lg pl-2">Contact:</td>
-                  <td>(203) 548-5041</td>
+                  <td>{fullData?.phoneNumber}</td>
                 </tr>
                 <tr>
                   <td className="font-bold text-lg pl-2">Address:</td>
-                  <td>150 Davie Drive, New Haven CT 06401</td>
+                  <td>{fullData?.address}, {fullData?.city} </td>
                 </tr>
                 <tr>
                   <td className="font-bold text-lg pl-2">City:</td>
-                  <td> New Haven</td>
-                </tr>
-                <tr>
-                  <td className="font-bold text-lg pl-2">State:</td>
-                  <td>CT</td>
+                  <td> {fullData?.city}</td>
                 </tr>
                 <tr>
                   <td className="font-bold text-lg pl-2">Zip Code:</td>
-                  <td>06508</td>
+                  <td>{fullData?.zipCode}</td>
                 </tr>
               </table>
               <Modal />
@@ -82,19 +81,19 @@ console.log(fullData)
             id="hair-profile"
             className="border rounded w-2/6 p-2 shadow opacity-70 bg-white"
           >
-            <h2 className="text-center text-pink-600">HAIR PROFILE</h2>
+            <h2 className="text-center text-pink-600"> HAIR PROFILE</h2>
             <table className="mb-4">
               <tr>
-                <td className="font-bold text-lg">Hair Type:</td>
-                <td>Natrual</td>
+                <td className="font-bold text-lg">Hair Goal:</td>
+                <td>{fullHairData?.hairGoal}</td>
               </tr>
               <tr>
-                <td className="font-bold text-lg">Hair Length:</td>
-                <td>12 Inches</td>
+                <td className="font-bold text-lg">Hair Type:</td>
+                <td>{fullHairData?.hairType}</td>
               </tr>
               <tr>
                 <td className="font-bold text-lg">Hair State:</td>
-                <td>Perm</td>
+                <td>{fullHairData?.hairState}</td>
               </tr>
               <tr>
                 <td className="font-bold text-lg">Hair Damage:</td>

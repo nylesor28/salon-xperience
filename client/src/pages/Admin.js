@@ -4,7 +4,6 @@ import { useState } from "react";
 import UserList from "../components/UserList";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import Auth from "../utils/auth";
 
 function Admin() {
   const [formState, setFormState] = useState({
@@ -16,15 +15,13 @@ function Admin() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    await addUser({
       variables: {
         email: formState.email,
         password: formState.password,
         username: formState.username,
       },
     });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
