@@ -61,21 +61,21 @@ export const QUERY_OPERATOR= gql`
   }
 `;
 
-export const QUERY_PRODUCTS = gql`
-  query getProducts($product: ID) {
-    products(product: $product) {
-      _id
-      name
-      description
-      price
-      quantity
-      image
-      product {
-        _id
-      }
-    }
-  }
-`;
+// export const QUERY_PRODUCTS = gql`
+//   query getProducts($product: ID) {
+//     products(product: $product) {
+//       _id
+//       name
+//       description
+//       price
+//       quantity
+//       image
+//       product {
+//         _id
+//       }
+//     }
+//   }
+// `;
 
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {

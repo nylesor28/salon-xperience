@@ -9,7 +9,7 @@ import img4 from "../assets/stylist/Eva.jpg";
 import img5 from "../assets/stylist/Jurnee.jpg";
 import img6 from "../assets/stylist/maya.jpg";
 import BootstrapCarouselComponent from '../components/Carousel/index.js';
-import axios from "axios";
+// import axios from "axios";
 
 
 function Stylist(props) {
