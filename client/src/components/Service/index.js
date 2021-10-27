@@ -19,7 +19,7 @@ function Service() {
               ></input>
             </div>
             <div className="m-1">
-              <label for="duration">Dutation:</label>
+              <label for="duration">Duration:</label>
               <input
                 id="duration"
                 type="text"
