@@ -141,6 +141,7 @@ Button{
   color: black;
   border-radius: 15px;
   align-self: center;
+  
 }
 Footer{
   color: white;
@@ -178,6 +179,6 @@ html {
   background-attachment: fixed;
 }
 
-.stylistheading{
+.tileheading{
   font-family: cursive;
 }

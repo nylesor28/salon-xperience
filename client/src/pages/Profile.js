@@ -38,19 +38,19 @@ console.log(fullHairData)
 // {fullData.firstName}
   return (
     <>
-      <h1 className="text-pink-600">{fullData?.firstName} PROFILE</h1>
+      <h1 className="tileheading text-white bg-pink-500  w-3/12 text-center mt-2 rounded-lg border-2 animate-pulse">{fullData?.firstName}`s Profile</h1>
       <section>
-        <div className="flex justify-between">
-          <div className="flex border rounded m-1 w-7/12 shadow">
+        <div className="flex justify-between ">
+          <div className="flex border rounded m-1 w-7/12 shadow p-2">
             <div id="profile-img" className="w-80  p-1">
               <img
-                className="w-80 h-80 rounded-lg"
+                className="w-80 h-52 rounded-lg"
                 src={profilepic}
                 alt="profile image"
               />
             </div>
             <div className="ml-4" id="profile-data">
-              <table className="mb-2 bg-white m-1 rounded opacity-70">
+              <table className="mb-2 bg-pink-500 text-white m-1 rounded opacity-90 w-full">
                 <tr>
                   <td className="font-bold text-lg pl-2">Name:</td>
                   <td>{fullData?.firstName} {fullData?.lastName}</td>
@@ -61,10 +61,10 @@ console.log(fullHairData)
                 </tr>
                 <tr>
                   <td className="font-bold text-lg pl-2">Address:</td>
-                  <td>{fullData?.address}, {fullData?.city} </td>
+                  <td>{fullData?.address} </td>
                 </tr>
                 <tr>
-                  <td className="font-bold text-lg pl-2">City:</td>
+                  <td className="font-bold text-lg pl-2">City/State:</td>
                   <td> {fullData?.city}</td>
                 </tr>
                 <tr>

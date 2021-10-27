@@ -2,7 +2,7 @@ import react from "react";
 import Content from "../components/Content";
 import HomeService from "../components/HomeService";
 // import Carousel from "../components/Carousel";
-// import Styler from "../components/ServiceCard";
+import Jumbotron from "../components/Jumbotron";
 import HomeForm from "../components/ListGroup";
 import PolicyForm from "../components/ListGroupPolicies";
 
@@ -25,6 +25,7 @@ function Home(props) {
 Salon Xperience was established in 2021 with a mission to provide exceptional service via an inspired team, cutting-edge techniques, and an indulging experience to each every one of our guests. Our goal is to have you looking fantastic and feeling incredible inside and out after your visit with us.
             </p>
             </Content> */}
+      <Jumbotron />
       <HomeService />
       <HomeForm />
       <h3
@@ -40,9 +41,7 @@ Salon Xperience was established in 2021 with a mission to provide exceptional se
         POLICY AND PROCEDURES
       </h3>
       <PolicyForm />
-      {/* <Carousel/> */}
-      {/* <Styler/> */}
-      {/* <ClientForm /> */}
+       {/* <ClientForm /> */}
     </div>
   );
 }

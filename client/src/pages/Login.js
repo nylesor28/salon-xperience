@@ -30,12 +30,12 @@ function Login(props) {
   };
 
   return (
-    <section className="flex justify-center py-60">
-      <div className="rounded-lg w-3/12 m-4 p-4 shadow-lg bg-white">
-        <Link className="font-bold text-lg" to="/signup">← Signup Here</Link>
+    <section className="flex justify-center py-28">
+      <div className="rounded-lg w-3/12 m-4 p-4 shadow-lg bg-white border-2 border-pink-500">
+        <Link className="font-bold text-lg no-underline" to="/signup">👈 Signup Here</Link>
 
-        <h2 className="font-bold text-center">Login</h2>
-        <form onSubmit={handleFormSubmit} className="border">
+        <h2 className="font-bold text-center text-pink-600">Login</h2>
+        <form onSubmit={handleFormSubmit} className="border-1 rounded p-2 border-pink-500">
           <div className="flex-row space-between my-2 text-black">
             <label className="font-bold" htmlFor="email">
               Email address:
