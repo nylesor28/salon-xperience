@@ -12,7 +12,7 @@ export default function Modal() {
   const [updatePassword] = useMutation(UPDATE_PASSWORD);
 
   const handleFormSubmit = async (event) => {
-    event.preventDefautl();
+    event.preventDefault();
 
  
     await updatePassword({
@@ -72,7 +72,7 @@ export default function Modal() {
                         name="oldPassword"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Old Password"
-                        type="oldPassword"
+                        type="password"
                         id="oldPassword"
                         onChange={handleChange}
                       />
@@ -85,7 +85,7 @@ export default function Modal() {
                         name="newPassword"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="New Password"
-                        type="newPassword"
+                        type="password"
                         id="newPassword"
                         onChange={handleChange}
                       />
