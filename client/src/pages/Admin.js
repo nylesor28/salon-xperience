@@ -1,6 +1,7 @@
 import React from "react";
 import Service from "../components/Service";
 import UserList from "../components/UserList";
+import Services from "../components/ServiceCard"
 
 function Admin() {
   return (
@@ -47,6 +48,9 @@ function Admin() {
         <Service />
         <UserList />
       </section>
+      <div>
+      <Services/>
+      </div>
     </>
   );
 }

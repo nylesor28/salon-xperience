@@ -1,30 +1,41 @@
+import React from 'react';
+
+function Services(){
+  return(
+    <div className="App">
+      <h1> something</h1>
+    </div>
+  );
+}
+export default Services
+
 // import React from 'react';
-import {CardGroup} from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Button from 'react';
-import React,{ useState } from 'react'
+// import {CardGroup} from 'react-bootstrap';
+// import Card from 'react-bootstrap/Card';
+// import Button from 'react';
+// import React,{ useState } from 'react'
 
 
-class ServiceCard extends React.Component {
+// class ServiceCard extends React.Component {
 
   
 
-    render() {
-      return (
-<CardGroup>
-  <Card>
-    <Card.Img variant="top" src={servicecard.image} />
-    <Card.Body>
-      <Card.Title>{servicecard.stylist}</Card.Title>
-      <Card.Text>
-      {servicecard.description}
-      </Card.Text>
-      <Button variant="primary">Go somewhere</Button>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
+//     render() {
+//       return (
+// <CardGroup>
+//   <Card>
+//     <Card.Img variant="top" src={servicecard.image} />
+//     <Card.Body>
+//       <Card.Title>{servicecard.stylist}</Card.Title>
+//       <Card.Text>
+//       {servicecard.description}
+//       </Card.Text>
+//       <Button variant="primary">Go somewhere</Button>
+//     </Card.Body>
+//     <Card.Footer>
+//       <small className="text-muted">Last updated 3 mins ago</small>
+//     </Card.Footer>
+//   </Card>
   {/* <Card>
     <Card.Img variant="top" src="holder.js/100px160" />
     <Card.Body>
@@ -54,9 +65,9 @@ class ServiceCard extends React.Component {
       <small className="text-muted">Last updated 3 mins ago</small>
     </Card.Footer>
   </Card> */}
-</CardGroup>
-      );
-}
-}
+// </CardGroup>
+//       );
+// }
+// }
 
-export default ServiceCard;
+// export default ServiceCard;

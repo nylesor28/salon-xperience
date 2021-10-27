@@ -20,6 +20,7 @@ import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
+import Services from "./pages/Services";
 import logo from "./assets/logo/sx1.png";
 import Contact from "./pages/Contact.js";
 import Admin from "./pages/Admin";
@@ -27,29 +28,14 @@ import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import "./App.css";
 import"bootstrap/dist/css/bootstrap.css";
-// import axios from "axios";
 import { StoreProvider } from './utils/GlobalState';
 
 import Auth from "./utils/auth.js";
-// const client = new ApolloClient({ request: operation => {
-//   const token = localStorage.getItem('id_token');
 
-//   operation.setContext({
-//     headers: {
-//       authorization: token ? `Bearer ${token}` : ''
-//     }
-//   });
-// },
-//   uri: '/graphql'
-// });
 const logout = (event) => {
   event.preventDefault();
   Auth.logout();
 };
-
-{
-  /* <div style={{ backgroundImage: "url(/assets/background.png)" }}></div>; */
-}
 
   
 const httpLink= createHttpLink({
@@ -81,6 +67,7 @@ class App extends React.Component {
         { title: "Profile", path: "/profile" },
         { title: "Stylist", path: "/stylist" },
         { title: "Contact", path: "/contact" },
+        { title: "Services", path: "/services" },
         { title: "Admin", path: "/admin" },
         { title: "Login", path: "/login" },
         { title: "SignUp", path: "/signup" },
@@ -101,6 +88,9 @@ class App extends React.Component {
       },
       profile: {
         title: "profile",
+      },
+      services: {
+        title: "Our Services",
       },
       contact: {
         title: "Admin",
@@ -162,6 +152,13 @@ class App extends React.Component {
                   >
                     Pricing
                   </Link>
+
+                  <Link
+                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                    to="/services"
+                  >
+                    Services
+                  </Link>
                   <Link
                     className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                     to="/Contact"
@@ -207,25 +204,6 @@ class App extends React.Component {
                       </Link>
                     </>
                   )}
-
-                  {/* <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/profile"
-                  >
-                    Profile
-                  </Link>
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/signup"
-                  >
-                    Sign Up
-                  </Link>
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/login"
-                  >
-                    Login
-                  </Link> */}
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -254,6 +232,11 @@ class App extends React.Component {
               path="/pricing"
               exact
               render={() => <Pricing title={this.state.pricing.title} />}
+            />
+             <Route
+              path="/services"
+              exact
+              render={() => <Pricing title={this.state.services.title} />}
             />
             <Route
               path="/contact"
