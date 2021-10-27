@@ -91,16 +91,27 @@ input ScheduleInput {
   hourEnd: Int
   minuteEnd: Int
 }
-type StylistCompleteProfile {
-  stylist: Stylist
-  user: User
-}
+
 
   type Client {
     _id : ID
     userId : ID
     stylistId : ID
     hairProfile: HairProfile
+  }
+
+  type BookedClient {
+    _id : ID
+    userId : User
+    stylistId : ID
+    hairProfile: HairProfile
+  }
+
+  type BookedStylist {
+    _id : ID
+    userId: User
+    certifications: String
+    workingHours: [Schedule]
   }
 
   type HairProfile {
@@ -120,8 +131,10 @@ type StylistCompleteProfile {
   }
 
   type ClientCompleteProfile {
-    client: Client
-    user: User
+    _id : ID
+    userId : User
+    stylist: BookedStylist
+    hairProfile: HairProfile
   }
 
   type Service {
@@ -144,22 +157,24 @@ type StylistCompleteProfile {
 
   type AppointmentDetails{
     appointment: Appointment
-    client: Client
-    stylist: Stylist
-    Service: Service
+    client: BookedClient
+    stylist: BookedStylist
+    service: Service
   }
 
   type Query {
     getUserProfile : User
+    getAllClients(clientUserId : ID) : [ClientCompleteProfile]
+    getClientInfo(clientUserId : ID) : ClientCompleteProfile 
+    getAllStylists: [BookedStylist]    
+    getStylistInfo(userId: ID ) : BookedStylist
 
-    getClientInfo(clientUserId : ID) : ClientCompleteProfile
-    getStylistInfo(userId: ID ) : StylistCompleteProfile
     getServiceById(_id: ID!) : Service
     getAllServices: [Service]
-    getAllAppointments: [Appointment]
-    getAppointmentById(_id: ID): Appointment
-    getAppointmentsByStylist(stylistId: ID): [Appointment]
-    getAppointmentsByClient(clientId: ID): [Appointment]
+    getAllAppointments: [AppointmentDetails]
+    getAppointmentById(_id: ID): AppointmentDetails
+    getAppointmentsByStylist(stylistId: ID): [AppointmentDetails]
+    getAppointmentsByClient(clientId: ID): [AppointmentDetails]
     products(service: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
@@ -178,8 +193,8 @@ type StylistCompleteProfile {
 
     login(email: String!, password: String!): Auth
 
-    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : Client
-    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : Stylist
+    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : ClientCompleteProfile
+    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : BookedStylist
     updateUser(firstName: String, lastName: String, email: String ): User
     updatePassword(oldPassword: String, newPassword: String): User
 

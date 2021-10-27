@@ -94,25 +94,49 @@ export const UPDATE_PASSWORD = gql`
 
 
 export const ADD_UPDATE_CLIENT_INFO = gql`
-
 mutation addUpdateClientInfo(
-  $_id: ID
   $stylistId : ID
   $hairProfileInput: HairProfileInput
 ) {
    addUpdateClientInfo( 
-   _id :$_id
     stylistId: $stylistId
      hairProfileInput: $hairProfileInput
-  ) {
-    _id
-    userId
-    stylistId
+  ) {      _id
+
+    userId {
+      _id
+      email
+      userProfile{
+        firstName
+        lastName
+        phoneNumber
+      }
+    }
     hairProfile {
       hairType
-      hairType
+      hairGoal
       hairState
       pictureUrl
+    }
+    stylist {
+      _id
+      userId {
+        _id
+        email
+        userProfile{
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+       certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    }
     }
   }
 }
@@ -186,20 +210,28 @@ mutation deleteService(
 `;
 
 export const ADD_UPDATE_STYLIST_INFO = gql`
+
 mutation addUpdateStylistInfo(
   $_id: ID
   $userId: ID
   $certifications: String
   $scheduleInput: [ScheduleInput]
 ) {
-  addUpdateStylistInfo( 
-  _id :$_id
+   addUpdateStylistInfo( 
+   _id :$_id
     userId: $userId
     certifications: $certifications
-    workingHours: $scheduleInput
+     workingHours: $scheduleInput
   ) {
     _id
-    userId
+    userId{
+      _id
+      userProfile{
+        _id
+        firstName
+        lastName
+      }
+    }
     certifications
     workingHours {
       weekday
@@ -229,7 +261,6 @@ mutation addAppointment(
     serviceId: $serviceId
     startTime: $startTime
     endTime: $endTime
-    
   ) {
         _id
     clientId
@@ -239,7 +270,6 @@ mutation addAppointment(
     endTime
   }
 }
-
 `;
 
 export const UPDATE_APPOINTMENT = gql`
@@ -250,55 +280,68 @@ mutation updateAppointment(
   $stylistId: ID!
   $serviceId: ID!
   $startTime: String!
-  $endEndTime:String
-) {
+  $endTime:String
+  ) {
   updateAppointment(
     _id:$_id
     clientId: $clientId
     stylistId: $stylistId
     serviceId: $serviceId
     startTime: $startTime
-    endTime: $endEndTime
-    
-  ) {
-     appointment{
+    endTime: $endTime
+    ) {
+    appointment {
       _id
       clientId
       stylistId
       serviceId
       startTime
       endTime
-      
     }
+
     client {
       _id
-      
+      userId {
+        userProfile {
+          _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    stylist {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    service {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
     }
     
   }
 }
 
-
 `;
 
 
 export const CANCEL_APPOINTMENT = gql`
-
-
-mutation deleteAppointment(
-  $_id: ID!
-) {
-  deleteAppointment(
-    _id: $_id
-  ) {
+mutation deleteAppointment($_id: ID!) {
+  deleteAppointment(_id: $_id) {
         _id
-    clientId
-    stylistId
-    serviceId
-    startTime
-    endTime
   }
 }
-
 
 `;
