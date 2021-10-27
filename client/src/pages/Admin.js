@@ -38,45 +38,45 @@ function Admin() {
       <section className="flex justify-between p-4">
         <div id="wrapper">
           <div>
-            <h2 className="text-center font-bold text-white">Create User</h2>
+            <h2 className="text-center font-bold bg-pink-500 rounded-lg border-2 text-white">Create A User</h2>
           </div>
 
           <form
             onSubmit={handleFormSubmit}
-            className="border w-96 p-1 rounded-md bg-white opacity-90 p-2 shadow-lg"
+            className="border-2 border-pink-500 w-96 p-1 rounded-md bg-white opacity-80 p-2 shadow-lg"
           >
             <div className="m-1">
-              <label htmlFor="username">User Name:</label>
+              <label className="font-bold" htmlFor="username">User Name:</label>
               <input
                 id="username"
                 type="username"
                 name="username"
-                className="border-1 border-black ml-2"
+                className="border-1 border-black ml-2 rounded"
                 onChange={handleChange}
               ></input>
             </div>
             <div className="m-1">
-              <label htmlFor="email">Email:</label>
+              <label className="font-bold" htmlFor="email">Email:</label>
               <input
                 id="email"
                 type="email"
                 name="email"
-                className="border-1 border-black ml-2"
+                className="border-1 border-black ml-2 rounded"
                 onChange={handleChange}
               ></input>
             </div>
             <div className="m-1">
-              <label htmlFor="password">Create password:</label>
+              <label className="font-bold" htmlFor="password">Create password:</label>
               <input
                 onChange={handleChange}
                 id="pwd"
                 name="password"
                 type="password"
-                className="border-1 border-black ml-2"
+                className="border-1 border-black ml-2 rounded"
               ></input>
             </div>
             <div>
-              <label htmlFor="users">User Type:</label>
+              <label className="font-bold" htmlFor="users">User Type:</label>
               <select
                 id="userType"
                 htmlFor="userType"
@@ -89,7 +89,7 @@ function Admin() {
                 <option value="client"> client </option>
               </select>
             </div>
-            <button className="border p-1 rounded-lg bg-blue-800 text-white font-bold hover:bg-blue-400">
+            <button className="border-2 mt-2 p-1 rounded-lg bg-blue-800 text-white font-bold hover:bg-blue-400">
               Create User
             </button>
           </form>

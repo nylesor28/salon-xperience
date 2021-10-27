@@ -81,7 +81,7 @@ console.log(fullHairData)
             id="hair-profile"
             className="border rounded w-2/6 p-2 shadow opacity-70 bg-white"
           >
-            <h2 className="text-center text-pink-600"> HAIR PROFILE</h2>
+            <h2 className="text-center text-white bg-pink-500 rounded-lg animate-pulse mt-2"> HAIR PROFILE</h2>
             <table className="mb-4">
               <tr>
                 <td className="font-bold text-lg">Hair Goal:</td>

@@ -11,7 +11,7 @@ function UserList() {
       <div className="w-3/12 bg-white opacity-95 p-2 shadow-lg rounded-lg">
         <h2 className="text-center font-bold text-pink-600">
           {" "}
-          All Active Clients
+          All Active Services
         </h2>
         {fullData &&
           fullData.map((service) => (
