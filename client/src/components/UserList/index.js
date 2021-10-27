@@ -1,9 +1,32 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALL_SERVICES } from "../../utils/queries";
+import { EXPIRE_SERVICE } from "../../utils/mutations";
 function UserList() {
   const { data: userData } = useQuery(QUERY_ALL_SERVICES);
   const fullData = userData?.getAllServices;
+  const [deleteService, { error }] = useMutation(EXPIRE_SERVICE);
+
+
+      
+
+
+  const handleDelete = async (event) => {
+    const _id = event.target.id;
+    console.log(_id);
+    try {
+      await deleteService({
+        variables: {
+          _id,
+        },
+        refetchQueries: [{ query: QUERY_ALL_SERVICES }],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    alert("Service Deleted");
+  };
+
 
   console.log(fullData);
   return (
@@ -16,10 +39,7 @@ function UserList() {
         {fullData &&
           fullData.map((service) => (
             <div className="border-2 rounded-lg p-1">
-              <div
-                id="wrapper"
-                className="border pl-4 pt-1 rounded shadow opacity-80"
-              >
+              <div className="border pl-4 pt-1 rounded shadow opacity-80">
                 <div className="flex ">
                   <p className="font-bold"> Service Name: </p>
                   <p className="pl-4"> {service.serviceName}</p>
@@ -35,7 +55,11 @@ function UserList() {
                     {service.duration.hour} HOUR {service.duration.minute} MINS
                   </p>
                 </div>
-                <button className="bg-red-400 text-white font-bold p-1 mb-2 rounded mt-2 border-2 shadow hover:bg-red-900">
+                <button
+                  id={service._id}
+                  onClick={handleDelete}
+                  className="bg-red-400 text-white font-bold p-1 mb-2 rounded mt-2 border-2 shadow hover:bg-red-900"
+                >
                   Delete Service
                 </button>
               </div>

@@ -151,15 +151,15 @@ export default function Modal() {
                       />
                     </div> */}
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="zipcode">
+                      <label className=" font-bold" htmlFor="zipCode">
                         Zip Code:
                       </label>
                       <input
-                        name="zipcode"
+                        name="zipCode"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Zip Code"
                         type="text"
-                        id="zipcode"
+                        id="zipCode"
                         onChange={handleChange}
                       />
                     </div>
