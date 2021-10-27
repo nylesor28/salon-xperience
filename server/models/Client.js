@@ -14,8 +14,7 @@ const clientSchema = new Schema(
     stylistId: 
     {
       type: Schema.Types.ObjectId,
-      ref: 'Stylist',
-      required: true
+      ref: 'Stylist'
     },
 
     hairProfile: 

@@ -19,14 +19,17 @@ export default function Modal() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    event.target.reset();
+    
     await addUpdateUser({
       variables: {
-        firstName: formState.firstName,
+
+        profileInput: {firstName: formState.firstName,
         lastName: formState.lastName,
         phoneNumber: formState.phoneNumber,
         address: formState.address,
         city: formState.city,
-        zipCode: formState.zipCode
+        zipCode: formState.zipCode}
       },
     });
   };
@@ -148,14 +151,14 @@ export default function Modal() {
                       />
                     </div> */}
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
+                      <label className=" font-bold" htmlFor="zipcode">
                         Zip Code:
                       </label>
                       <input
                         name="zipcode"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Zip Code"
-                        type="zipcode"
+                        type="text"
                         id="zipcode"
                         onChange={handleChange}
                       />
