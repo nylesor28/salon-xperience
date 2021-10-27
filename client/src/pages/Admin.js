@@ -16,15 +16,15 @@ function Admin() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
+    event.target.reset()
+    await addUser({
       variables: {
         email: formState.email,
         password: formState.password,
         username: formState.username,
       },
     });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
