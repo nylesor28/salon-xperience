@@ -6,7 +6,7 @@ import Jumbotron from "../Jumbotron";
 function StylistAppointment(props) {
   return (
     <Card style={{ width: "24rem", height: "auto" }}>
-      <Card.Title>Wash and Set</Card.Title>
+      <Card.Title className="bg-pink-500 p-1 rounded mt-1 text-white border-2">Wash and Set</Card.Title>
       <ListGroup horizontal className="">
         <ListGroupItem className="font-bold">Stylist:</ListGroupItem>
         <ListGroupItem>Kelly</ListGroupItem>

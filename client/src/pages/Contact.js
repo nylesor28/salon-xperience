@@ -58,39 +58,42 @@ class ContactPage extends React.Component {
       <div>
         {/* <Hero title={this.props.title}/> */}
         <Content>
-          <form>
+          <form className="border p-2 bg-white opacity-80 rounded-lg mt-2">
             <Form.Group>
-              <Form.Label htmlFor="full-name"> Full Name</Form.Label>
+              <Form.Label className="font-bold" htmlFor="full-name"> Full Name:</Form.Label>
               <Form.Control
                 id="full-name"
                 name="name"
                 type="text"
                 value={this.state.name}
                 onChange={this.handleChange}
+                className="border-2"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="email"> Email</Form.Label>
+              <Form.Label className="font-bold" htmlFor="email"> Email:</Form.Label>
               <Form.Control
                 id="email"
                 name="email"
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                className="border-2"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="subject"> Subject</Form.Label>
+              <Form.Label className="font-bold" htmlFor="subject"> Subject:</Form.Label>
               <Form.Control
                 id="subject"
                 name="subject"
                 type="text"
                 value={this.state.subject}
                 onChange={this.handleChange}
+                className="border-2"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="message"> Message</Form.Label>
+              <Form.Label className="font-bold" htmlFor="message"> Message:</Form.Label>
               <Form.Control
                 id="message"
                 name="message"
@@ -98,6 +101,7 @@ class ContactPage extends React.Component {
                 rows="8"
                 value={this.state.message}
                 onChange={this.handleChange}
+                className="border-2"
               />
             </Form.Group>
 
