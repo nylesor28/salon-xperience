@@ -8,7 +8,7 @@ import logo from "./../../assets/logo/sx1.png";
 
 function Footer() {
   return (
-    <footer className="mt-5">
+    <footer className="mt-5 bg-pink-600">
       <Container className="p=0" fluid={true}>
         <Row className="border-top justify-content-betweenp-3">
           <Col className="p-15" md={2} sm={12}>     

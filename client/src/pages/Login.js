@@ -30,13 +30,13 @@ function Login(props) {
   };
 
   return (
-    <section className="flex justify-center">
-      <div className="border-2 rounded-md w-3/12 m-4 p-2 shadow-lg">
-        <Link to="/signup">← Go to Signup</Link>
+    <section className="flex justify-center py-28">
+      <div className="rounded-lg w-3/12 m-4 p-4 shadow-lg bg-white border-2 border-pink-500">
+        <Link className="font-bold text-lg no-underline" to="/signup">👈 Signup Here</Link>
 
-        <h2>Login</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="flex-row space-between my-2">
+        <h2 className="font-bold text-center text-pink-600">Login</h2>
+        <form onSubmit={handleFormSubmit} className="border-1 rounded p-2 border-pink-500">
+          <div className="flex-row space-between my-2 text-black">
             <label className="font-bold" htmlFor="email">
               Email address:
             </label>
@@ -49,7 +49,7 @@ function Login(props) {
               onChange={handleChange}
             />
           </div>
-          <div className="flex-row space-between my-2">
+          <div className="flex-row space-between my-2 text-black">
             <label className="font-bold" htmlFor="pwd">
               Password:
             </label>

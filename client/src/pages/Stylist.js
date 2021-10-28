@@ -17,8 +17,8 @@ function Stylist(props) {
   return (
     <>
      <div className="row">
-            <div className="col-sm-6">
-              <h1 className="justify-content-center py-5">STYLIST GALLERY</h1>
+            <div className="flex justify-center">
+              <h1 className="justify-content-center p-2 mt-4 rounded-lg border-2 animate-bounce text-white bg-pink-500 tileheading">STYLIST GALLERY</h1>
             </div>
           </div>
       <div className="stylist-container">
@@ -34,15 +34,15 @@ const StylistFlashcards=[{
     id: 0,
     stylist:"Roz",
     speciality: "natural Hair",
-    education:"Paul Mitchell",
+    education:"Kelly  Mitchell",
     image: img1,
     description: "long term"
 },
 {
   id: 1,
-  stylist:"Akem",
+  stylist:"Akeem",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Jody Mitchell",
   image: img2,
   description: "long term"
 },
@@ -50,7 +50,7 @@ const StylistFlashcards=[{
   id: 2,
   stylist:"Emilia",
   speciality: "natural Hair",
-  education:"Paul Mitchell",
+  education:"Anna Mitchell",
   image: img3,
   description: "long term"
 },
