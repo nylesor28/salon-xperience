@@ -1,4 +1,14 @@
-import react from "react";
+// import react from "react";
+// import AllServices from '../components/Pricing'
+
+// function AllServices(){
+//   return (
+//     <div className ="AllServices">
+
+//     </div>
+//   )
+// }
+// export default AllServices;
 // import Carousel from "../components/HairTypesCard";
 // import img1 from "../assets/hairtypes/1S.jpg";
 // import img2 from "../assets/hairtypes/2a.jpg";
@@ -10,15 +20,15 @@ import react from "react";
 // import img8 from "../assets/hairtypes/4b.jpg";
 // import img9 from "../assets/hairtypes/4bf.jpg";
 // import img10 from "../assets/hairtypes/4c.jpg";
-import React, { useState, useEffect } from 'react';
-import Carousel from "../components/HairTypesCard";
+// import React, { useState, useEffect } from 'react';
+// import Carousel from "../components/HairTypesCard";
 
-function Services(props) {
+// function Services(props) {
   // const[hairtypescards, setHairTypesCards]=useState(HairTypesCards)
-  return (
-    <div>
-      <Carousel />
-    </div>
+  // return (
+  //   <div>
+  //     <Carousel />
+  //   </div>
     // <>
     // <div className="row">
     //        <div className="col-sm-6">
@@ -29,8 +39,8 @@ function Services(props) {
     //  <HairTypesCardList hairtypescards={hairtypescards} />
     //  </div>
     //  </>
-  );
-}
+//   );
+// }
 // const HairTypesCards=[{
 //   id: 0,
 //   title:"1-Straight",
@@ -89,4 +99,4 @@ function Services(props) {
 // },
 // ];
 // };
-export default Services;
+// export default Services;
