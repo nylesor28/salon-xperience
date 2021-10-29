@@ -1,6 +1,7 @@
 import React from "react";
 import Products from "../components/Products";
 import Cart from "../components/Cart";
+import ClientForm from "../components/ClientForm";
 
 
 const Pricing = () => {
