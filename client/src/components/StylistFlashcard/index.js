@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React, { useState } from "react";
 
 
 export default function StylistFlashcard({stylistflashcard}) {
@@ -70,5 +70,6 @@ export default function StylistFlashcard({stylistflashcard}) {
            }}>{stylistflashcard.description}</p> 
            </div>
         </div>
-    )
+    
+  );
 }

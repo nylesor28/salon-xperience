@@ -17,8 +17,8 @@ function Stylist(props) {
   return (
     <>
      <div className="row">
-            <div className="col-sm-6">
-              <h1 className="justify-content-center py-5">STYLIST GALLERY</h1>
+            <div className="flex justify-center">
+              <h1 className="justify-content-center p-2 mt-4 rounded-lg border-2 animate-bounce text-white bg-pink-500 tileheading">STYLIST GALLERY</h1>
             </div>
           </div>
       <div className="stylist-container">

@@ -1,7 +1,46 @@
 import React from "react";
+import {ADD_UPDATE_USER_PROFILE} from "../../utils/mutations"
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+
+
 
 export default function Modal() {
   const [showModal, setShowModal] = React.useState(false);
+  const [formState, setFormState] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "", 
+    address: "", 
+    city: "", 
+    zipCode: "", 
+  });
+  const [addUpdateUser] = useMutation(ADD_UPDATE_USER_PROFILE);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    event.target.reset();
+    
+    await addUpdateUser({
+      variables: {
+
+        profileInput: {firstName: formState.firstName,
+        lastName: formState.lastName,
+        phoneNumber: formState.phoneNumber,
+        address: formState.address,
+        city: formState.city,
+        zipCode: formState.zipCode}
+      },
+    });
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   return (
     <>
       <button
@@ -33,7 +72,7 @@ export default function Modal() {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <form className="p-3 rounded shadow">
+                  <form onSubmit={handleFormSubmit} className="p-3 rounded shadow">
                     <div>
                       <label className=" font-bold" htmlFor="firstName">
                         First Name:
@@ -42,8 +81,9 @@ export default function Modal() {
                         name="firstName"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="First Name"
-                        type="firstName"
+                        type="text"
                         id="firstName"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">
@@ -54,20 +94,22 @@ export default function Modal() {
                         name="lastName"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Last Name"
-                        type="lastName"
+                        type="text"
                         id="lastName"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="contact">
+                      <label className=" font-bold" htmlFor="phoneNumber">
                         Contact Number:
                       </label>
                       <input
-                        name="contact"
+                        name="phoneNumber"
                         className="border-1 border-black ml-1 rounded"
-                        placeholder="Contact"
-                        type="contact"
-                        id="contact"
+                        placeholder="phoneNumber"
+                        type="text"
+                        id="phoneNumber"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">
@@ -78,23 +120,25 @@ export default function Modal() {
                         name="address"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Address"
-                        type="address"
+                        type="text"
                         id="address"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
+                      <label className=" font-bold" htmlFor="city">
                         City:
                       </label>
                       <input
                         name="city"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="City"
-                        type="city"
+                        type="text"
                         id="city"
+                        onChange={handleChange}
                       />
                     </div>
-                    <div className="mt-2">
+                    {/* <div className="mt-2">
                       <label className=" font-bold" htmlFor="address">
                         State:
                       </label>
@@ -105,17 +149,18 @@ export default function Modal() {
                         type="state"
                         id="state"
                       />
-                    </div>
+                    </div> */}
                     <div className="mt-2">
-                      <label className=" font-bold" htmlFor="address">
+                      <label className=" font-bold" htmlFor="zipCode">
                         Zip Code:
                       </label>
                       <input
-                        name="zipcode"
+                        name="zipCode"
                         className="border-1 border-black ml-1 rounded"
                         placeholder="Zip Code"
-                        type="zipcode"
-                        id="zipcode"
+                        type="text"
+                        id="zipCode"
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="mt-2">

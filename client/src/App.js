@@ -15,7 +15,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Footer from "./components/Footer/index.js";
 import Home from "./pages/Home";
-import Detail from './pages/Detail';
+import Detail from "./pages/Detail";
 import Clients from "./pages/Clients";
 import Stylist from "./pages/Stylist";
 import Pricing from "./pages/Pricing";
@@ -27,9 +27,9 @@ import Admin from "./pages/Admin";
 import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import "./App.css";
-import"bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 // import axios from "axios";
-import { StoreProvider } from './utils/GlobalState';
+import { StoreProvider } from "./utils/GlobalState";
 
 import Auth from "./utils/auth.js";
 
@@ -37,24 +37,23 @@ const logout = (event) => {
   event.preventDefault();
   Auth.logout();
 };
-  
-const httpLink= createHttpLink({
-  uri: '/graphql',
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-
 });
 
 class App extends React.Component {
@@ -108,100 +107,96 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <Router>
-        <StoreProvider>
-          <Container className="p=0" fluid={true}>
-            {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
-            <Navbar className="border-bottom bg-blue-400" expand="lg">
-              <Navbar.Brand href="#home">
-                <div className="w-60 h-24 pl-4">
-                  <img
-                    src={logo}
-                    width="w-full"
-                    height="w-full"
-                    className="d-inline-block align-top"
-                    alt="logo"
-                  />
-                </div>
-              </Navbar.Brand>
-              {/* <Navbar.Brand>Salon Xperience</Navbar.Brand> */}
-              <Navbar.Toggle
-                className="border=0"
-                aria-controls="navbar-toggle"
-              />
-              <Navbar.Collapse id="navbar-toggle">
-                <Nav className="ml-auto">
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/"
-                  >
-                    Home
-                  </Link>
-
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/stylist"
-                  >
-                    Stylist
-                  </Link>
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/pricing"
-                  >
-                    Pricing
-                  </Link>
-                  <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/services"
-                  >
-                  Services
-                  </Link>
-                     <Link
-                    className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                    to="/Contact"
-                  >
-                    Contact
-                  </Link>
-                  {Auth.loggedIn() && Auth.isAdmin() ? (
+          <StoreProvider>
+            <Container className="p=0" fluid={true}>
+              {/* <Navbar className="border-bottom" bg="transparent" expand="lg"> */}
+              <Navbar className="border-bottom bg-pink-600 tileheading" expand="lg">
+                <Navbar.Brand href="#home">
+                  <div className="w-60 h-24 pl-4">
+                    <img
+                      src={logo}
+                      width="w-full"
+                      height="w-full"
+                      className="d-inline-block align-top"
+                      alt="logo"
+                    />
+                  </div>
+                </Navbar.Brand>
+                {/* <Navbar.Brand>Salon Xperience</Navbar.Brand> */}
+                <Navbar.Toggle
+                  className="border=0"
+                  aria-controls="navbar-toggle"
+                />
+                <Navbar.Collapse id="navbar-toggle">
+                  <Nav className="ml-auto">
                     <Link
                       className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                      to="/Admin"
+                      to="/"
                     >
-                      Admin
+                      Home
                     </Link>
-                  ) : null}
 
-                  {Auth.loggedIn() ? (
-                    <>
+                    <Link
+                      className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                      to="/stylist"
+                    >
+                      Stylist
+                    </Link>
+                    <Link
+                      className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                      to="/pricing"
+                    >
+                      Pricing
+                    </Link>
+                    <Link
+                      className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                      to="/Contact"
+                    >
+                      Contact
+                    </Link>
+                    {Auth.loggedIn() && Auth.isAdmin() ? (
                       <Link
                         className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                        to="/profile"
+                        to="/Admin"
                       >
-                        Profile
+                        Admin
                       </Link>
-                      <Link to="/" className="text-white mr-2 bg-red-400 border-2 text-xl hover:bg-red-800 rounded-full">
-                      <button className="font-bold p-1" onClick={logout}>
-                        Logout
-                      </button>
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link
-                        className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                        to="/login"
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
-                        to="/signup"
-                      >
-                        Signup
-                      </Link>
-                    </>
-                  )}
+                    ) : null}
 
-                  {/* <Link
+                    {Auth.loggedIn() ? (
+                      <>
+                        <Link
+                          className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                          to="/profile"
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          onClick={logout}
+                          to="/"
+                          className="mr-2 text-white font-bold text-2xl pt-2 hover:bg-gray-600 p-1 rounded-md no-underline"
+                        >
+                          Logout
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link
+                          className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                          to="/login"
+                        >
+                          Login
+                        </Link>
+                        <Link
+                          className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                          to="/signup"
+                        >
+                          Signup
+                        </Link>
+                      </>
+                    )}
+
+                    {/* <Link
                     className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
                     to="/profile"
                   >
@@ -219,58 +214,60 @@ class App extends React.Component {
                   >
                     Login
                   </Link> */}
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-            <Route
-              path="/"
-              exact
-              render={() => (
-                <Home
-                  title={this.state.home.title}
-                  subTitle={this.state.home.subTitle}
-                  subscript={this.state.home.subscript}
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+              <Route
+                path="/"
+                exact
+                render={() => (
+                  <Home
+                    title={this.state.home.title}
+                    subTitle={this.state.home.subTitle}
+                    subscript={this.state.home.subscript}
+                  />
+                )}
+              />
+              <Route
+                path="/profile"
+                exact
+                render={() => <Profile title={this.state.profile.title} />}
+              />
+              <Route
+                path="/stylist"
+                exact
+                render={() => <Stylist title={this.state.stylist.title} />}
+              />
+              <Route
+                path="/pricing"
+                exact
+                render={() => <Pricing title={this.state.pricing.title} />}
+              />
+              <Route
+                path="/contact"
+                exact
+                render={() => <Contact title={this.state.contact.title} />}
+              />
+              {Auth.loggedIn() && Auth.isAdmin() ? (
+                <Route
+                  path="/admin"
+                  exact
+                  render={() => <Admin title={this.state.admin.title} />}
                 />
-              )}
-            />
-            <Route
-              path="/profile"
-              exact
-              render={() => <Profile title={this.state.profile.title} />}
-            />
-            <Route
-              path="/stylist"
-              exact
-              render={() => <Stylist title={this.state.stylist.title} />}
-            />
-            <Route
-              path="/pricing"
-              exact
-              render={() => <Pricing title={this.state.pricing.title} />}
-            />
-            <Route
-              path="/contact"
-              exact
-              render={() => <Contact title={this.state.contact.title} />}
-            />
-            <Route
-              path="/admin"
-              exact
-              render={() => <Admin title={this.state.admin.title} />}
-            />
-            <Route
-              path="/signup"
-              exact
-              render={() => <SignUp title={this.state.signup.title} />}
-            />
-            <Route
-              path="/login"
-              exact
-              render={() => <Login title={this.state.login.title} />}
-            />
+              ) : null}
+              <Route
+                path="/signup"
+                exact
+                render={() => <SignUp title={this.state.signup.title} />}
+              />
+              <Route
+                path="/login"
+                exact
+                render={() => <Login title={this.state.login.title} />}
+              />
 
-            <Footer></Footer>
-          </Container>
+              <Footer></Footer>
+            </Container>
           </StoreProvider>
         </Router>
       </ApolloProvider>

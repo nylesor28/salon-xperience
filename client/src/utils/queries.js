@@ -188,33 +188,347 @@ query GetUserProfile{
 }
 `;
 
-export const GET_CLIENT_HAIR_PROFILE_INFO=gql`
-query getClientInfo( $userId:ID!) {
-  getClientInfo( clientUserId: $userId){
-    client {
+export const GET_CLIENT_FULL_PROFILE_INFO=gql`
+
+
+query getClientInfo(
+  $clientUserId: ID
+) {
+   getClientInfo( 
+   clientUserId :$clientUserId
+    
+  ) {
+    _id
+
+    userId {
       _id
-      userId
-      hairProfile {
-				hairType
-        hairGoal
-        hairState
-      }
-    }
-    user {
-      _id
-      userName
       email
-      userProfile {
+      userProfile{
         firstName
         lastName
         phoneNumber
-        address
-        city
-        zipCode
-        imageURL
       }
-  	}
+    }
+    hairProfile {
+      hairType
+      hairGoal
+      hairState
+      pictureUrl
+    }
+    stylist {
+      _id
+      userId {
+        _id
+        email
+        userProfile{
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+       certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    
+    }
+      
+    }
+  }
+}
+`;
+
+export const GET_ALL_CLIENTS = gql`
+query getAllClients {
+  getAllClients {
+   _id
+
+   userId {
+     _id
+     email
+     userProfile{
+       firstName
+       lastName
+       phoneNumber
+     }
+   }
+   hairProfile {
+     hairType
+     hairGoal
+     hairState
+     pictureUrl
+   }
+   stylist {
+     _id
+     userId {
+       _id
+       email
+       userProfile{
+         firstName
+         lastName
+         phoneNumber
+       }
+     }
+      certifications
+   workingHours {
+     weekday
+     hourStart
+     minuteStart
+     hourEnd
+     minuteEnd
+   
+   }
+   }
+ }
+}
+`;
+
+export const GET_STYLIST_FULL_PROFILE_INFO=gql`
+
+query getStylistInfo( $userId:ID!) {
+  getStylistInfo( userId: $userId){
+      _id
+      userId{
+        _id
+        userProfile{
+          _id
+          firstName
+          lastName
+        }
+      }
+      certifications
+      workingHours {
+        weekday
+        hourStart
+        minuteStart
+        hourEnd
+        minuteEnd
+      
+      }
+    }
+  }
+`;
+
+
+export const GET_ALL_STYLISTS = gql`
+query getAllStylists {
+  getAllStylists {
+         _id
+     userId{
+       _id
+       email
+       userProfile{
+         _id
+         firstName
+         lastName
+         phoneNumber
+       }
+     }
+     certifications
+     workingHours {
+       weekday
+       hourStart
+       minuteStart
+       hourEnd
+       minuteEnd
+     }
+ }
+}
+`;
+
+export const GET_ALL_APPOINTMENTS=gql`
+query getAllAppointments {
+  getAllAppointments{
+      appointment {
+        _id
+        clientId
+        stylistId
+        serviceId
+        startTime
+        endTime
+      }
+      client {
+        _id
+				userId {
+          userProfile {
+            _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        } 
+      }
+      stylist {
+        _id
+        userId {
+          userProfile{
+                _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        }
+      }
+      service {
+        _id
+        serviceName
+        price
+        duration{
+          hour
+          minute
+        }
+      }
+      
+    }
+}
+`;
+
+export const GET_APPOINTMENT_BY_ID=gql`
+query getAppointmentById($_id:ID!) {
+  getAppointmentById(_id: $_id) {
+  appointment {
+        _id
+        clientId
+        stylistId
+        serviceId
+        startTime
+        endTime
+      }
+      client {
+        _id
+				userId {
+          userProfile {
+            _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        } 
+      }
+      stylist {
+        _id
+        userId {
+          userProfile{
+                _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        }
+      }
+      service {
+        _id
+        serviceName
+        price
+        duration{
+          hour
+          minute
+        }
+      }
+      
+    }
+}
+`;
+
+
+export const GET_APPOINTMENT_BY_CLIENT_ID=gql`
+
+query getAppointmentByClient($clientId:ID!) {
+  getAppointmentsByClient( clientId: $clientId) {
+   appointment {
+      _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+    }
+    client {
+      _id
+      userId {
+        userProfile {
+          _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      } 
+    }
+    stylist {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    service {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
+    }
     
   }
 }
-`
+
+`;
+
+
+export const GET_APPOINTMENT_BY_STYLIST_ID=gql`
+query getAppointmentByStylist($stylistId:ID!) {
+  getAppointmentsByStylist( stylistId: $stylistId) {
+      appointment {
+        _id
+        clientId
+        stylistId
+        serviceId
+        startTime
+        endTime
+      }
+      client {
+        _id
+				userId {
+          userProfile {
+            _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        } 
+      }
+      stylist {
+        _id
+        userId {
+          userProfile{
+                _id
+            firstName
+            lastName
+            phoneNumber
+          }
+        }
+      }
+      service {
+        _id
+        serviceName
+        price
+        duration{
+          hour
+          minute
+        }
+      }
+      
+    }
+}
+`;
+
+

@@ -130,27 +130,51 @@ export const UPDATE_PASSWORD = gql`
   }
   `;
 
-  
-export const ADD_UPDATE_CLIENT_INFO = gql`
 
+export const ADD_UPDATE_CLIENT_INFO = gql`
 mutation addUpdateClientInfo(
-  $_id: ID
   $stylistId : ID
   $hairProfileInput: HairProfileInput
 ) {
    addUpdateClientInfo( 
-   _id :$_id
     stylistId: $stylistId
      hairProfileInput: $hairProfileInput
-  ) {
-    _id
-    userId
-    stylistId
+  ) {      _id
+
+    userId {
+      _id
+      email
+      userProfile{
+        firstName
+        lastName
+        phoneNumber
+      }
+    }
     hairProfile {
       hairType
-      hairType
+      hairGoal
       hairState
       pictureUrl
+    }
+    stylist {
+      _id
+      userId {
+        _id
+        email
+        userProfile{
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+       certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    }
     }
   }
 }
@@ -221,4 +245,141 @@ mutation deleteService(
     expiredDate
   }
 }
-`;  
+`;
+
+export const ADD_UPDATE_STYLIST_INFO = gql`
+
+mutation addUpdateStylistInfo(
+  $_id: ID
+  $userId: ID
+  $certifications: String
+  $scheduleInput: [ScheduleInput]
+) {
+   addUpdateStylistInfo( 
+   _id :$_id
+    userId: $userId
+    certifications: $certifications
+     workingHours: $scheduleInput
+  ) {
+    _id
+    userId{
+      _id
+      userProfile{
+        _id
+        firstName
+        lastName
+      }
+    }
+    certifications
+    workingHours {
+      weekday
+      hourStart
+      minuteStart
+      hourEnd
+      minuteEnd
+    
+    }
+  }
+}
+`;
+
+
+export const ADD_APPOINTMENT = gql`
+
+mutation addAppointment(
+  $clientId: ID!
+  $stylistId: ID!
+  $serviceId: ID!
+  $startTime: String!
+  $endTime:String
+) {
+  addAppointment(
+    clientId: $clientId
+    stylistId: $stylistId
+    serviceId: $serviceId
+    startTime: $startTime
+    endTime: $endTime
+  ) {
+        _id
+    clientId
+    stylistId
+    serviceId
+    startTime
+    endTime
+  }
+}
+`;
+
+export const UPDATE_APPOINTMENT = gql`
+
+mutation updateAppointment(
+  $_id: ID!
+  $clientId: ID!
+  $stylistId: ID!
+  $serviceId: ID!
+  $startTime: String!
+  $endTime:String
+  ) {
+  updateAppointment(
+    _id:$_id
+    clientId: $clientId
+    stylistId: $stylistId
+    serviceId: $serviceId
+    startTime: $startTime
+    endTime: $endTime
+    ) {
+    appointment {
+      _id
+      clientId
+      stylistId
+      serviceId
+      startTime
+      endTime
+    }
+
+    client {
+      _id
+      userId {
+        userProfile {
+          _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    stylist {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    service {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
+    }
+    
+  }
+}
+
+`;
+
+
+export const CANCEL_APPOINTMENT = gql`
+mutation deleteAppointment($_id: ID!) {
+  deleteAppointment(_id: $_id) {
+        _id
+  }
+}
+
+`;
