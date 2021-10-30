@@ -50,16 +50,7 @@ input DurationInput {
     password: String!
     email: String!
     role: String
-    userProfile: UserProfile
-
-  }
-  type Operator {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    orders: [Order]
-  }
+    userProfile: UserProfile  
 
   type Order {
     _id: ID
@@ -187,29 +178,6 @@ input ScheduleInput {
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-  }
-  type Amenity {
-    _id: ID
-    name: String
-  }
-
-  type Merchandise {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    amenity: Amenity
-  }
-  type Query {
-    amenities: [Amenity]
-    products(amenity: ID, name: String): [Merchandise]
-    merchandise(_id: ID!): Merchandise
-    operator: Operator
-    order(_id: ID!): Order
-    checkout(merchandise: [ID]!): Checkout
-  }
 
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
@@ -231,12 +199,6 @@ input ScheduleInput {
     addOrder(products: [ID]!): Order
    
     updateProduct(_id: ID!, quantity: Int!): Product
-
-    addOperator(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(merchandises: [ID]!): Order
-    updateOperator(firstName: String, lastName: String, email: String, password: String): User
-    updateMerchandise(_id: ID!, quantity: Int!): Merchandise
-    login(email: String!, password: String!): Auth
   }
 `;
 
