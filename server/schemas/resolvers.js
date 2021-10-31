@@ -73,7 +73,9 @@ const resolvers = {
       return clientInfo;
     },
     getStylistInfo: async (parent, { userId }, context) => {
-      const stylist = await Stylist.findOne({ userId: userId })
+      const searchStylistId = userId || context.user._id
+
+      const stylist = await Stylist.findOne({ userId: searchStylistId })
         .select("-__v")
         .populate({
           path: "userId",
@@ -698,7 +700,7 @@ const resolvers = {
         updateUserId = args.userId;
       } else {
         throw new AuthenticationError("Not Authorized");
-      }
+      }     
 
       const { certifications, workingHours } = args;
 

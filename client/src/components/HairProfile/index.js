@@ -10,9 +10,6 @@ function HairProfile() {
 
   const { data: hairData } = useQuery(GET_CLIENT_FULL_PROFILE_INFO);
   const fullHairData = hairData?.getClientInfo?.hairProfile;
-
-
-  console.log(fullHairData);
   return (
     
           <div

@@ -8,16 +8,16 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_CLIENT_FULL_PROFILE_INFO } from "../utils/queries";
 import HairModal from "../components/HairModal";
 import HairProfile from "../components/HairProfile";
+import StylistProfile from "../components/StylistProfile";
 import Auth from "../utils/auth"
 
 function Profile() {
   const { data: userData } = useQuery(GET_USER_PROILE);
   const fullData = userData?.getUserProfile?.userProfile;
-  const { data: hairData } = useQuery(GET_CLIENT_FULL_PROFILE_INFO);
-  const fullHairData = hairData?.getClientInfo?.hairProfile;
+
 
   console.log(fullData);
-  console.log(fullHairData);
+  // console.log(fullHairData);
   return (
     <>
       <h1 className="tileheading text-white bg-pink-500  w-3/12 text-center mt-2 rounded-lg border-2 animate-pulse">
@@ -66,6 +66,8 @@ function Profile() {
           {Auth.loggedIn() && Auth.isClient() ? (
           <HairProfile />): null}
 
+      {Auth.loggedIn() && Auth.isStylist() ? (
+          <StylistProfile />): null}
         </div>
 
         <div className="mt-4">
