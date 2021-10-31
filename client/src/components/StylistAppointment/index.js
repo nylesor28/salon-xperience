@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, ListGroupItem, ListGroup, Button } from "react-bootstrap";
 import plc from "../../assets/images/jomboimg.jpg";
-import Jumbotron from "../Jumbotron";
 
 function StylistAppointment(props) {
   return (

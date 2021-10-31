@@ -1,10 +1,6 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import { ListGroup } from "react-bootstrap";
-import Button from "@restart/ui/esm/Button";
-import Badge from "react-bootstrap/Badge";
+
 
 class HomeForm extends React.Component {
   render() {
@@ -16,7 +12,7 @@ class HomeForm extends React.Component {
           style={{
             opacity: "0.5",
             background: "rgba (86, 185, 100, 0.20)",
-            fontweight: "bold",
+            fontWeight: "bold",
             color: "black",
             border:'0px',
             // borderBottom: 'solid black',
@@ -38,7 +34,7 @@ class HomeForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
+                color: " hotpink",
                 fontweight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
@@ -81,8 +77,8 @@ class HomeForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
-                fontweight: "bold",
+                color: " hotpink",
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
                 fontSize: '24px',

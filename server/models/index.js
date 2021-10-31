@@ -6,6 +6,7 @@ const Product = require("./Product");
 const Service = require("./Service");
 const Order = require("./Order");
 const Stylist = require("./Stylist");
+const Category = require('./Category');
 const Appointment = require("./Appointment");
 const JoinStylistService = require("./JoinStylistService");
 
@@ -19,5 +20,6 @@ module.exports = {
   Client,
   Stylist,
   Appointment,
-  JoinStylistService
+  JoinStylistService,
+  Category
 };
