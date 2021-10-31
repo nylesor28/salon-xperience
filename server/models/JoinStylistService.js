@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const joinStylistServicesSchema = new Schema(
+const joinStylistServiceSchema = new Schema(
   {
-    servicesId: 
+    serviceId: 
     {
       type: Schema.Types.ObjectId,
       ref: 'Services',
@@ -19,6 +19,6 @@ const joinStylistServicesSchema = new Schema(
   }
 );
 
-const JoinStylistService = mongoose.model('JoinStylistServices', joinStylistServicesSchema);
+const JoinStylistService = mongoose.model('JoinStylistService', joinStylistServiceSchema);
 
 module.exports = JoinStylistService;

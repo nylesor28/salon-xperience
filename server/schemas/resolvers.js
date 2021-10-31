@@ -183,7 +183,7 @@ const resolvers = {
     },
 
     getAllAppointments: async (parent, args, context) => {
-      console.log("INSIDE GET APPOINTMENTS");
+  
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
@@ -913,7 +913,7 @@ const resolvers = {
     },
 
     addOrder: async (parent, { products }, context) => {
-      console.log(context);
+  
       if (context.user) {
         const order = new Order({ products });
 
@@ -943,13 +943,15 @@ const resolvers = {
   
       const role = context.user.role?.toLowerCase();
   
-      if ( role !== "admin" || role !== "stylist") {
+      if ( role !== "admin" && role !== "stylist") {
         throw new AuthenticationError("Not Authorized");
       }
         try {
-          return await Appointment.create(args);
+          const joinStylistService=  await JoinStylistService.create(args);
+          console.log(joinStylistService)
         } catch (e) {
-          throw "There was a problem associating service to stylist";
+          console.log(e)
+          //throw "There was a problem associating service to stylist";
         }
       
       
