@@ -170,15 +170,83 @@ body,
 html {
   width: 100%;
   height: 100%;
-  /* padding: 0px;
-  margin: 0px; */
   background-image: url("../src/assets/background.png");
   background-repeat:no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
-
-.tileheading{
-  font-family: cursive;
+.Pricing{
+  margin-top: 25px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  width:100%;
 }
+.product-content image{
+    width: 100%;
+    padding: 4rem;
+    overflow: hidden;
+    transition: all .4s ease-in-out;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.50);
+  }
+.product-content h1{
+ text-align: center; 
+}
+.description-con p {
+  text-align: center;
+  color:hotpink;
+  font-weight: bold;
+  font-size: 16px;
+} 
+
+.product-button{
+  /* size: 16px; */
+  background-color: black;
+  color: hotpink;
+  font-size: 24px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-size-adjust: 16px;
+  border-radius: 15px;
+  
+}
+.booking-button {
+  background-color: hotpink;
+  color: black;
+  font-size: 24px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-size-adjust: 16px;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 4px 95px;
+  cursor: pointer;
+}
+
+.Hair-Types{
+  margin-top: 25px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  width:100%;
+}
+.hairTypes-content image{
+  width: 100%;
+  padding: 4rem;
+  overflow: hidden;
+  transition: all .4s ease-in-out;
+  transform: scale(1.2);
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.50);
+}
+.hairTypes-content h1{
+  text-align: center; 
+  color:hotpink;
+ }
+ .hairTypesdescription-con p {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+} 

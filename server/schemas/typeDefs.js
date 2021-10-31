@@ -33,7 +33,10 @@ input DurationInput {
   minute: Int
 }
 
-
+type Category {
+  _id: ID
+  name: String
+}
 
   type Product {
     _id: ID
@@ -42,7 +45,7 @@ input DurationInput {
     image: String
     quantity: Int
     price: Float
-    service: Service
+    category: Category
   }
   type User {
     _id: ID
@@ -50,17 +53,14 @@ input DurationInput {
     password: String!
     email: String!
     role: String
-    userProfile: UserProfile
-
-  }
+    userProfile: UserProfile 
+    orders:[Order] 
 
   type Order {
     _id: ID
     purchaseDate: String
     products: [Product]
   }
-
-
 
   type Checkout {
     session: ID
@@ -175,12 +175,14 @@ input ScheduleInput {
     getAppointmentById(_id: ID): AppointmentDetails
     getAppointmentsByStylist(stylistId: ID): [AppointmentDetails]
     getAppointmentsByClient(clientId: ID): [AppointmentDetails]
-    products(service: ID, name: String): [Product]
+    products(category: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
+    categories:[Category]
     checkout(products: [ID]!): Checkout
-  }
+    order(_id: ID!): Order
+
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
     addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
@@ -201,7 +203,6 @@ input ScheduleInput {
     addOrder(products: [ID]!): Order
    
     updateProduct(_id: ID!, quantity: Int!): Product
-
   }
 `;
 

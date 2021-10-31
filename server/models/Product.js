@@ -24,9 +24,9 @@ const productSchema = new Schema({
     min: 0,
     default: 0
   },
-  Service: {
+  category: {
     type: Schema.Types.ObjectId,
-    ref: 'Service',
+    ref: 'Category',
     required: true
   }
 });

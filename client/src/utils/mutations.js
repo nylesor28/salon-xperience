@@ -29,9 +29,6 @@ export const ADD_ORDER = gql`
   }
 `;
 
-
-
-
 export const ADD_UPDATE_USER_PROFILE = gql`
 
 mutation addUpdateUserProfile($profileInput: UserProfileInput!){
