@@ -55,6 +55,7 @@ type Category {
     role: String
     userProfile: UserProfile 
     orders:[Order] 
+  }
 
   type Order {
     _id: ID
@@ -178,10 +179,10 @@ input ScheduleInput {
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
-    order(_id: ID!): Order
     categories:[Category]
     checkout(products: [ID]!): Checkout
     order(_id: ID!): Order
+  }
 
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User

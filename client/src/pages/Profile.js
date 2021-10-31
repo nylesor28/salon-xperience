@@ -101,9 +101,7 @@ function Profile() {
             </h2>
             <div className="flex justify-evenly">
               <StylistAppointment />
-              <StylistAppointment />
-              <StylistAppointment />
-              <StylistAppointment />
+             
             </div>
           </div>
         </div>
