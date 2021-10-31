@@ -42,7 +42,7 @@ The application was built using the MERN stack and  performs CRUD operations sup
 
 # Usage
  
- Individuals seeking to explore the client side of the deployed application via the Heroku Link - https://salon-xperience.herokuapp.com/.  Individual wish to review the administrative side of the application will need to reach out to a member of the development team for a walk through of the program. 
+ Individuals seeking to explore the client and stylist side of the application can utilize the Heroku Link - https://salon-xperience.herokuapp.com/.  An Individual wish to review the administrative side of the application will need to reach out to a member of the development team for a walk through of the program. 
 
 
 
