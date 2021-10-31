@@ -19,8 +19,8 @@ const Pricing = () => {
                 <p>{product.description}</p>
                 <p>{product.price}</p>
                 </div>
-                <button className="product-button"> Add to cart</button> 
-                <button className="booking-button">Reservation</button>   
+                {/* <button className="product-button"> Add to cart</button> 
+                <button className="booking-button">Reservation</button>    */}
           </div>
 </div>
         })
