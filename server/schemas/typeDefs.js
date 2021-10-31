@@ -162,6 +162,12 @@ input ScheduleInput {
     service: Service
   }
 
+  type JoinStylistService{
+    _id: ID
+    stylist: Stylist
+    service: Service
+  }
+
   type Query {
     getUserProfile : User
     getAllClients(clientUserId : ID) : [ClientCompleteProfile]
@@ -180,6 +186,7 @@ input ScheduleInput {
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    getAllJoinStylistService :[JoinStylistService]
   }
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
@@ -201,6 +208,10 @@ input ScheduleInput {
     addOrder(products: [ID]!): Order
    
     updateProduct(_id: ID!, quantity: Int!): Product
+    addJoinStylistService(stylistId: ID!, serviceId: ID!) : JoinStylistService
+    updateJoinStylistService(_id: ID!, stylistId: ID!, serviceId: ID!) : JoinStylistService
+    deleteJoinStylistService(_id: ID!) : JoinStylistService
+
 
   }
 `;

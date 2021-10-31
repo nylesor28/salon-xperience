@@ -8,6 +8,7 @@ const {
   Client,
   Stylist,
   Appointment,
+  JoinStylistService
 } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
@@ -515,6 +516,46 @@ const resolvers = {
 
       return { session: session.id };
     },
+    getAllJoinStylistService: async (parent, args, context) => {
+
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+      const joinStylistService = await JoinStylistService.find()
+        .select("-__v")
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
+
+      const joinStylistServiceArr = joinStylistService.map((item) => {
+
+        const itemDetails = {
+          _id: item._id,
+          stylist: item.stylistId,
+          service: item.serviceId,
+        };
+
+        return itemDetails;
+      });
+      return joinStylistServiceArr;
+    },
   },
   Mutation: {
     addUser: async (parent, args, context) => {
@@ -893,7 +934,92 @@ const resolvers = {
         { new: true }
       );
     },
+    addJoinStylistService: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+  
+      const role = context.user.role?.toLowerCase();
+  
+      if ( role !== "admin" || role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+        try {
+          return await Appointment.create(args);
+        } catch (e) {
+          throw "There was a problem associating service to stylist";
+        }
+      
+      
+    },
+    updateJoinStylistService: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if ( role !== "admin" || role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+  
+      try {
+        const { _id,  stylistId, serviceId} = args;
+        let joinStylistServiceDetails = {};
+  
+        const joinStylistServiceResults = await JoinStylistService.findOneAndUpdate(
+          { _id: _id },
+          {stylistId, serviceId },
+          { new: true }
+        )
+          .populate({
+            path: "stylistId",
+            model: "Stylist",
+            select: "-__v",
+            populate: {
+              path: "userId",
+              model: "User",
+              select: "-__v, -username, -password",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+                select: "-__v",
+              },
+            },
+          })
+          .populate({
+            path: "serviceId",
+            model: "Service",
+            select: "-__v -createdDate",
+          });
+  
+          joinStylistServiceDetails = {
+          _id: joinStylistServiceResults._id,
+          stylist: joinStylistServiceResults.stylistId,
+          service: joinStylistServiceResults.serviceId,
+        };
+  
+        return joinStylistServiceDetails;
+      } catch (e) {
+        throw new Exception("There was a problem updating stylist/service relationships");
+      }
+    },
+    deleteJoinStylistService: async (parent, { _id }, context) => {
+  
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if ( role !== "admin" || role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+  
+        try {
+          return await JoinStylistService.findOneAndDelete({ _id }).select("-__v");
+        } catch (e) {
+          throw "There was a problem deleting stylist/service relationships";
+        }
+  
+    }
+
   },
+ 
 };
 
 module.exports = resolvers;
