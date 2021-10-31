@@ -11,64 +11,23 @@ export const LOGIN = gql`
   }
 `;
 
-// export const ADD_ORDER = gql`
-//   mutation addOrder($products: [ID]!) {
-//     addOrder(products: $products) {
-//       purchaseDate
-//       products {
-//         _id
-//         name
-//         description
-//         price
-//         quantity
-//         service {
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const ADD_ORDER = gql`
-  mutation addOrder($merchandises: [ID]!) {
-    addOrder(merchandises: $merchandises) {
+  mutation addOrder($products: [ID]!) {
+    addOrder(products: $products) {
       purchaseDate
-      merchandises {
+      products {
         _id
         name
         description
         price
         quantity
-        amenity {
+        service {
           name
         }
       }
     }
   }
 `;
-export const ADD_OPERATOR = gql`
-  mutation addOperator(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    addOperator(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
-      token
-      user {
-        _id
-      }
-    }
-  }
-`;
-
-
-
 
 export const ADD_UPDATE_USER_PROFILE = gql`
 

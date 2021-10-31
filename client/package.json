@@ -16,6 +16,7 @@
     "bootstrap": "^5.1.1",
     "graphql": "^15.6.1",
     "graphql-tag": "^2.12.5",
+    "idb": "^6.1.5",
     "itsa-react-globalstate": "^16.0.2",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",

@@ -12,10 +12,9 @@ class PolicyForm extends React.Component {
           style={{
             opacity: "0.5",
             background: "rgba (86, 185, 100, 0.20)",
-            fontweight: "bold",
+            fontWeight: "bold",
             color: "black",
             border:'0px',
-            // borderBottom: 'solid black',
           }}
         >
           <div className="ms-2 me-auto">
@@ -34,8 +33,9 @@ class PolicyForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
-                fontweight: "bold",
+                // color: " rgb(190, 98, 144)",
+                color: "hotpink",
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
                 fontSize: '24px',
@@ -51,7 +51,7 @@ class PolicyForm extends React.Component {
           style={{
             opacity: "0.5",
             background: "rgba (76, 175,80,0.50)",
-            fontweight: "bold",
+            fontWeight: "bold",
             color: "black",
             border:'0px',
             // borderBottom: 'solid black',
@@ -73,8 +73,8 @@ class PolicyForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
-                fontweight: "bold",
+                color: " hotpink",
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
                 fontSize: '24px',
@@ -90,7 +90,7 @@ class PolicyForm extends React.Component {
           style={{
             opacity: "0.5",
             background: "rgba (76, 175,80,0.50)",
-            fontweight: "bold",
+            fontWeight: "bold",
             color: "black",
             border:'0px',
             // borderBottom: 'solid black',
@@ -112,8 +112,8 @@ class PolicyForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
-                fontweight: "bold",
+                color: " hotpink",
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
                 fontSize: '24px',
@@ -131,7 +131,7 @@ class PolicyForm extends React.Component {
           style={{
             opacity: "0.5",
             background: "rgba (76, 175,80,0.50)",
-            fontweight: "bold",
+            fontWeight: "bold",
             color: "black",
             border:'0px',
             // borderBottom: 'solid black',
@@ -153,8 +153,8 @@ class PolicyForm extends React.Component {
               className="subtext"
               style={{
                 display: "flex",
-                color: " rgb(190, 98, 144)",
-                fontweight: "bold",
+                color: " hotpink",
+                fontWeight: "bold",
                 justifyContent: "center",
                 alignItems: "center",
                 fontSize: '24px',

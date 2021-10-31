@@ -34,8 +34,8 @@ const userSchema = new Schema(
         type: String,
         enum : ['client', 'stylist', 'admin'],
         default: "client"
-      }
-    
+      },
+      orders: [Order.schema]
   },
 
 );

@@ -14,6 +14,24 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
+    categories: async () => {
+      return await Category.find();
+    },
+    products: async (parent, { category, name }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await Product.find(params).populate('category');
+    },
     getUserProfile: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findOne({
@@ -446,16 +464,16 @@ const resolvers = {
         };
       }
 
-      return await Product.find(params).populate("service");
+      return await Product.find(params).populate("category");
     },
     product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate("service");
+      return await Product.findById(_id).populate("category");
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: "orders.products",
-          populate: "service",
+          populate: "category",
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -469,7 +487,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: "orders.products",
-          populate: "service",
+          populate: "category",
         });
 
         return user.orders.id(_id);

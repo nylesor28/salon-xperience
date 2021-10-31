@@ -85,6 +85,9 @@ class App extends React.Component {
       pricing: {
         title: "Resume",
       },
+      services: {
+        title: "services",
+      },
       profile: {
         title: "profile",
       },
@@ -147,6 +150,12 @@ class App extends React.Component {
                       to="/pricing"
                     >
                       Pricing
+                    </Link>
+                    <Link
+                      className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
+                      to="/services"
+                    >
+                      Services
                     </Link>
                     <Link
                       className="nav-link text-white font-bold text-2xl hover:bg-gray-600 rounded-lg"
@@ -242,6 +251,11 @@ class App extends React.Component {
                 path="/pricing"
                 exact
                 render={() => <Pricing title={this.state.pricing.title} />}
+              />
+               <Route
+                path="/services"
+                exact
+                render={() => <Services title={this.state.services.title} />}
               />
               <Route
                 path="/contact"
