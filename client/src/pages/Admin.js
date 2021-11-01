@@ -21,6 +21,7 @@ function Admin() {
         email: formState.email,
         password: formState.password,
         username: formState.username,
+        role: formState.userType
       },
     });
 

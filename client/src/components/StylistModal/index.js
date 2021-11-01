@@ -1,36 +1,30 @@
 import React from "react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_UPDATE_CLIENT_INFO } from "../../utils/mutations";
+import { ADD_UPDATE_STYLIST_INFO } from "../../utils/mutations";
 
-function HairModal() {
+function StylistModal() {
   const [showModal, setShowModal] = useState(false);
-  const [hairState, setHairState] = useState({
-    hairType: "",
-    hairGoal: "",
-    hairState: "",
+  const [stylistState, setStylistState] = useState({
+    certifications: "",
   });
 
-  const [updateHairProfile] = useMutation(ADD_UPDATE_CLIENT_INFO);
+  const [addUpdateStylistInfo] = useMutation(ADD_UPDATE_STYLIST_INFO);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    await updateHairProfile({
+    await addUpdateStylistInfo({
         variables: {
-        hairProfileInput: {
-        hairType: hairState.hairType,
-        hairGoal: hairState.hairGoal,
-        hairState: hairState.hairState
-        }
+        certifications: stylistState.certifications
       },
     });
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setHairState({
-      ...hairState,
+    setStylistState({
+      ...stylistState,
       [name]: value,
     });
   };
@@ -42,7 +36,7 @@ function HairModal() {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        UPDATE HAIR PROFILE
+        UPDATE STYLIST PROFILE
       </button>
       {showModal ? (
         <>
@@ -53,7 +47,7 @@ function HairModal() {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    UPDATE HAIR PROFILE
+                    UPDATE STYLIST PROFILE
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -71,41 +65,15 @@ function HairModal() {
                     className="p-3 rounded shadow"
                   >
                     <div className="mb-1">
-                      <label className=" font-bold" htmlFor="hairGoal">
-                        Hair Goal
+                      <label className=" font-bold" htmlFor="certifications">
+                        Certifications
                       </label>
                       <input
-                        name="hairGoal"
+                        name="certifications"
                         className="border-1 border-black ml-1 rounded"
-                        placeholder="Growth, Length"
+                        placeholder="Natural Hair"
                         type="text"
-                        id="hairGoal"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className="mb-1">
-                      <label className=" font-bold" htmlFor="hairType">
-                        Hair Type
-                      </label>
-                      <input
-                        name="hairType"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="Hair Type"
-                        type="text"
-                        id="hairType"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <label className=" font-bold" htmlFor="hairState">
-                        Hair State
-                      </label>
-                      <input
-                        name="hairState"
-                        className="border-1 border-black ml-1 rounded"
-                        placeholder="Hair State"
-                        type="text"
-                        id="hairState"
+                        id="certifications"
                         onChange={handleChange}
                       />
                     </div>
@@ -126,13 +94,7 @@ function HairModal() {
                   >
                     Close
                   </button>
-                  {/* <button
-                    className=" text-black bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Save Changes
-                  </button> */}
+
                 </div>
               </div>
             </div>
@@ -144,4 +106,4 @@ function HairModal() {
   );
 }
 
-export default HairModal;
+export default StylistModal;

@@ -7,15 +7,17 @@ import { GET_USER_PROILE } from "../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_CLIENT_FULL_PROFILE_INFO } from "../utils/queries";
 import HairModal from "../components/HairModal";
+import HairProfile from "../components/HairProfile";
+import StylistProfile from "../components/StylistProfile";
+import Auth from "../utils/auth"
 
 function Profile() {
   const { data: userData } = useQuery(GET_USER_PROILE);
   const fullData = userData?.getUserProfile?.userProfile;
-  const { data: hairData } = useQuery(GET_CLIENT_FULL_PROFILE_INFO);
-  const fullHairData = hairData?.getClientInfo?.hairProfile;
+
 
   console.log(fullData);
-  console.log(fullHairData);
+  // console.log(fullHairData);
   return (
     <>
       <h1 className="tileheading text-white bg-pink-500  w-3/12 text-center mt-2 rounded-lg border-2 animate-pulse">
@@ -61,36 +63,11 @@ function Profile() {
               {/* <button className="bg-blue-400 p-1 rounded-lg text-white font-bold hover:bg-blue-800 mt-2">Update Info</button> */}
             </div>
           </div>
-          <div
-            id="hair-profile"
-            className="border rounded w-2/6 p-2 shadow bg-white"
-          >
-            <h2 className="text-center text-white bg-pink-500 rounded-lg animate-pulse mt-2">
-              {" "}
-              HAIR PROFILE
-            </h2>
-            <table className="mb-4">
-              <tr>
-                <td className="font-bold text-lg">Hair Goal:</td>
-                <td>{fullHairData?.hairGoal}</td>
-              </tr>
-              <tr>
-                <td className="font-bold text-lg">Hair Type:</td>
-                <td>{fullHairData?.hairType}</td>
-              </tr>
-              <tr>
-                <td className="font-bold text-lg">Hair State:</td>
-                <td>{fullHairData?.hairState}</td>
-              </tr>
-              <tr>
-                <td className="font-bold text-lg">Hair Damage:</td>
-                <td> None</td>
-              </tr>
-            </table>
-            <div>
-              <HairModal />
-            </div>
-          </div>
+          {Auth.loggedIn() && Auth.isClient() ? (
+          <HairProfile />): null}
+
+      {Auth.loggedIn() && Auth.isStylist() ? (
+          <StylistProfile />): null}
         </div>
 
         <div className="mt-4">

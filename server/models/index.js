@@ -8,6 +8,8 @@ const Order = require("./Order");
 const Stylist = require("./Stylist");
 const Category = require('./Category');
 const Appointment = require("./Appointment");
+const JoinStylistService = require("./JoinStylistService");
+
 
 module.exports = {
   User,
@@ -18,5 +20,6 @@ module.exports = {
   Client,
   Stylist,
   Appointment,
+  JoinStylistService,
   Category
 };

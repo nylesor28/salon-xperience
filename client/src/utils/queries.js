@@ -235,7 +235,7 @@ query getAllClients {
 
 export const GET_STYLIST_FULL_PROFILE_INFO=gql`
 
-query getStylistInfo( $userId:ID!) {
+query getStylistInfo( $userId:ID) {
   getStylistInfo( userId: $userId){
       _id
       userId{
@@ -477,5 +477,6 @@ query getAppointmentByStylist($stylistId:ID!) {
     }
 }
 `;
+
 
 
