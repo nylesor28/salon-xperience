@@ -88,7 +88,7 @@ export default function Modal() {
                     </div>
                     <div className="mt-2">
                       <label className=" font-bold" htmlFor="lastName">
-                        First Name:
+                        Last Name:
                       </label>
                       <input
                         name="lastName"

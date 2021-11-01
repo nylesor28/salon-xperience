@@ -29,9 +29,6 @@ export const ADD_ORDER = gql`
   }
 `;
 
-
-
-
 export const ADD_UPDATE_USER_PROFILE = gql`
 
 mutation addUpdateUserProfile($profileInput: UserProfileInput!){
@@ -344,4 +341,60 @@ mutation deleteAppointment($_id: ID!) {
   }
 }
 
+`;
+
+
+export const ADD_JOIN_STYLIST_SERVICE = gql`
+mutation addJoinStylistService(
+  $stylistId: ID!
+  $serviceId:ID!
+) {
+  addJoinStylistService(
+  stylistId: $stylistId
+  serviceId: $serviceId
+  ){
+    _id
+    stylistId
+    serviceId
+
+  }
+}
+`;
+
+export const UPDATE_jOIN_STYLIST_SERVICE = gql`
+
+mutation updateJoinStylistService(
+  $_id: ID!
+  $stylistId: ID!
+  $serviceId: ID!
+  ) {
+    updateJoinStylistService(
+    _id:$_id
+    stylistId: $stylistId
+    serviceId: $serviceId
+    ) {
+   
+    stylistId {
+      _id
+      userId {
+        userProfile{
+              _id
+          firstName
+          lastName
+          phoneNumber
+        }
+      }
+    }
+    serviceId {
+      _id
+      serviceName
+      price
+      duration{
+        hour
+        minute
+      }
+    }
+    
+  }
+}
 `;

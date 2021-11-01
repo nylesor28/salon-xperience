@@ -8,12 +8,31 @@ const {
   Client,
   Stylist,
   Appointment,
+  JoinStylistService
 } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
+    categories: async () => {
+      return await Category.find();
+    },
+    products: async (parent, { category, name }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await Product.find(params).populate('category');
+    },
     getUserProfile: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findOne({
@@ -72,7 +91,9 @@ const resolvers = {
       return clientInfo;
     },
     getStylistInfo: async (parent, { userId }, context) => {
-      const stylist = await Stylist.findOne({ userId: userId })
+      const searchStylistId = userId || context.user._id
+
+      const stylist = await Stylist.findOne({ userId: searchStylistId })
         .select("-__v")
         .populate({
           path: "userId",
@@ -120,8 +141,6 @@ const resolvers = {
     },
 
     getAllClients: async (parent, args, context) => {
-
-
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
@@ -180,7 +199,7 @@ const resolvers = {
     },
 
     getAllAppointments: async (parent, args, context) => {
-      console.log("INSIDE GET APPOINTMENTS");
+  
       if (!context.user) {
         throw new AuthenticationError("Not logged in");
       }
@@ -448,16 +467,16 @@ const resolvers = {
         };
       }
 
-      return await Product.find(params).populate("service");
+      return await Product.find(params).populate("category");
     },
     product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate("service");
+      return await Product.findById(_id).populate("category");
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: "orders.products",
-          populate: "service",
+          populate: "category",
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -471,7 +490,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: "orders.products",
-          populate: "service",
+          populate: "category",
         });
 
         return user.orders.id(_id);
@@ -479,6 +498,7 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
@@ -514,6 +534,46 @@ const resolvers = {
       });
 
       return { session: session.id };
+    },
+    getAllJoinStylistService: async (parent, args, context) => {
+
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+      const joinStylistService = await JoinStylistService.find()
+        .select("-__v")
+        .populate({
+          path: "stylistId",
+          model: "Stylist",
+          select: "-__v",
+          populate: {
+            path: "userId",
+            model: "User",
+            select: "-__v, -username, -password",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+              select: "-__v",
+            },
+          },
+        })
+        .populate({
+          path: "serviceId",
+          model: "Service",
+          select: "-__v -createdDate",
+        });
+
+      const joinStylistServiceArr = joinStylistService.map((item) => {
+
+        const itemDetails = {
+          _id: item._id,
+          stylist: item.stylistId,
+          service: item.serviceId,
+        };
+
+        return itemDetails;
+      });
+      return joinStylistServiceArr;
     },
   },
   Mutation: {
@@ -657,7 +717,7 @@ const resolvers = {
         updateUserId = args.userId;
       } else {
         throw new AuthenticationError("Not Authorized");
-      }
+      }     
 
       const { certifications, workingHours } = args;
 
@@ -868,9 +928,8 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
     addOrder: async (parent, { products }, context) => {
-      console.log(context);
+  
       if (context.user) {
         const order = new Order({ products });
 
@@ -883,7 +942,6 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-
     updateProduct: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
@@ -893,7 +951,97 @@ const resolvers = {
         { new: true }
       );
     },
+    addJoinStylistService: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+  
+      const role = context.user.role?.toLowerCase();
+  
+      if ( role !== "admin" && role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+        try {
+          return await JoinStylistService.create(args);
+         
+        } catch (e) {
+      
+          throw "There was a problem associating service to stylist";
+        }
+      
+      
+    },
+    updateJoinStylistService: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+
+      const role = context.user.role
+      if ( role !== "admin" && role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+      
+      try {
+        const { _id,  stylistId, serviceId} = args;
+        let joinStylistServiceDetails = {};
+  
+        const joinStylistServiceResults = await JoinStylistService.findOneAndUpdate(
+          { _id: _id },
+          {stylistId, serviceId },
+          { new: true }
+        )
+          .populate({
+            path: "stylistId",
+            model: "Stylist",
+            select: "-__v",
+            populate: {
+              path: "userId",
+              model: "User",
+              select: "-__v, -username, -password",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+                select: "-__v",
+              },
+            },
+          })
+          .populate({
+            path: "serviceId",
+            model: "Service",
+            select: "-__v -createdDate",
+          });
+
+  
+          joinStylistServiceDetails = {
+          _id: joinStylistServiceResults._id,
+          stylistId: joinStylistServiceResults.stylistId,
+          serviceId: joinStylistServiceResults.serviceId
+        };
+  
+        return joinStylistServiceDetails;
+      } catch (e) {
+        throw new Exception("There was a problem updating stylist/service relationships");
+      }
+    },
+    deleteJoinStylistService: async (parent, { _id }, context) => {
+  
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in!");
+      }
+      if ( role !== "admin" && role !== "stylist") {
+        throw new AuthenticationError("Not Authorized");
+      }
+  
+        try {
+          return await JoinStylistService.findOneAndDelete({ _id }).select("-__v");
+        } catch (e) {
+          throw "There was a problem deleting stylist/service relationships";
+        }
+  
+    }
+
   },
+ 
 };
 
 module.exports = resolvers;

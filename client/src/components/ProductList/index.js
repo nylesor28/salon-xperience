@@ -10,7 +10,7 @@ import spinner from '../../assets/spinner.gif';
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentService } = state;
+  const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
@@ -33,21 +33,22 @@ function ProductList() {
     }
   }, [data, loading, dispatch]);
 
-  function filterproducts() {
-    if (!currentService) {
+  function filterProducts() {
+    if (!currentCategory) {
       return state.products;
     }
 
     return state.products.filter(
-      (product) => product.product._id === currentService
+      (product) => product.category._id === currentCategory
     );
   }
 
   return (
     <div className="my-2">
+      <h2>Our Products:</h2>
       {state.products.length ? (
         <div className="flex-row">
-          {filterproducts().map((product) => (
+          {filterProducts().map((product) => (
             <ProductItem
               key={product._id}
               _id={product._id}

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PASSWORD } from "../../utils/mutations";
 import { ADD_UPDATE_CLIENT_INFO } from "../../utils/mutations";
 
 function HairModal() {

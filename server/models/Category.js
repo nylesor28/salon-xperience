@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const serviceSchema = new Schema({
+const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -10,5 +10,6 @@ const serviceSchema = new Schema({
   }
 });
 
-const Service = mongoose.model('Service', serviceSchema);
-module.exports = Service;
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = Category;
