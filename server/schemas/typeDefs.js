@@ -1,42 +1,40 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  type UserProfile {
+    _id: ID
+    firstName: String!
+    lastName: String!
+    phoneNumber: String!
+    address: String
+    city: String
+    zipCode: String
+    imageURL: String
+  }
+  input UserProfileInput {
+    firstName: String!
+    lastName: String!
+    phoneNumber: String!
+    address: String
+    city: String
+    zipCode: String
+    imageURL: String
+  }
 
+  type Duration {
+    hour: Int
+    minute: Int
+  }
 
-type UserProfile {
-  _id: ID
-  firstName: String!
-  lastName: String!
-  phoneNumber: String!
-  address: String
-  city: String
-  zipCode: String
-  imageURL : String
-}
-input UserProfileInput {
-  firstName: String!
-  lastName: String!
-  phoneNumber: String!
-  address: String
-  city: String
-  zipCode: String
-  imageURL : String
-}
+  input DurationInput {
+    hour: Int
+    minute: Int
+  }
 
-type Duration {
-  hour: Int
-  minute: Int
-}
-
-input DurationInput {
-  hour: Int
-  minute: Int
-}
-
-type Category {
-  _id: ID
-  name: String
-}
+  type Category {
+    _id: ID
+    name: String
+  }
 
   type Product {
     _id: ID
@@ -71,45 +69,43 @@ type Category {
     user: User
   }
 
-  
-type Stylist {
-  _id : ID
-  userId: ID!
-  certifications: String
-  workingHours: [Schedule]
-}
-type Schedule {
-  weekday: Int!
-  hourStart:  Int
-  minuteStart: Int
-  hourEnd: Int
-  minuteEnd: Int
-}
-input ScheduleInput {
-  weekday: Int!
-  hourStart:  Int
-  minuteStart: Int
-  hourEnd: Int
-  minuteEnd: Int
-}
-
+  type Stylist {
+    _id: ID
+    userId: ID!
+    certifications: String
+    workingHours: [Schedule]
+  }
+  type Schedule {
+    weekday: Int!
+    hourStart: Int
+    minuteStart: Int
+    hourEnd: Int
+    minuteEnd: Int
+  }
+  input ScheduleInput {
+    weekday: Int!
+    hourStart: Int
+    minuteStart: Int
+    hourEnd: Int
+    minuteEnd: Int
+  }
 
   type Client {
-    _id : ID
-    userId : ID
-    stylistId : ID
+    _id: ID
+    userId: ID
+    stylistId: ID
     hairProfile: HairProfile
   }
 
   type BookedClient {
-    _id : ID
-    userId : User
-    stylistId : ID
+    _id: ID
+    userId: User
+    stylistId: ID
     hairProfile: HairProfile
   }
 
   type BookedStylist {
-    _id : ID
+    _id: ID
     userId: User
     certifications: String
     workingHours: [Schedule]
@@ -120,7 +116,6 @@ input ScheduleInput {
     hairType: String
     hairState: String
     hairGoal: String
-
   }
 
   input HairProfileInput {
@@ -128,12 +123,11 @@ input ScheduleInput {
     hairType: String
     hairState: String
     hairGoal: String
-
   }
 
   type ClientCompleteProfile {
-    _id : ID
-    userId : User
+    _id: ID
+    userId: User
     stylist: BookedStylist
     hairProfile: HairProfile
   }
@@ -156,7 +150,7 @@ input ScheduleInput {
     endTime: String
   }
 
-  type AppointmentDetails{
+  type AppointmentDetails {
     appointment: Appointment
     client: BookedClient
     stylist: BookedStylist
@@ -176,13 +170,13 @@ input ScheduleInput {
   }
 
   type Query {
-    getUserProfile : User
-    getAllClients(clientUserId : ID) : [ClientCompleteProfile]
-    getClientInfo(clientUserId : ID) : ClientCompleteProfile 
-    getAllStylists: [BookedStylist]    
-    getStylistInfo(userId: ID ) : BookedStylist
+    getUserProfile: User
+    getAllClients(clientUserId: ID): [ClientCompleteProfile]
+    getClientInfo(clientUserId: ID): ClientCompleteProfile
+    getAllStylists: [BookedStylist]
+    getStylistInfo(userId: ID): BookedStylist
 
-    getServiceById(_id: ID!) : Service
+    getServiceById(_id: ID!): Service
     getAllServices: [Service]
     getAllAppointments: [AppointmentDetails]
     getAppointmentById(_id: ID): AppointmentDetails
@@ -191,32 +185,70 @@ input ScheduleInput {
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
-    order(_id: ID!): Order
-    categories:[Category]
+    categories: [Category]
     checkout(products: [ID]!): Checkout
+    order(_id: ID!): Order
     getAllJoinStylistService :[JoinStylistService]
+
   }
  
 
   type Mutation {
-    addUpdateUserProfile( profileInput: UserProfileInput!) : User
-    addUser( username: String!, email: String!, password: String!, profileId: ID, role: String): Auth
-    addService (serviceName: String!, duration: DurationInput!, price: String!) : Service
-    updateService (_id: ID!, serviceName: String!, duration: DurationInput!, price: Float!) : Service
-    deleteService (_id: ID!) : Service
-    addAppointment(clientId: ID!, stylistId: ID!, serviceId: ID!, startTime: String!, endTime: String) : Appointment
-    updateAppointment (_id: ID!, clientId: ID!, stylistId: ID!, serviceId: ID!, startTime: String!, endTime: String) : AppointmentDetails
-    deleteAppointment (_id: ID!): Appointment
+    addUpdateUserProfile(profileInput: UserProfileInput!): User
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      profileId: ID
+      role: String
+    ): Auth
+    addService(
+      serviceName: String!
+      duration: DurationInput!
+      price: String!
+    ): Service
+    updateService(
+      _id: ID!
+      serviceName: String!
+      duration: DurationInput!
+      price: Float!
+    ): Service
+    deleteService(_id: ID!): Service
+    addAppointment(
+      clientId: ID!
+      stylistId: ID!
+      serviceId: ID!
+      startTime: String!
+      endTime: String
+    ): Appointment
+    updateAppointment(
+      _id: ID!
+      clientId: ID!
+      stylistId: ID!
+      serviceId: ID!
+      startTime: String!
+      endTime: String
+    ): AppointmentDetails
+    deleteAppointment(_id: ID!): Appointment
 
     login(email: String!, password: String!): Auth
 
-    addUpdateClientInfo(_id: ID, stylistId: ID, hairProfileInput: HairProfileInput) : ClientCompleteProfile
-    addUpdateStylistInfo(_id: ID, userId: ID,  certifications: String, workingHours: [ScheduleInput]) : BookedStylist
-    updateUser(firstName: String, lastName: String, email: String ): User
+    addUpdateClientInfo(
+      _id: ID
+      stylistId: ID
+      hairProfileInput: HairProfileInput
+    ): ClientCompleteProfile
+    addUpdateStylistInfo(
+      _id: ID
+      userId: ID
+      certifications: String
+      workingHours: [ScheduleInput]
+    ): BookedStylist
+    updateUser(firstName: String, lastName: String, email: String): User
     updatePassword(oldPassword: String, newPassword: String): User
 
     addOrder(products: [ID]!): Order
-   
+
     updateProduct(_id: ID!, quantity: Int!): Product
     addJoinStylistService(stylistId: ID!, serviceId: ID!) : JoinStylistService
     updateJoinStylistService(_id: ID!, stylistId: ID!, serviceId: ID!) : JoinStylistServiceFullData
@@ -227,4 +259,3 @@ input ScheduleInput {
 `;
 
 module.exports = typeDefs;
-
