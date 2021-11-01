@@ -165,8 +165,14 @@ input ScheduleInput {
 
   type JoinStylistService{
     _id: ID
-    stylist: Stylist
-    service: Service
+    stylistId: ID
+    serviceId: ID
+  }
+
+  type JoinStylistServiceFullData{
+    _id: ID
+    stylistId: BookedStylist
+    serviceId: Service
   }
 
   type Query {
@@ -213,7 +219,7 @@ input ScheduleInput {
    
     updateProduct(_id: ID!, quantity: Int!): Product
     addJoinStylistService(stylistId: ID!, serviceId: ID!) : JoinStylistService
-    updateJoinStylistService(_id: ID!, stylistId: ID!, serviceId: ID!) : JoinStylistService
+    updateJoinStylistService(_id: ID!, stylistId: ID!, serviceId: ID!) : JoinStylistServiceFullData
     deleteJoinStylistService(_id: ID!) : JoinStylistService
 
 

@@ -479,3 +479,4 @@ query getAppointmentByStylist($stylistId:ID!) {
 `;
 
 
+

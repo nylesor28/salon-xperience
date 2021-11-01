@@ -962,11 +962,11 @@ const resolvers = {
         throw new AuthenticationError("Not Authorized");
       }
         try {
-          const joinStylistService=  await JoinStylistService.create(args);
-          console.log(joinStylistService)
+          return await JoinStylistService.create(args);
+         
         } catch (e) {
-          console.log(e)
-          //throw "There was a problem associating service to stylist";
+      
+          throw "There was a problem associating service to stylist";
         }
       
       
@@ -975,10 +975,12 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
-      if ( role !== "admin" || role !== "stylist") {
+
+      const role = context.user.role
+      if ( role !== "admin" && role !== "stylist") {
         throw new AuthenticationError("Not Authorized");
       }
-  
+      
       try {
         const { _id,  stylistId, serviceId} = args;
         let joinStylistServiceDetails = {};
@@ -1008,11 +1010,12 @@ const resolvers = {
             model: "Service",
             select: "-__v -createdDate",
           });
+
   
           joinStylistServiceDetails = {
           _id: joinStylistServiceResults._id,
-          stylist: joinStylistServiceResults.stylistId,
-          service: joinStylistServiceResults.serviceId,
+          stylistId: joinStylistServiceResults.stylistId,
+          serviceId: joinStylistServiceResults.serviceId
         };
   
         return joinStylistServiceDetails;
@@ -1025,7 +1028,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("You need to be logged in!");
       }
-      if ( role !== "admin" || role !== "stylist") {
+      if ( role !== "admin" && role !== "stylist") {
         throw new AuthenticationError("Not Authorized");
       }
   
