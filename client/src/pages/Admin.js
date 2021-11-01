@@ -86,6 +86,7 @@ function Admin() {
                 name="userType"
                 className="rounded-md border mt-2 ml-2"
               >
+                <option value="placeholder"> </option>
                 <option value="admin"> admin</option>
                 <option value="stylist"> stylist </option>
                 <option value="client"> client </option>
