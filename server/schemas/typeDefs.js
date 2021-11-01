@@ -54,7 +54,8 @@ type Category {
     email: String!
     role: String
     userProfile: UserProfile 
-    orders:[Order] 
+    orders: [Order] 
+  }
 
   type Order {
     _id: ID
@@ -162,6 +163,18 @@ input ScheduleInput {
     service: Service
   }
 
+  type JoinStylistService{
+    _id: ID
+    stylistId: ID
+    serviceId: ID
+  }
+
+  type JoinStylistServiceFullData{
+    _id: ID
+    stylistId: BookedStylist
+    serviceId: Service
+  }
+
   type Query {
     getUserProfile : User
     getAllClients(clientUserId : ID) : [ClientCompleteProfile]
@@ -181,7 +194,9 @@ input ScheduleInput {
     order(_id: ID!): Order
     categories:[Category]
     checkout(products: [ID]!): Checkout
-    order(_id: ID!): Order
+    getAllJoinStylistService :[JoinStylistService]
+  }
+ 
 
   type Mutation {
     addUpdateUserProfile( profileInput: UserProfileInput!) : User
@@ -203,6 +218,11 @@ input ScheduleInput {
     addOrder(products: [ID]!): Order
    
     updateProduct(_id: ID!, quantity: Int!): Product
+    addJoinStylistService(stylistId: ID!, serviceId: ID!) : JoinStylistService
+    updateJoinStylistService(_id: ID!, stylistId: ID!, serviceId: ID!) : JoinStylistServiceFullData
+    deleteJoinStylistService(_id: ID!) : JoinStylistService
+
+
   }
 `;
 
