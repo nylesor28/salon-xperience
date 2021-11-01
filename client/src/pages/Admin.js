@@ -10,7 +10,7 @@ function Admin() {
     username: "",
     email: "",
     password: "",
-    userType: "",
+    role: "",
   });
   const [addUser] = useMutation(ADD_USER);
 
@@ -22,7 +22,7 @@ function Admin() {
         email: formState.email,
         password: formState.password,
         username: formState.username,
-        role: formState.userType
+        role: formState.role
       },
     });
 
@@ -80,12 +80,13 @@ function Admin() {
             <div>
               <label className="font-bold" htmlFor="users">User Type:</label>
               <select
-                id="userType"
-                htmlFor="userType"
+                id="role"
+                htmlFor="role"
                 onChange={handleChange}
-                name="userType"
+                name="role"
                 className="rounded-md border mt-2 ml-2"
               >
+                <option value=""> Select Option</option>
                 <option value="admin"> admin</option>
                 <option value="stylist"> stylist </option>
                 <option value="client"> client </option>
