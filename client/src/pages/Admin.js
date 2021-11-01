@@ -10,6 +10,7 @@ function Admin() {
     username: "",
     email: "",
     password: "",
+    userType: "",
   });
   const [addUser] = useMutation(ADD_USER);
 
